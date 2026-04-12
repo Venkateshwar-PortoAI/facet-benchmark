@@ -36,3 +36,8 @@ latex/fig2_embedding_strength.png
 latex/fig3_protocol.png
 latex/main.tex
 latex/
+
+# Paper artifacts (not part of benchmark)
+PAPER_ARXIV_v1.pdf
+figures/
+eval/gen_figures.py
