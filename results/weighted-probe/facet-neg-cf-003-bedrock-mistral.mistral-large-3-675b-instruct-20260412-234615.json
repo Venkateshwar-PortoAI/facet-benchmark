@@ -1,0 +1,22 @@
+{
+  "instance_id": "facet-neg-cf-003",
+  "model": "mistral.mistral-large-3-675b-instruct",
+  "backend": "bedrock",
+  "n_factors": 6,
+  "neutralized_factor": "F1",
+  "prompt": "CASE: Biakanja v. Irving \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)\n\nA document preparer assisted a testator with estate planning. The testator's will included a bequest to a recipient. The following specific facts apply: (1) the document preparer was a licensed attorney in good standing, not a notary holding themselves out beyond their credentials \u2014 moral blame is minimal. (2) The bequest was contingent on multiple conditions being met, including the testator outliving several other named relatives, making it difficult to say the recipient was specifically intended to benefit \u2014 the intent-to-affect the recipient is diffuse and unresolved on this record. (3) The harm to the recipient, if any, was remote and speculative because the will's conditional structure made the bequest uncertain even if the will had been properly executed. (4) The causal connection between the preparer's conduct and any alleged harm was heavily attenuated by multiple intervening events, including deaths of other relatives and changes in the testator's living circumstances. (5) Imposing a duty here would not meaningfully deter future harm because the conduct at issue is already fully regulated by attorney licensing and malpractice law. (6) The policy consequences of extending duty to cover this specific fact pattern would substantially burden the legal profession's ability to provide conditional-bequest estate planning services. The question is whether the document preparer owed a duty of care to the recipient under the Biakanja six-factor test.\n\nThe factors are:\nF1: Whether the transaction was specifically intended to affect the plaintiff is unresolved on this record. The bequest was contingent on multiple conditions and the recipient's status as intended beneficiary was diffuse. The court does not develop intent-to-affect as a load-bearing consideration.\nF2: The foreseeability of harm to the recipient was remote because the bequest was conditional on many factors (other named relatives' deaths, testator's longevity) and the recipient's receipt was uncertain regardless of whether the will was validly executed.\nF3: The certainty of the plaintiff's injury was low because the conditional-bequest structure made receipt uncertain even if the will had been executed correctly. Damages are speculative.\nF4: The causal connection between the document preparer's conduct and any alleged harm to the recipient was heavily attenuated by multiple intervening events \u2014 subsequent deaths of named relatives, changes in testator circumstances, and the conditional structure of the bequest itself.\nF5: The document preparer was a licensed attorney in good standing acting within the scope of their profession \u2014 not an unauthorized practitioner. Moral blame for the preparation is minimal.\nF6: Imposing a duty here would not meaningfully deter future harm because the conduct at issue is already fully regulated by attorney licensing and malpractice law. The duty extension would burden legitimate estate-planning practice without adding preventive value.\n\nQUESTION: Under the Biakanja six-factor duty-to-third-party test applied to the modified facts above, does the document preparer owe a duty of care to the named recipient?\n\nFor each factor F1 through F6, assign a weight in [0, 100] representing how much that factor drove your answer to the question above. The weights MUST sum to 100. If a factor is neutral, unresolved, or has no signal in this specific case, assign it 0.\n\nFormat your response EXACTLY as a single line:\nF1: X, F2: X, F3: X, F4: X, F5: X, F6: X\n\nThen on the next line, state your yes/no answer to the question.",
+  "raw_response": "F1: 5, F2: 20, F3: 20, F4: 30, F5: 5, F6: 20\n\nNo",
+  "parsed_weights": {
+    "F1": 5.0,
+    "F2": 20.0,
+    "F3": 20.0,
+    "F4": 30.0,
+    "F5": 5.0,
+    "F6": 20.0
+  },
+  "weight_sum": 100.0,
+  "neutralized_weight": 5.0,
+  "elapsed_sec": 1.7674729824066162,
+  "cost_usd": null,
+  "timestamp": "20260412-234615"
+}
