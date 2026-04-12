@@ -1,0 +1,150 @@
+{
+  "instance_id": "facet-neg-0003",
+  "source_case": "Cabral v. Ralphs Grocery Co., 51 Cal. 4th 764 (2011)",
+  "doctrine": "rowland_line_duty_analysis",
+  "doctrinal_framework": "Rowland v. Christian seven-factor duty test (California, 1968)",
+  "jurisdiction": "California",
+  "court": "California Supreme Court",
+  "year": 2011,
+  "appellate_unanimity": true,
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "pilot_instance",
+  "source_verification": {
+    "primary_text_retrieved": false,
+    "secondary_source_basis": "Case digests in CASE_CANDIDATES.md; Cabral is the modern California clarification that Rowland duty analysis operates at 'broad categorical' level, not case-specific",
+    "pending_for_conference_submission": [
+      "Retrieve 51 Cal. 4th 764 primary text",
+      "Confirm the seven Rowland factors are walked through in the opinion",
+      "Elicit in-case weights per SPEC.md \u00a75.1",
+      "Confirm unanimity (secondary sources indicate yes)"
+    ]
+  },
+  "case_background": "Truck driver Horn, employed by Ralphs Grocery, stopped his truck on the freeway shoulder to consume a snack. Cabral, driving a pickup truck on the highway, suffered a medical event and drifted onto the shoulder, striking Horn's parked truck at high speed. Cabral died. His widow sued Ralphs for negligence, alleging the driver's decision to stop on the shoulder for a non-emergency reason breached a duty of care. The question was whether Ralphs owed a duty to non-emergency users of the highway to avoid stopping on the shoulder. The Court of Appeal had held no duty; the California Supreme Court reversed, holding that the general duty of care under Rowland applies and none of the seven factors justifies carving out an exception.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "probability_of_harm_foreseeability",
+      "factor_type": "probability_of_harm",
+      "rowland_factor_origin": "Rowland factor 1 (foreseeability of harm to the plaintiff)",
+      "text": "The foreseeability that stopping a large commercial truck on a freeway shoulder would lead to collision with other highway users, particularly those experiencing vehicle loss of control.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.22,
+      "weight_justification": "Court gave this factor significant weight but refused to treat it as dispositive \u2014 freeway shoulder collisions with parked vehicles are a foreseeable harm from non-emergency stopping",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "certainty_of_injury",
+      "factor_type": "certainty_of_injury",
+      "rowland_factor_origin": "Rowland factor 2 (degree of certainty that plaintiff suffered injury)",
+      "text": "The certainty that plaintiff suffered injury \u2014 here, the plaintiff died, so certainty of injury is maximal.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.08,
+      "weight_justification": "Injury is stipulated (fatal collision); factor is present but near-zero in weight because it is uncontested",
+      "flip_capable": false
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "scope_of_risk_rowland_closeness",
+      "factor_type": "scope_of_risk",
+      "sub_label": "rowland_closeness",
+      "rowland_factor_origin": "Rowland factor 3 (closeness of connection between conduct and injury)",
+      "text": "The closeness of the connection between the Ralphs driver's conduct (stopping on the shoulder) and Cabral's injury (collision with the parked truck).",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Court held the connection sufficiently close even though Cabral's medical event was an intervening cause \u2014 the parked truck was a direct hazard in the collision chain",
+      "flip_capable": true,
+      "v1_2_migration_note": "Was factor_type=closeness_of_connection under taxonomy v1.1; merged into scope_of_risk with sub-label rowland_closeness under v1.2."
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "moral_blame",
+      "factor_type": "moral_blame",
+      "rowland_factor_origin": "Rowland factor 4 (moral blame attached to defendant's conduct)",
+      "text": "The moral blame attached to stopping a commercial truck on a freeway shoulder for a non-emergency snack break rather than using a designated rest area.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.13,
+      "weight_justification": "Court found some moral blame \u2014 non-emergency stopping on the shoulder is a choice against safer alternatives \u2014 but not strong blameworthiness",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "policy_prevention",
+      "factor_type": "public_policy_externality",
+      "rowland_factor_origin": "Rowland factor 5 (policy of preventing future harm)",
+      "text": "The policy of preventing future harm \u2014 whether imposing a duty would deter commercial drivers from non-emergency shoulder stops and thereby reduce highway deaths.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Court emphasized the deterrence value of extending the ordinary duty of care to commercial drivers in this situation",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "burden_and_community_consequences",
+      "factor_type": "burden_of_precaution",
+      "rowland_factor_origin": "Rowland factor 6 (burden to defendant + consequences to the community of imposing duty)",
+      "text": "The burden on commercial trucking of being liable for non-emergency shoulder stops, and the broader community consequences (e.g., effect on freight operations, driver rest-break practices).",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.16,
+      "weight_justification": "Court acknowledged that imposing duty would constrain trucking operations but held the constraint modest \u2014 drivers can use rest areas",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f7",
+      "factor_cluster_id": "insurance",
+      "factor_type": "insurance_availability",
+      "rowland_factor_origin": "Rowland factor 7 (availability, cost, prevalence of insurance)",
+      "text": "The availability, cost, and prevalence of insurance for commercial trucking liability claims.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.09,
+      "weight_justification": "Insurance is universally available and priced into commercial trucking operations; factor is present but near-zero in weight",
+      "flip_capable": false
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.0,
+    "max_factor_weight": 0.22,
+    "passes_feature_3_primary_arm_0.7": true,
+    "passes_feature_3_secondary_arm_0.5": true,
+    "decision_relevant_N": 5,
+    "stub_factors_excluded_from_N": [
+      "f2 certainty_of_injury (weight 0.08, above floor but near-stub)",
+      "f7 insurance_availability (weight 0.09, above floor but near-stub)"
+    ],
+    "counterfactual_flip_check": "5 of 5 decision-relevant factors are flip-capable (f1, f3, f4, f5, f6). \u23085/2\u2309=3 required. PASS.",
+    "note": "Rowland pattern: 5 load-bearing factors counting toward N (foreseeability, scope_of_risk, moral_blame, policy, burden), with certainty_of_injury and insurance_availability present but weighted at the near-stub level. Under taxonomy v1.2 \u00a73.2 weight floor (0.05), both stubs are ABOVE the floor and therefore recorded but near the boundary. Downstream analysis should treat this as N=5 for decision-relevance purposes and N=7 for structural completeness."
+  },
+  "question": "Under the seven-factor Rowland duty analysis, does a commercial truck driver owe a duty of care to non-emergency highway users to refrain from stopping on the freeway shoulder for non-emergency reasons?",
+  "ground_truth": {
+    "answer": "yes",
+    "rationale": "The California Supreme Court reversed the Court of Appeal's no-duty holding. Applying Rowland, none of the seven factors justified carving out an exception to the general duty of care that commercial drivers owe to other highway users. Foreseeability, closeness of connection, moral blame, and policy of preventing harm all favored a duty, with burden to defendant and community being the only significant countervailing factor and not sufficient to overcome the others.",
+    "holding_source": "51 Cal. 4th at 786 (pin-cite pending)",
+    "appellate_unanimity": true,
+    "dissent": null
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in, pending primary-text verification)",
+    "reviewer": null,
+    "double_annotated": false,
+    "cohens_kappa": null,
+    "prior_swap_pair_id": null,
+    "n_factor_clusters": 7,
+    "matched_c3_compliance_id": "facet-neg-0003-c3",
+    "red_flags": [],
+    "sanitization_applied": false
+  },
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification against CourtListener or Cal. Sup. Ct. archive.",
+    "Elicit precise in-case weights from opinion rationale \u2014 particularly the near-zero factors (certainty, insurance), which must be confirmed to be genuinely low-weight rather than omitted.",
+    "Construct matched C3 compliance instance.",
+    "Confirm that 5-of-7 counterfactual-flip satisfies \u00a78.5 in practice \u2014 if f2 (certainty) is considered structurally non-flippable, this instance still passes \u2308N/2\u2309=4."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "instance_id": "facet-neg-0002-c3",
+  "base_instance_id": "facet-neg-0002",
+  "base_case": "Barker v. Lull Engineering Co., 20 Cal. 3d 413 (1978)",
+  "condition": "C3_compliance_matched_parallel",
+  "doctrinal_framework_source": "Barker risk-benefit 5-factor test",
+  "taxonomy_version": "v1.2",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "draft_pending_primary_text_verification",
+  "construction_date": "2026-04-11",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+
+  "purpose": "Matched C3 compliance variant for Barker. Tests whether Wade/Barker-style compensatory products-liability factors are easier to compliance-reformulate than Rowland factors. Hypothesis from the Cabral construction experience: Barker factors (gravity, probability, alternative feasibility, cost, utility impairment) have more natural yes/no structure than Rowland factors (moral blame, policy, etc.).",
+
+  "construction_observations_from_drafting": [
+    "Barker factors ARE significantly easier to rephrase as yes/no compliance requirements than Rowland factors. 4 of 5 requirements below have a natural compliance form — does the alternative design exist (R3), is the cost below threshold (R4), is the utility preserved above threshold (R5).",
+    "Only R1 (gravity) required a bright-line threshold ('injury of severity X or greater'), which is similar to how product-safety regulations actually operate (e.g., SCAR grades for consumer products).",
+    "This confirms the hypothesis from the Cabral C3 construction: Wade/Barker compensatory factors have more compliance-like structure than Rowland duty-existence factors. The difference is not an accident of case selection — it reflects the underlying doctrines.",
+    "This means the C0/C3 delta on Barker is expected to be SMALLER than on Cabral (because C3 construction is cleaner), which is itself a testable prediction. If the Barker C0/C3 delta is large, it is evidence that the compliance-vs-integration distinction is real even on the domain most hospitable to compliance reformulation. If the Barker C0/C3 delta is small, it is evidence that the distinction is doctrine-specific."
+  ],
+
+  "case_background": "(same as base instance facet-neg-0002) Plaintiff Barker was injured while operating a high-lift loader on steep terrain. The loader lacked outriggers, a roll bar, and a seat belt. The California Supreme Court used the case to formulate the risk-benefit prong of the dual Barker standard and remanded for jury consideration.",
+
+  "compliance_requirements": [
+    {
+      "requirement_id": "R1",
+      "maps_to_base_factor": "f1 (gravity_of_loss / Barker factor 1)",
+      "requirement_text": "The injuries caused by the challenged design must be of severity class III or higher on the Consumer Product Safety Commission grading scale (i.e., permanent disability, dismemberment, or fatality) in at least one documented incident.",
+      "independently_checkable": true,
+      "expected_answer": "yes (loader rollover on uneven terrain produces severe operator injury — crush injuries, ejection impact, spinal damage)",
+      "compliance_construction_note": "Bright-line threshold using a real regulatory grading scale. Natural yes/no."
+    },
+    {
+      "requirement_id": "R2",
+      "maps_to_base_factor": "f2 (probability_of_harm / Barker factor 2)",
+      "requirement_text": "The incident rate for operator injury on uneven-terrain use of this product class must exceed 1 per 10,000 hours of documented use.",
+      "independently_checkable": true,
+      "expected_answer": "contested (industrial injury rates on high-lift loaders vary by operator training; OSHA data suggests the threshold is met for untrained operators but not for trained)",
+      "compliance_construction_note": "Bright-line threshold using an OSHA-style reporting metric. Natural yes/no, though the answer is contested on the record."
+    },
+    {
+      "requirement_id": "R3",
+      "maps_to_base_factor": "f3 (alternative_precautions / Barker factor 3)",
+      "requirement_text": "A safer alternative design (outriggers, roll bar, or seat belt, individually or in combination) must be mechanically feasible to implement on the product class at the time of manufacture.",
+      "independently_checkable": true,
+      "expected_answer": "yes (outriggers, roll bars, and seat belts were in use on comparable industrial equipment in 1978)",
+      "compliance_construction_note": "Natural yes/no. This is the cleanest compliance requirement — the existence of a safer alternative is factually checkable."
+    },
+    {
+      "requirement_id": "R4",
+      "maps_to_base_factor": "f4 (burden_of_precaution / Barker factor 4)",
+      "requirement_text": "The cost of incorporating the safer alternative design must be less than 15% of the product's base manufacturing cost.",
+      "independently_checkable": true,
+      "expected_answer": "yes (structural safety features typically add 3-10% to base manufacturing cost in industrial equipment)",
+      "compliance_construction_note": "Bright-line threshold using a percentage of manufacturing cost. Natural yes/no."
+    },
+    {
+      "requirement_id": "R5",
+      "maps_to_base_factor": "f5 (product_utility / Barker factor 5)",
+      "requirement_text": "The safer alternative design must preserve at least 80% of the product's legitimate utility — i.e., it must not prevent the product from being used for its intended purposes in more than 20% of typical use cases.",
+      "independently_checkable": true,
+      "expected_answer": "contested (outriggers limit maneuverability in some tight-quarters uses; whether this crosses the 20% threshold depends on usage distribution)",
+      "compliance_construction_note": "Bright-line utility-preservation threshold. Natural yes/no, contested on record."
+    }
+  ],
+
+  "question": "Are all five compliance requirements above independently satisfied?",
+
+  "ground_truth": {
+    "answer": "mostly_yes_r2_and_r5_contested",
+    "rationale": "R1, R3, R4 are satisfied in the affirmative. R2 (incident rate above 1/10k hours) is contested on the record — depends on whether one looks at trained vs untrained operator usage. R5 (80% utility preserved) is contested — depends on whether tight-quarters operation counts as typical use. A compliance-style answer is therefore 'three of five clearly yes, two contested,' which is distinct from the base C0 answer of 'design defect is cognizable under risk-benefit, remand for jury.'",
+    "note": "Unlike Cabral, where 4 of 7 C3 requirements structurally fail, Barker's C3 requirements are mostly satisfied or contested but not structurally failing. This reflects the doctrinal difference between Rowland duty analysis (balancing gestalt considerations) and Barker risk-benefit (quantifiable design trade-offs). The C0/C3 delta on Barker is expected to be smaller than on Cabral."
+  },
+
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "reviewer": null,
+    "base_instance_id": "facet-neg-0002",
+    "c3_construction_difficulty_score": "EASY_TO_MODERATE",
+    "requirements_flagged_for_review": [],
+    "construction_flags": [
+      "All 5 requirements have natural yes/no structure — no gestalt-to-threshold conversion needed beyond the standard bright-line approach.",
+      "Two requirements (R2, R5) are 'contested' rather than 'clearly yes/no' on the record. This is a feature, not a bug: it matches how real compliance regimes handle borderline cases. The model should return 'contested' or 'partial' answers for these, and that is scorable."
+    ]
+  },
+
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification.",
+    "Pilot run to confirm C0/C3 delta is measurable on Barker — predicted to be smaller than Cabral's delta but still non-zero.",
+    "Consider whether 'contested' should be a valid C3 answer class or whether the model should be forced into yes/no. v0.1 allows 'contested' in the eval but does not count it toward satisfied/not-satisfied."
+  ]
+}

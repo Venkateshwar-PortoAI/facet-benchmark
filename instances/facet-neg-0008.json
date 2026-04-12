@@ -1,0 +1,127 @@
+{
+  "instance_id": "facet-neg-0008",
+  "source_case": "Parsons v. Crown Disposal Co., 15 Cal. 4th 456 (1997)",
+  "doctrine": "rowland_duty",
+  "doctrinal_framework": "Rowland seven-factor duty analysis (California)",
+  "jurisdiction": "California",
+  "court": "California Supreme Court",
+  "year": 1997,
+  "appellate_unanimity": false,
+  "appellate_split": "majority with Kennard dissent",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "pilot_instance",
+  "case_background": "Plaintiff Parsons was injured when his horse was spooked by the normal operation of a garbage-collection truck owned by Crown Disposal Co. The truck was operating within its expected commercial function \u2014 collecting trash on a residential street during daytime hours \u2014 and Parsons was horseback-riding on the same street. The horse bolted at the sound and motion of the truck, throwing Parsons. Parsons sued Crown on negligence grounds, alleging the driver owed a duty of care to adjust normal truck operations for fright-prone animals in the area. The California Supreme Court applied the seven Rowland factors and held that no duty existed \u2014 imposing a duty on ordinary commercial vehicle operation to accommodate fright-prone animals would be an unwarranted extension.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "foreseeability",
+      "factor_type": "probability_of_harm",
+      "rowland_factor_origin": "Rowland factor 1 (foreseeability of harm)",
+      "text": "The foreseeability that a garbage truck's normal operation on a residential street could startle a horse and injure its rider \u2014 how predictable is this harm given the vehicle's ordinary use?",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "mixed",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Court acknowledged horses can be startled by truck noise but found the specific harm sufficiently removed from ordinary expectations"
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "certainty_of_injury",
+      "factor_type": "certainty_of_injury",
+      "rowland_factor_origin": "Rowland factor 2",
+      "text": "The certainty that plaintiff suffered injury \u2014 here, the fall from a bolting horse produced documented physical injury.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.08,
+      "weight_justification": "Injury is certain but not a load-bearing Rowland factor in this case",
+      "is_stub_factor": true
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "scope_of_risk",
+      "factor_type": "scope_of_risk",
+      "sub_label": "rowland_closeness",
+      "rowland_factor_origin": "Rowland factor 3 (closeness of connection)",
+      "text": "The closeness of the connection between the garbage truck's operation and the plaintiff's injury \u2014 mediated by the horse's fright reaction as an intervening biological response.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Court found the causal chain somewhat attenuated by the intervening animal-behavior link"
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "moral_blame",
+      "factor_type": "moral_blame",
+      "rowland_factor_origin": "Rowland factor 4",
+      "text": "The moral blame attached to operating a garbage truck in its ordinary commercial function on a public residential street \u2014 operating equipment for its intended purpose in its intended setting.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.16,
+      "weight_justification": "Court held there is no moral blame in operating a standard commercial vehicle in its normal manner"
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "policy_prevention",
+      "factor_type": "public_policy_externality",
+      "rowland_factor_origin": "Rowland factor 5 (policy of preventing future harm)",
+      "text": "The policy consequences of imposing a duty \u2014 whether requiring commercial vehicle operators to adjust normal operations for animal fright would meaningfully reduce future harm or would instead impose unworkable restrictions on ordinary commerce.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.18,
+      "weight_justification": "Load-bearing policy factor \u2014 court emphasized the chilling effect on ordinary commercial activity"
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "burden_and_consequences",
+      "factor_type": "burden_of_precaution",
+      "rowland_factor_origin": "Rowland factor 6 (burden to defendant + community consequences)",
+      "text": "The burden on commercial vehicle operators and the broader community of requiring operational adjustments whenever fright-prone animals might be present \u2014 scope of such adjustments across all commercial vehicles in all residential areas.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Court emphasized that adjusting normal commercial operation imposes disproportionate community cost"
+    },
+    {
+      "factor_id": "f7",
+      "factor_cluster_id": "insurance",
+      "factor_type": "insurance_availability",
+      "rowland_factor_origin": "Rowland factor 7",
+      "text": "Insurance availability for commercial vehicle liability is standard.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "mixed",
+      "in_case_weight_estimate": 0.07,
+      "weight_justification": "Near-stub factor",
+      "is_stub_factor": true
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.0,
+    "max_factor_weight": 0.19,
+    "passes_feature_3_primary_arm_0.7": true,
+    "passes_feature_3_secondary_arm_0.5": true,
+    "decision_relevant_N": 5,
+    "stub_factors_excluded_from_N": [
+      "f2",
+      "f7"
+    ]
+  },
+  "question": "Under the seven-factor Rowland duty analysis, does a garbage-truck operator owe a duty of care to adjust normal vehicle operation to avoid startling fright-prone animals on the public street?",
+  "ground_truth": {
+    "answer": "no",
+    "rationale": "The California Supreme Court held that no duty existed. The policy-of-preventing-harm, burden-to-community, moral-blame, and closeness-of-connection factors all pointed against extending duty. Only foreseeability of injury (Rowland factor 1) pointed toward duty, and that was insufficient to outweigh the countervailing factors.",
+    "holding_source": "15 Cal. 4th at 485 (pin-cite pending)",
+    "appellate_unanimity": false,
+    "dissent": "Kennard, J. dissenting"
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "n_factor_clusters": 7,
+    "matched_c3_compliance_id": "facet-neg-0008-c3",
+    "red_flags": [],
+    "jurisdiction_category": "state_supreme"
+  },
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification of 15 Cal. 4th 456",
+    "Weight elicitation from opinion"
+  ]
+}

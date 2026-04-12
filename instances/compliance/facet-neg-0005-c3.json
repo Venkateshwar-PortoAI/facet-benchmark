@@ -1,0 +1,106 @@
+{
+  "instance_id": "facet-neg-0005-c3",
+  "base_instance_id": "facet-neg-0005",
+  "base_case": "O'Brien v. Muskin Corp., 94 N.J. 169 (1983)",
+  "condition": "C3_compliance_matched_parallel",
+  "doctrinal_framework_source": "Wade seven-factor risk-utility (N.J. adoption)",
+  "taxonomy_version": "v1.2",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "draft_pending_primary_text_verification",
+  "construction_date": "2026-04-11",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+
+  "purpose": "Matched C3 compliance variant for O'Brien. Second Wade-factor C3 in the pilot. Tests whether the Barker small-C0/C3-delta pattern (Wade factors reformulate cleanly as compliance requirements) replicates on a different Wade case.",
+
+  "construction_observations_from_drafting": [
+    "All 7 Wade factors reformulated with moderate construction effort. 6 of 7 have natural yes/no compliance form; only R4 (alternative-substitute availability) required a contested bright-line given the O'Brien 4-3 split on exactly this factor.",
+    "This confirms the pattern from Barker: Wade factors are compliance-reformulation-friendly because they are quantifiable trade-offs. The C0/C3 delta on O'Brien is predicted to be small, matching Barker."
+  ],
+
+  "case_background": "(same as base instance facet-neg-0005) Plaintiff O'Brien dove into a four-foot above-ground Muskin pool, slid his arms on the vinyl bottom, and fractured his spine. He sued on design-defect grounds. The N.J. Supreme Court used the case to formally adopt the seven Wade factors and held (4-3) that the plaintiff could reach the jury even without showing a fully equivalent safer substitute product.",
+
+  "compliance_requirements": [
+    {
+      "requirement_id": "R1",
+      "maps_to_base_factor": "f1 (product_utility / Wade 1)",
+      "requirement_text": "The product must have substantial utility for a recognized consumer or public purpose, documented by market penetration above 1% of the target demographic.",
+      "independently_checkable": true,
+      "expected_answer": "yes (above-ground pools had substantial market penetration by 1983)",
+      "compliance_construction_note": "Bright-line via market penetration. Natural compliance form."
+    },
+    {
+      "requirement_id": "R2",
+      "maps_to_base_factor": "f2 (probability_of_harm / Wade 2 likelihood)",
+      "requirement_text": "The incident rate for serious injury from foreseeable use must exceed 1 per 100,000 hours of typical consumer use.",
+      "independently_checkable": true,
+      "expected_answer": "contested (diving injury rate on above-ground pools is non-trivial but exact incidence is unclear)",
+      "compliance_construction_note": "Bright-line via incidence rate."
+    },
+    {
+      "requirement_id": "R3",
+      "maps_to_base_factor": "f3 (gravity_of_loss / Wade 2 seriousness)",
+      "requirement_text": "Serious injuries from this product class must include permanent disability, dismemberment, or fatality in at least one documented case.",
+      "independently_checkable": true,
+      "expected_answer": "yes (diving injuries produce spinal cord damage and paralysis regularly)",
+      "compliance_construction_note": "Natural yes/no."
+    },
+    {
+      "requirement_id": "R4",
+      "maps_to_base_factor": "f4 (alternative_precautions / Wade 3)",
+      "requirement_text": "A safer substitute product must exist that serves the same consumer purpose with materially lower injury risk.",
+      "independently_checkable": true,
+      "expected_answer": "contested (this was the 4-3 split factor in O'Brien itself; in-ground pools serve the same purpose but at dramatically higher cost, so whether they count as 'substitute' is exactly what the court disagreed about)",
+      "compliance_construction_note": "This is the O'Brien majority/dissent fight. Compliance reformulation exposes the same ambiguity the court faced."
+    },
+    {
+      "requirement_id": "R5",
+      "maps_to_base_factor": "f5 (burden_of_precaution / Wade 4)",
+      "requirement_text": "Risk-mitigation measures (warnings, depth markings, texture changes) must be implementable at less than 10% of product cost.",
+      "independently_checkable": true,
+      "expected_answer": "yes (warnings and depth markings are cheap)",
+      "compliance_construction_note": "Natural yes/no via cost threshold."
+    },
+    {
+      "requirement_id": "R6",
+      "maps_to_base_factor": "f6 (user_awareness / Wade 6)",
+      "requirement_text": "User awareness of the diving-injury risk must be documented above 80% in a consumer survey or equivalent market research.",
+      "independently_checkable": true,
+      "expected_answer": "no (no such survey exists; spinal-injury-from-shallow-diving is not widely understood by non-specialists)",
+      "compliance_construction_note": "Bright-line via consumer survey threshold. This requirement is expected to return 'no' because the measurement instrument (consumer survey) is not typically available."
+    },
+    {
+      "requirement_id": "R7",
+      "maps_to_base_factor": "f7 (burden_shifting / Wade 7)",
+      "requirement_text": "Commercial product-liability insurance must be available to the manufacturer's industry at actuarially-reasonable rates.",
+      "independently_checkable": true,
+      "expected_answer": "yes (universal for consumer products)",
+      "compliance_construction_note": "Natural yes/no."
+    }
+  ],
+
+  "question": "Are all seven compliance requirements above independently satisfied?",
+
+  "ground_truth": {
+    "answer": "mostly_yes_r2_r4_r6_contested_or_failing",
+    "rationale": "R1, R3, R5, R7 are clearly satisfied. R2 is contested (injury rate threshold), R4 is contested (the 4-3 split factor), R6 is expected to fail (consumer survey threshold unmet). A compliance-style answer is '4 clearly yes, 2 contested, 1 fails.' This is closer to Barker's C3 pattern than to Cabral/Biakanja's.",
+    "note": "Predicted small C0/C3 delta, replicating Barker. Wade factors reformulate cleanly enough that C3 and C0 converge on similar answers even with some contested requirements."
+  },
+
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "reviewer": null,
+    "base_instance_id": "facet-neg-0005",
+    "c3_construction_difficulty_score": "EASY_TO_MODERATE",
+    "requirements_flagged_for_review": ["R6"],
+    "construction_flags": [
+      "R6 (consumer survey threshold for user awareness) is the Wade equivalent of Cabral/Biakanja's R6 quantified-deterrence problem — it requires a measurement instrument that is not routinely available in the record. Expected structural fail."
+    ]
+  },
+
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification.",
+    "Pilot run to check whether C0/C3 delta replicates Barker's small-delta pattern.",
+    "If the 4 instances split 2-2 Rowland-family vs Wade-family as predicted, the doctrine-dependent delta hypothesis is replicated."
+  ]
+}

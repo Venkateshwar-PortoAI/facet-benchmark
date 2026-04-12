@@ -1,0 +1,95 @@
+{
+  "base_instance_id": "facet-neg-0008",
+  "base_case": "Parsons v. Crown Disposal Co., 15 Cal. 4th 456 (1997)",
+  "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
+  "protocol_version": "SPEC.md \u00a76.3 v0.4",
+  "taxonomy_version": "v1.2",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "construction_date": "2026-04-11",
+  "status": "draft_pending_primary_text_verification",
+  "perturbations": [
+    {
+      "variant_id": "facet-neg-0008-c2-f1",
+      "perturbed_factor_id": "f1",
+      "perturbed_factor_type": "probability_of_harm",
+      "base_weight": 0.19,
+      "base_directionality": "mixed",
+      "original_text": "The foreseeability that a garbage truck's normal operation on a residential street could startle a horse and injure its rider \u2014 how predictable is this harm given the vehicle's ordinary use?",
+      "neutral_rewrite": "Whether this consideration (probability of harm) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f1 (probability_of_harm). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-0008-c2-f2",
+      "perturbed_factor_id": "f2",
+      "perturbed_factor_type": "certainty_of_injury",
+      "base_weight": 0.08,
+      "base_directionality": "toward_duty",
+      "original_text": "The certainty that plaintiff suffered injury \u2014 here, the fall from a bolting horse produced documented physical injury.",
+      "neutral_rewrite": "Whether this consideration (certainty of injury) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f2 (certainty_of_injury). Human review recommended before final dataset admission.",
+      "is_stub_factor": true
+    },
+    {
+      "variant_id": "facet-neg-0008-c2-f3",
+      "perturbed_factor_id": "f3",
+      "perturbed_factor_type": "scope_of_risk",
+      "base_weight": 0.17,
+      "base_directionality": "against_duty",
+      "original_text": "The closeness of the connection between the garbage truck's operation and the plaintiff's injury \u2014 mediated by the horse's fright reaction as an intervening biological response.",
+      "neutral_rewrite": "Whether this consideration (scope of risk) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f3 (scope_of_risk). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-0008-c2-f4",
+      "perturbed_factor_id": "f4",
+      "perturbed_factor_type": "moral_blame",
+      "base_weight": 0.16,
+      "base_directionality": "against_duty",
+      "original_text": "The moral blame attached to operating a garbage truck in its ordinary commercial function on a public residential street \u2014 operating equipment for its intended purpose in its intended setting.",
+      "neutral_rewrite": "Whether this consideration (moral blame) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f4 (moral_blame). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-0008-c2-f5",
+      "perturbed_factor_id": "f5",
+      "perturbed_factor_type": "public_policy_externality",
+      "base_weight": 0.18,
+      "base_directionality": "against_duty",
+      "original_text": "The policy consequences of imposing a duty \u2014 whether requiring commercial vehicle operators to adjust normal operations for animal fright would meaningfully reduce future harm or would instead impose unworkable restrictions on ordinary commerce.",
+      "neutral_rewrite": "Whether this consideration (public policy externality) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f5 (public_policy_externality). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-0008-c2-f6",
+      "perturbed_factor_id": "f6",
+      "perturbed_factor_type": "burden_of_precaution",
+      "base_weight": 0.15,
+      "base_directionality": "against_duty",
+      "original_text": "The burden on commercial vehicle operators and the broader community of requiring operational adjustments whenever fright-prone animals might be present \u2014 scope of such adjustments across all commercial vehicles in all residential areas.",
+      "neutral_rewrite": "Whether this consideration (burden of precaution) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f6 (burden_of_precaution). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-0008-c2-f7",
+      "perturbed_factor_id": "f7",
+      "perturbed_factor_type": "insurance_availability",
+      "base_weight": 0.07,
+      "base_directionality": "mixed",
+      "original_text": "Insurance availability for commercial vehicle liability is standard.",
+      "neutral_rewrite": "Whether this consideration (insurance availability) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f7 (insurance_availability). Human review recommended before final dataset admission.",
+      "is_stub_factor": true
+    }
+  ],
+  "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
+  "construction_notes": [
+    "Generated via eval/gen_c2_c3.py \u2014 template-based neutral rewrites.",
+    "Human annotator review recommended before final dataset admission.",
+    "Reconstruction-check disqualification (SPEC.md \u00a76.3 v0.4) applies at eval time."
+  ]
+}

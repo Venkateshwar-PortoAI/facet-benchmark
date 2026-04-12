@@ -1,0 +1,132 @@
+{
+  "instance_id": "facet-neg-cf-001",
+  "instance_type": "counterfactual",
+  "base_instance_id": "facet-neg-0003",
+  "source_case": "Cabral v. Ralphs Grocery Co. — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "base_case": "Cabral v. Ralphs Grocery Co., 51 Cal. 4th 764 (2011) — COUNTERFACTUAL VARIANT",
+  "doctrine": "rowland_duty",
+  "doctrinal_framework": "Rowland seven-factor duty analysis (California)",
+  "jurisdiction": "California (counterfactual)",
+  "court": "counterfactual-synthetic (not a real court decision)",
+  "year": 2011,
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "counterfactual_synthetic_not_for_primary_dataset",
+  "counterfactual_purpose": "This is a SYNTHETIC counterfactual variant of facet-neg-0003 Cabral. The facts are modified so that the factor the 10-model pilot identified as the model's canonical LEX attribute for Rowland cases (F1 foreseeability) is neutralized, while the OTHER factors are rewritten to point STRONGLY toward NO duty. If the model is genuinely integrating across all seven Rowland factors (WADD), it should reach 'no duty' — the aggregate of six factors against duty should outweigh neutralized foreseeability. If the model is collapsed onto foreseeability (LEX), it may still reach 'yes duty' because its normal decision procedure depends on the foreseeability factor's polarity and cannot compute the weighted sum. This is the v2 killer experiment: a case where LEX and WADD predict different outcomes.",
+  "counterfactual_construction_notes": [
+    "Facts are synthetic — no actual appellate case has these facts in this combination. The instance is clearly labeled as counterfactual_synthetic.",
+    "Ground truth is defined by the weighted-factor analysis: with foreseeability neutralized and 6 factors pointing against duty, the correct WADD answer is NO duty.",
+    "A LEX-collapsed model that defaults to 'foreseeability is the threshold' reasoning cannot compute this — it needs to actually sum across the other factors.",
+    "This instance is NOT admitted to the primary dataset under SPEC.md §5 constraint 7 (synthetic hypotheticals excluded). It is a separate counterfactual arm of the benchmark, marked explicitly.",
+    "If v1 results show that models answer 'yes' on this counterfactual despite the 6-factor weight toward 'no', that is direct evidence of LEX-locked reasoning that produces wrong answers when the canonical factor is removed."
+  ],
+  "case_background": "A commercial truck driver employed by a major grocery chain pulled his commercial rig onto the freeway shoulder during a brief snack stop. The driver was in full compliance with all commercial vehicle regulations, the freeway shoulder at that location was wide enough to fully accommodate the vehicle, visibility was excellent, the location was not identified in any state-level high-risk-shoulder-stop database, and the company's training and safety protocols explicitly permitted brief non-emergency stops for driver wellness. Plaintiff Cabral, driving a pickup truck on the highway, experienced an unexpected medical event and drifted onto the shoulder, striking the parked truck. Cabral died. His widow sued the grocery company for negligence, alleging that the company owed a duty to refrain from all non-emergency shoulder stops. The case turns on whether the seven-factor Rowland duty analysis supports extending duty under these specific facts where the driver's conduct was commercially routine and safely executed.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "foreseeability_neutralized",
+      "factor_type": "probability_of_harm",
+      "rowland_factor_origin": "Rowland factor 1 (foreseeability of harm)",
+      "text": "Whether the foreseeability of collision on a clear, fully-paved, high-visibility shoulder location is sufficient to support a general duty of care is treated here as an unresolved question on the record — neither clearly foreseeable nor clearly unforeseeable. The location was not in any prior-incident database, the visibility was excellent, and no prior similar collision has been documented at or near this milepost.",
+      "directionality": "neutralized",
+      "in_case_weight_estimate": 0.05,
+      "weight_justification": "Deliberately neutralized in the counterfactual — foreseeability is the LEX attribute the 10-model pilot identified for Cabral, so this counterfactual removes that signal entirely",
+      "is_stub_factor": true,
+      "counterfactual_note": "CFNEUTRALIZED: this is the perturbed axis"
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "certainty_of_injury_low",
+      "factor_type": "certainty_of_injury",
+      "rowland_factor_origin": "Rowland factor 2",
+      "text": "The causal chain between the truck's presence and Cabral's death is heavily mediated by Cabral's own medical event. Absent the medical event, no collision would have occurred. The 'certainty of injury from the defendant's conduct' is low because the conduct alone, without the intervening medical cause, produces no injury.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Reframed to emphasize the intervening-cause structure"
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "distant_connection",
+      "factor_type": "scope_of_risk",
+      "sub_label": "rowland_closeness",
+      "rowland_factor_origin": "Rowland factor 3 (closeness of connection)",
+      "text": "The causal connection between the driver's brief compliant stop and the plaintiff's death is substantially attenuated by the intervening medical event, the distance of plaintiff's drift, the clear visibility conditions, and the fact that comparable roadside conditions exist at countless other locations. Attributing this specific outcome to this specific driver's stop requires a long causal chain.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Reframed to point strongly against the closeness-of-connection factor that in the real Cabral supported duty"
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "no_moral_blame",
+      "factor_type": "moral_blame",
+      "rowland_factor_origin": "Rowland factor 4 (moral blame)",
+      "text": "The driver's conduct carries no moral blame. The stop was permitted by company policy, consistent with industry commercial-driver wellness guidelines, executed in compliance with traffic regulations, and motivated by reasonable safety considerations (driver fatigue management). A morally-blameworthy act is not present.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Reframed to remove moral blame entirely — the original Cabral had some moral blame attached to 'non-emergency' stops"
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "no_deterrence",
+      "factor_type": "public_policy_externality",
+      "rowland_factor_origin": "Rowland factor 5 (policy of preventing future harm)",
+      "text": "Imposing a duty here would not meaningfully prevent future harm. The underlying cause of the incident was the plaintiff's medical event, not the driver's conduct. Prohibiting commercial driver wellness stops would not prevent similar outcomes from unexpected medical events among other highway users, and would impose substantial cost on commercial driver safety.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Reframed — policy of preventing harm now points against duty because duty would not prevent the specific causal mechanism"
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "severe_burden",
+      "factor_type": "burden_of_precaution",
+      "rowland_factor_origin": "Rowland factor 6 (burden to defendant + community consequences)",
+      "text": "Imposing a duty to refrain from all non-emergency shoulder stops would be substantially burdensome on commercial trucking operations industry-wide. It would conflict with Federal Motor Carrier Safety Administration driver-wellness guidelines, increase fatigue-related incidents, and impose operational constraints on every commercial driver in every state. The community-wide cost is substantial.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.18,
+      "weight_justification": "Reframed to emphasize the substantial-burden argument that the real Cabral court minimized"
+    },
+    {
+      "factor_id": "f7",
+      "factor_cluster_id": "insurance_irrelevant",
+      "factor_type": "insurance_availability",
+      "rowland_factor_origin": "Rowland factor 7",
+      "text": "Commercial liability insurance is available, but this factor carries near-zero weight in the counterfactual analysis because the underlying duty question does not turn on loss-spreading.",
+      "directionality": "neutral",
+      "in_case_weight_estimate": 0.11,
+      "weight_justification": "Near-stub factor",
+      "is_stub_factor": true
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.00,
+    "max_factor_weight": 0.18,
+    "passes_feature_3_primary_arm_0.7": true,
+    "note": "6 of 7 factors point against duty (f2-f6 + policy/burden dominance); only foreseeability (f1) is neutralized. Aggregate weight against duty: ~0.84."
+  },
+  "question": "Under the seven-factor Rowland duty analysis applied to the modified facts described above, does the commercial grocery chain owe a duty of care to Cabral?",
+  "ground_truth": {
+    "answer": "no",
+    "rationale": "Under a weighted-additive analysis of the seven Rowland factors, six of seven point against duty (certainty of injury is attenuated by intervening cause, closeness is remote, no moral blame, no deterrence value, substantial burden, insurance irrelevant) and foreseeability is neutralized. The aggregate weight is strongly against duty — a WADD-reasoning decision-maker should reach 'no duty.' A LEX-collapsed model that defaults to 'foreseeability is the Rowland threshold' has no signal to work with and is expected to either default to its training prior (likely 'yes duty' given the original case law) or randomize.",
+    "note": "This is the v2 killer experiment: a case where LEX and WADD predict DIFFERENT outcomes. If models reach 'yes duty' on this counterfactual, they are exhibiting LEX-locked reasoning that produces wrong answers when the canonical factor is neutralized."
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "n_factor_clusters": 7,
+    "matched_c3_compliance_id": null,
+    "red_flags": [],
+    "counterfactual_type": "lex_vs_wadd_divergence",
+    "base_case_differs_in": [
+      "Removed foreseeability signal (original Cabral had foreseeability pointing strongly toward duty)",
+      "Added intervening-medical-event emphasis (original Cabral mentioned but did not emphasize this)",
+      "Reframed driver conduct as company-permitted wellness stop (original Cabral framed it as non-emergency)",
+      "Added FMCSA driver-wellness guidelines context to burden analysis (not in original)",
+      "Explicit 'no prior incidents at this location' (original was silent)"
+    ]
+  },
+  "open_items": [
+    "Run this counterfactual across the 10-model pilot matrix.",
+    "Predicted outcome: models that collapsed onto F1 foreseeability on the real Cabral will NOT reach 'no duty' on this counterfactual. They will either default to 'yes' (LEX-locked) or produce inconsistent answers.",
+    "If results confirm the prediction, this is the paper's v2 killer-experiment evidence for LEX-induced wrong answers on out-of-distribution cases.",
+    "This instance is explicitly EXCLUDED from the primary dataset (synthetic). It is the counterfactual arm of the benchmark."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "instance_id": "facet-neg-cf-003-c3",
+  "base_instance_id": "facet-neg-cf-003",
+  "base_case": "Biakanja v. Irving \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "condition": "C3_compliance_matched_parallel",
+  "doctrinal_framework_source": "Biakanja six-factor duty-to-third-party test (California)",
+  "taxonomy_version": "v1.2",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "draft_pending_primary_text_verification",
+  "construction_date": "2026-04-11",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "case_background": "A document preparer assisted a testator with estate planning. The testator's will included a bequest to a recipient. The following specific facts apply: (1) the document preparer was a licensed attorney in good standing, not a notary holding themselves out beyond their credentials \u2014 moral blame is minimal. (2) The bequest was contingent on multiple conditions being met, including the testator outliving several other named relatives, making it difficult to say the recipient was specifically intended to benefit \u2014 the intent-to-affect the recipient is diffuse and unresolved on this record. (3) The harm to the recipient, if any, was remote and speculative because the will's conditional structure made the bequest uncertain even if the will had been properly executed. (4) The causal connection between the preparer's conduct and any alleged harm was heavily attenuated by multiple intervening events, including deaths of other relatives and changes in the testator's living circumstances. (5) Imposing a duty here would not meaningfully deter future harm because the conduct at issue is already fully regulated by attorney licensing and malpractice law. (6) The policy consequences of extending duty to cover this specific fact pattern would substantially burden the legal profession's ability to provide conditional-bequest estate planning services. The question is whether the document preparer owed a duty of care to the recipient under the Biakanja six-factor test.",
+  "compliance_requirements": [
+    {
+      "requirement_id": "R1",
+      "maps_to_base_factor": "f1 (moral_blame)",
+      "requirement_text": "The record must establish that the consideration 'moral blame' clearly supports the outcome direction that its base directionality indicates (neutralized). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "contested",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R2",
+      "maps_to_base_factor": "f2 (probability_of_harm)",
+      "requirement_text": "The record must establish that the consideration 'probability of harm' clearly supports the outcome direction that its base directionality indicates (against_duty). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R3",
+      "maps_to_base_factor": "f3 (certainty_of_injury)",
+      "requirement_text": "The record must establish that the consideration 'certainty of injury' clearly supports the outcome direction that its base directionality indicates (against_duty). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R4",
+      "maps_to_base_factor": "f4 (scope_of_risk)",
+      "requirement_text": "The record must establish that the consideration 'scope of risk' clearly supports the outcome direction that its base directionality indicates (against_duty). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R5",
+      "maps_to_base_factor": "f5 (moral_blame)",
+      "requirement_text": "The record must establish that the consideration 'moral blame' clearly supports the outcome direction that its base directionality indicates (against_duty). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R6",
+      "maps_to_base_factor": "f6 (public_policy_externality)",
+      "requirement_text": "The record must establish that the consideration 'public policy externality' clearly supports the outcome direction that its base directionality indicates (against_duty). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    }
+  ],
+  "question": "Are all 6 compliance requirements above independently satisfied?",
+  "ground_truth": {
+    "answer": "varies_by_instance",
+    "rationale": "Auto-generated C3; review each requirement individually before eval."
+  },
+  "construction_notes": [
+    "Generated via eval/gen_c2_c3.py \u2014 template-based compliance rephrasings.",
+    "Human annotator review recommended.",
+    "The round-2 review literal-application instruction in the eval harness (SPEC.md \u00a76.4 v0.5) should produce cleaner C3 counts regardless of template tightness."
+  ]
+}

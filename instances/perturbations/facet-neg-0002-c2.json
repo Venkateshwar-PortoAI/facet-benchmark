@@ -1,0 +1,85 @@
+{
+  "base_instance_id": "facet-neg-0002",
+  "base_case": "Barker v. Lull Engineering Co., 20 Cal. 3d 413 (1978)",
+  "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
+  "protocol_version": "SPEC.md §6.3 v0.4",
+  "taxonomy_version": "v1.2",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+  "construction_date": "2026-04-11",
+  "status": "draft_pending_primary_text_verification",
+
+  "purpose": "Five per-factor weight-perturbation variants for Barker. Tests the C2 protocol on a Barker five-factor risk-benefit case (Cal. 1978, plaintiff verdict) to check whether Wade/Barker-style compensatory products cases produce a different collapse signature than the Rowland-line Cabral result.",
+
+  "construction_notes": [
+    "All five Barker factors could be rewritten to neutral text. Barker factor 5 (adverse consequences of alternative design) was the trickiest because it is phrased in terms of a specific alternative design; neutral rewrite frames it as 'neither significantly adverse nor clearly safe.'",
+    "No stub factors — all five Barker factors carry meaningful weight. This is a clean 5-factor case with tight weight distribution (0.18-0.22).",
+    "The 3 pro-liability factors (f1 gravity, f2 probability, f3 alternative) vs 2 anti-liability factors (f4 burden, f5 product_utility) gives a stronger counterweight test than Cabral (6 pro, 1 against, 0 stub).",
+    "The cleanest collapse test here is perturbing f4 or f5 (the anti-liability factors) — if the model is collapsed onto a pro-liability factor, f4/f5 perturbation won't shift the answer. If the model is integrating, removing both counterweights should push the answer strongly toward liability."
+  ],
+
+  "perturbations": [
+    {
+      "variant_id": "facet-neg-0002-c2-f1",
+      "perturbed_factor_id": "f1",
+      "perturbed_factor_type": "gravity_of_loss",
+      "perturbed_barker_factor": "Barker factor 1 (gravity of danger)",
+      "base_weight": 0.22,
+      "base_directionality": "toward_liability",
+      "original_text": "The gravity of danger posed by the loader's challenged design — specifically the severity of injury from tipping, rollover, or operator ejection on uneven terrain.",
+      "neutral_rewrite": "Whether the danger posed by the loader's design rises to the level of severity required to count against the design is treated by the court as neither clearly severe nor clearly moderate; the record leaves the magnitude-of-harm question open.",
+      "perturbation_note": "Highest-weight factor. A model integrating all 5 should show a substantial answer shift here."
+    },
+    {
+      "variant_id": "facet-neg-0002-c2-f2",
+      "perturbed_factor_id": "f2",
+      "perturbed_factor_type": "probability_of_harm",
+      "perturbed_barker_factor": "Barker factor 2 (likelihood of danger)",
+      "base_weight": 0.20,
+      "base_directionality": "toward_liability",
+      "original_text": "The likelihood the danger would occur given foreseeable uses of the loader, including operation on the kind of terrain at issue.",
+      "neutral_rewrite": "Whether the likelihood of the danger occurring during foreseeable use is high enough to warrant a design-defect finding is not developed as a load-bearing consideration in the court's analysis of this case.",
+      "perturbation_note": "Second-highest pro-liability factor. Perturbation should shift the answer if the model is integrating."
+    },
+    {
+      "variant_id": "facet-neg-0002-c2-f3",
+      "perturbed_factor_id": "f3",
+      "perturbed_factor_type": "alternative_precautions",
+      "perturbed_barker_factor": "Barker factor 3 (mechanical feasibility of safer alternative)",
+      "base_weight": 0.21,
+      "base_directionality": "toward_liability",
+      "original_text": "The mechanical feasibility of a safer alternative design — specifically outriggers, roll bar, seat belt, or combination thereof.",
+      "neutral_rewrite": "The mechanical feasibility of safer alternative designs is treated by the court as neither clearly achievable nor clearly impossible on this record; both sides offered competing evidence about whether outriggers and similar features could have been engineered into this loader.",
+      "perturbation_note": "The factor that is doctrinally most central to design-defect risk-benefit analysis. Collapse onto this factor is a strong alternative hypothesis to collapse onto gravity or probability."
+    },
+    {
+      "variant_id": "facet-neg-0002-c2-f4",
+      "perturbed_factor_id": "f4",
+      "perturbed_factor_type": "burden_of_precaution",
+      "perturbed_barker_factor": "Barker factor 4 (financial cost of improved design)",
+      "base_weight": 0.18,
+      "base_directionality": "against_liability",
+      "original_text": "The financial cost of incorporating the proposed safer design elements into the loader manufacturing.",
+      "neutral_rewrite": "The financial cost of incorporating the proposed safer design elements is not developed in the record as either prohibitive or trivial; the magnitude of the cost is treated as an open question.",
+      "perturbation_note": "First of two anti-liability factors. Perturbing f4 removes one counterweight; a non-collapsed model should shift further toward liability; a model collapsed onto a pro-liability factor should not shift."
+    },
+    {
+      "variant_id": "facet-neg-0002-c2-f5",
+      "perturbed_factor_id": "f5",
+      "perturbed_factor_type": "product_utility",
+      "perturbed_barker_factor": "Barker factor 5 (adverse consequences of alternative design to product and consumer)",
+      "base_weight": 0.19,
+      "base_directionality": "against_liability",
+      "original_text": "The adverse consequences the proposed safer design would impose on the product and its consumer — weight, maneuverability, cost, or interference with legitimate off-level uses.",
+      "neutral_rewrite": "Whether a safer alternative design would impose adverse consequences on the loader's product utility — weight, maneuverability, interference with legitimate off-level operation — is treated by the court as neither clearly significant nor clearly trivial; the utility impairment question is not resolved in the record.",
+      "perturbation_note": "Second of two anti-liability factors. The clearest two-factor collapse test: combined with f4 perturbation, removing both counterweights tests whether the model responds to the loss of both anti-liability pushers."
+    }
+  ],
+
+  "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
+
+  "open_items_for_pilot": [
+    "Run the 5 C2 variants on the harness (same pipeline as Cabral).",
+    "Compare the Barker collapse signature (products liability, Wade-style compensatory) to the Cabral result (Rowland duty analysis). If both show collapse but onto different canonical factors, that is evidence of doctrinal-framework-dependent collapse. If both collapse onto the same type of factor, that is evidence of a general collapse pattern.",
+    "Primary-text verification of Barker 20 Cal. 3d 413 before admission to final dataset."
+  ]
+}

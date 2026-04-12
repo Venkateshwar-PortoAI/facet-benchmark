@@ -1,0 +1,115 @@
+{
+  "base_instance_id": "facet-neg-0003",
+  "base_case": "Cabral v. Ralphs Grocery Co., 51 Cal. 4th 764 (2011)",
+  "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
+  "protocol_version": "SPEC.md §6.3 v0.4 (weight-perturbation with reconstruction-rate disqualification)",
+  "taxonomy_version": "v1.2",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+  "construction_date": "2026-04-11",
+  "status": "draft_pending_primary_text_verification",
+
+  "purpose": "Seven per-factor weight-perturbation variants of Cabral (facet-neg-0003). Each variant rewrites exactly one factor-cluster to a doctrinally neutral value while leaving the other six factor-clusters structurally present and unchanged. Under SPEC.md §6.3 v0.4, this replaces the v0.3 removal-ablation because removing a factor from a Rowland-line duty case leaves something that is no longer a Rowland-factor analysis — the model would silently reconstruct the missing factor from pretraining, contaminating the control. Weight-perturbation preserves doctrinal structure while varying the perturbed factor's contribution.",
+
+  "construction_notes_from_drafting": [
+    "All seven factors could be rewritten neutrally without producing doctrinally incoherent text. The C2-v0.4 protocol is constructable on a real Rowland case.",
+    "The two stub factors (f2 certainty_of_injury at weight 0.08 and f7 insurance_availability at weight 0.09) produce near-no-op perturbations because their base weights are already near zero. They are retained in the variant set for methodological completeness but should not be expected to produce meaningful signal in the ensemble measurement.",
+    "The load-bearing factors (f1 foreseeability, f3 rowland_closeness, f4 moral_blame, f5 policy, f6 burden) produce substantively different neutral rewrites and are the ones the collapse measurement will actually rely on.",
+    "Each perturbation was checked for not-creating-a-missing-factor-impression: the neutral rewrite is phrased as 'the court finds this factor disputed / not developed / balanced' rather than 'this factor is not considered.' This matters because the reconstruction-rate disqualification check asks the model whether any factor was *missing*; a neutral rewrite should read as 'present but neutral,' not 'absent.'",
+    "Directionality of neutral rewrites is explicitly null, not 'toward' or 'against' duty. Weight contribution is recorded as 0.00 in the perturbed position."
+  ],
+
+  "perturbations": [
+    {
+      "variant_id": "facet-neg-0003-c2-f1",
+      "perturbed_factor_id": "f1",
+      "perturbed_factor_type": "probability_of_harm",
+      "perturbed_rowland_factor": "Rowland factor 1 (foreseeability of harm)",
+      "base_weight": 0.22,
+      "base_directionality": "toward_duty",
+      "original_text": "The foreseeability that stopping a large commercial truck on a freeway shoulder would lead to collision with other highway users, particularly those experiencing vehicle loss of control.",
+      "neutral_rewrite": "Whether harm to other highway users is foreseeable when commercial trucks stop on freeway shoulders is a contested factual and predictive question in this record; the court finds neither that such collisions are notably common nor that they are notably rare, and treats this factor as balanced.",
+      "perturbation_note": "Original was the most-weighted factor (0.22). Neutral rewrite removes the directional push without erasing the factor's doctrinal presence. A model integrating all seven factors should show a substantial answer shift here; a model collapsed onto foreseeability should show the largest shift on this perturbation. A model collapsed onto a different factor should show no shift."
+    },
+    {
+      "variant_id": "facet-neg-0003-c2-f2",
+      "perturbed_factor_id": "f2",
+      "perturbed_factor_type": "certainty_of_injury",
+      "perturbed_rowland_factor": "Rowland factor 2 (certainty of injury)",
+      "base_weight": 0.08,
+      "base_directionality": "toward_duty",
+      "is_stub_factor": true,
+      "stub_note": "Below the weight floor if a stricter floor were applied; sits at 0.08 above the 0.05 §3.2 threshold but barely. Perturbation is near-no-op — the base factor was already near-zero in contribution.",
+      "original_text": "The certainty that plaintiff suffered injury — here, the plaintiff died, so certainty of injury is maximal.",
+      "neutral_rewrite": "The degree of certainty about the plaintiff's injury is treated as neither a load-bearing confirmatory factor nor an affirmative doubt in the court's analysis.",
+      "perturbation_note": "Near-no-op stub perturbation. Retained for completeness but should not be expected to produce measurable signal."
+    },
+    {
+      "variant_id": "facet-neg-0003-c2-f3",
+      "perturbed_factor_id": "f3",
+      "perturbed_factor_type": "scope_of_risk",
+      "perturbed_sub_label": "rowland_closeness",
+      "perturbed_rowland_factor": "Rowland factor 3 (closeness of connection)",
+      "base_weight": 0.17,
+      "base_directionality": "toward_duty",
+      "original_text": "The closeness of the connection between the Ralphs driver's conduct (stopping on the shoulder) and Cabral's injury (collision with the parked truck).",
+      "neutral_rewrite": "The directness of the connection between the commercial truck driver's conduct and the plaintiff's injury is a matter on which the court finds the record genuinely mixed — the intervening medical event lengthened the causal chain, but the parked truck remained a direct physical hazard in the collision. The court treats this consideration as balanced.",
+      "perturbation_note": "Tests whether the model is sensitive to scope-of-risk under the v1.2 merged type. The original was a moderate-weight factor; neutral rewrite preserves the sub-label presence without pushing toward duty."
+    },
+    {
+      "variant_id": "facet-neg-0003-c2-f4",
+      "perturbed_factor_id": "f4",
+      "perturbed_factor_type": "moral_blame",
+      "perturbed_rowland_factor": "Rowland factor 4 (moral blame)",
+      "base_weight": 0.13,
+      "base_directionality": "toward_duty",
+      "original_text": "The moral blame attached to stopping a commercial truck on a freeway shoulder for a non-emergency snack break rather than using a designated rest area.",
+      "neutral_rewrite": "Whether the commercial truck driver's choice to stop on the shoulder for a non-emergency reason rather than use a rest area carries moral blame is not meaningfully developed in this record; the court treats the driver's choice as neither notably blameworthy nor notably innocent.",
+      "perturbation_note": "Moral_blame is the factor most vulnerable to silent model reconstruction — frontier models often hold strong priors about commercial driver conduct. The reconstruction-rate check is especially important on this perturbation."
+    },
+    {
+      "variant_id": "facet-neg-0003-c2-f5",
+      "perturbed_factor_id": "f5",
+      "perturbed_factor_type": "public_policy_externality",
+      "perturbed_rowland_factor": "Rowland factor 5 (policy of preventing future harm)",
+      "base_weight": 0.15,
+      "base_directionality": "toward_duty",
+      "original_text": "The policy of preventing future harm — whether imposing a duty would deter commercial drivers from non-emergency shoulder stops and thereby reduce highway deaths.",
+      "neutral_rewrite": "Whether imposing a duty here would meaningfully deter future non-emergency shoulder stops is treated by the court as neither established nor refuted; the deterrence argument is considered but not accorded net directional weight.",
+      "perturbation_note": "The policy factor is where courts often do their actual decision work while claiming they are weighing; a model that has learned the real decision pattern will be sensitive to this perturbation regardless of whether the formal weighting says this factor is moderate."
+    },
+    {
+      "variant_id": "facet-neg-0003-c2-f6",
+      "perturbed_factor_id": "f6",
+      "perturbed_factor_type": "burden_of_precaution",
+      "perturbed_rowland_factor": "Rowland factor 6 (burden to defendant + consequences to community)",
+      "base_weight": 0.16,
+      "base_directionality": "against_duty",
+      "original_text": "The burden on commercial trucking of being liable for non-emergency shoulder stops, and the broader community consequences (e.g., effect on freight operations, driver rest-break practices).",
+      "neutral_rewrite": "The magnitude of the burden on commercial trucking operations from imposing a duty to avoid non-emergency shoulder stops is treated by the court as neither substantial nor trivial; the burden and its community consequences are considered but not resolved in either direction.",
+      "perturbation_note": "This is the only factor in Cabral with base directionality against_duty. Perturbing it removes the one counterweight in the instance and should, on any non-collapsed model, shift the answer more toward duty. A model that does NOT shift on this perturbation is strong evidence of collapse onto one of the pro-duty factors."
+    },
+    {
+      "variant_id": "facet-neg-0003-c2-f7",
+      "perturbed_factor_id": "f7",
+      "perturbed_factor_type": "insurance_availability",
+      "perturbed_rowland_factor": "Rowland factor 7 (availability/cost/prevalence of insurance)",
+      "base_weight": 0.09,
+      "base_directionality": "toward_duty",
+      "is_stub_factor": true,
+      "stub_note": "Above the §3.2 0.05 floor but substantively near-zero — the standard Rowland vestigial factor.",
+      "original_text": "The availability, cost, and prevalence of insurance for commercial trucking liability claims.",
+      "neutral_rewrite": "The availability of insurance for commercial trucking liability is treated by the court as present but not load-bearing in the duty analysis.",
+      "perturbation_note": "Near-no-op. Retained for methodological completeness."
+    }
+  ],
+
+  "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
+  "reconstruction_check_note": "Sent after each perturbation trial. If the model spontaneously names the perturbed factor as 'missing' — e.g., if after the f4 moral_blame perturbation the model says 'the court has not discussed whether the driver's decision carries moral blame' — the trial is disqualified because the model has identified the perturbation. A model that accepts the neutral rewrite at face value ('all seven factors appear to be addressed, with factor 4 treated as balanced') is processing the perturbation rather than reconstructing from pretraining.",
+
+  "open_items_for_pilot": [
+    "Primary-text verification of Cabral itself (blocks all seven perturbations from being admitted to the pilot dataset).",
+    "Run the reconstruction-check prompt on a frontier model (Claude Opus 4.6) for each of the 7 variants to establish baseline disqualification rate. If >30% of variants trigger reconstruction, the neutral-rewrite language is too aggressive and must be made less detectable.",
+    "Pilot the full C0 → C2-f1 through C2-f7 sequence on 2-3 models and verify that a model integrating all seven factors produces proportionally-shifted answers across the perturbations, while a clearly-collapsed model (e.g., a small open model) produces shifts primarily on one perturbation.",
+    "If the pilot validates the protocol, construct C2 perturbations for the other 4 pilot seed instances (0002 Barker, 0004 Biakanja, 0005 O'Brien; 0001 Voss remains a construction exercise and does not get perturbations until rebuild)."
+  ]
+}

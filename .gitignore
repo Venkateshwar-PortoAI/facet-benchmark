@@ -1,0 +1,24 @@
+
+# Build artifacts
+PAPER_ARXIV_v1.html
+eval/md_to_pdf.py
+facet-arxiv-submission.zip
+latex/main.pdf
+latex/main.aux
+latex/main.log
+latex_arXiv/
+
+# Internal working docs (not for public repo)
+PAPER_DRAFT_v0.1.md
+PAPER_DRAFT_v0.2.md
+PAPER_ARXIV_v1.md
+REVIEW_v0.1.md
+REVIEW_v0.2.md
+PREREGISTRATION_WORKFLOW.md
+results/FINDINGS_cabral_pilot_v0.1.md
+results/FINDINGS_cross_family_v0.3.md
+results/FINDINGS_extended_thinking_addendum.md
+results/FINDINGS_pilot_v0.1.md
+results/FINDINGS_pilot_v0.2.md
+results/FINDINGS_pilot_v0.5.md
+results/*-dry-run-*.json

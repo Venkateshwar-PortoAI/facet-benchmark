@@ -1,0 +1,104 @@
+{
+  "instance_id": "facet-neg-0007",
+  "source_case": "Davis v. Consolidated Rail Corp., 788 F.2d 1260 (7th Cir. 1986)",
+  "doctrine": "hand_formula_extended",
+  "doctrinal_framework": "Hand formula (B < PL) in workplace-safety context (Posner)",
+  "jurisdiction": "federal (7th Circuit, Illinois law)",
+  "court": "United States Court of Appeals for the Seventh Circuit",
+  "year": 1986,
+  "author": "Posner, J.",
+  "appellate_unanimity": true,
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "pilot_instance",
+  "case_background": "Plaintiff Davis, a railway car inspector, was struck by a moving locomotive while inspecting coupled cars. He alleged that the railroad failed to implement standard blue-flag protocols (a well-known industry-wide warning system where a blue flag or light placed on or near a stationary train signals that workers are on or under the equipment and no movement may occur). The railroad argued that Davis himself failed to place the blue flag. Judge Posner applied the Hand formula, weighing the burden on the railroad of enforcing blue-flag protocols against the probability and gravity of worker injury from unannounced train movement, and discussing plaintiff conduct, industry custom, and alternative precautions. The Seventh Circuit reversed and remanded on comparative-negligence grounds.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "burden_of_precaution",
+      "factor_type": "burden_of_precaution",
+      "hand_component": "B",
+      "text": "The burden on Consolidated Rail of enforcing blue-flag protocols \u2014 training costs, supervisory oversight, the operational cost of ensuring every inspection is preceded by a properly-placed blue flag.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.16,
+      "weight_justification": "Court acknowledged the protocol enforcement cost was material but not dispositive"
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "probability_of_harm",
+      "factor_type": "probability_of_harm",
+      "hand_component": "P",
+      "text": "The probability that a locomotive would couple to stationary cars while an inspector was beneath them, given the yard layout, the shift schedule, and the communication practices.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Railway yards have known recurring risk of unannounced coupling incidents"
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "gravity_of_loss",
+      "factor_type": "gravity_of_loss",
+      "hand_component": "L",
+      "text": "The gravity of injury to a worker struck or crushed by a coupling locomotive \u2014 catastrophic injury, likely death.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.2,
+      "weight_justification": "Crushing injury from coupling is among the most severe foreseeable workplace harms"
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "industry_custom",
+      "factor_type": "industry_custom",
+      "text": "Blue-flag protocol is the industry-standard warning system for railway inspection work, established by federal regulation and universal among class-I railroads.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Industry custom strongly favored the plaintiff's theory that protocol enforcement was expected"
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "comparative_fault",
+      "factor_type": "comparative_fault",
+      "text": "Plaintiff's failure to place the blue flag himself before commencing inspection, and whether the railroad's protocol makes flag-placement the inspector's duty or the yardmaster's duty.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Posner gave substantial weight to the comparative-negligence question on remand"
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "alternative_precautions",
+      "factor_type": "alternative_precautions",
+      "text": "Alternative precautions beyond blue-flag enforcement \u2014 radio check-in, yardmaster communication, derail devices, physical lockouts on coupling equipment.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Availability of alternatives (radio, derails) strengthens the case for railroad precaution duty"
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.0,
+    "max_factor_weight": 0.2,
+    "passes_feature_3_primary_arm_0.7": true,
+    "passes_feature_3_secondary_arm_0.5": true
+  },
+  "question": "Under the Hand formula in a workplace-safety context, did Consolidated Rail breach its duty of care by failing to enforce blue-flag protocols for car inspection work?",
+  "ground_truth": {
+    "answer": "yes",
+    "rationale": "The Seventh Circuit reversed the defense judgment and remanded on comparative-negligence grounds. Posner held that under Hand-formula reasoning, the burden of protocol enforcement was modest compared to the probability-times-gravity of worker injury, and that the industry-custom evidence combined with alternative-precaution availability supported liability subject to comparative-fault reduction for the plaintiff's own protocol failure.",
+    "holding_source": "788 F.2d at 1266 (pin-cite pending)",
+    "appellate_unanimity": true
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "n_factor_clusters": 6,
+    "matched_c3_compliance_id": "facet-neg-0007-c3",
+    "red_flags": [],
+    "jurisdiction_category": "federal_appellate"
+  },
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification of 788 F.2d 1260",
+    "Weight elicitation from opinion"
+  ]
+}

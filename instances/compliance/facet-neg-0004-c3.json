@@ -1,0 +1,100 @@
+{
+  "instance_id": "facet-neg-0004-c3",
+  "base_instance_id": "facet-neg-0004",
+  "base_case": "Biakanja v. Irving, 49 Cal. 2d 647 (1958)",
+  "condition": "C3_compliance_matched_parallel",
+  "doctrinal_framework_source": "Biakanja six-factor duty-to-third-party test",
+  "taxonomy_version": "v1.2",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "draft_pending_primary_text_verification",
+  "construction_date": "2026-04-11",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+
+  "purpose": "Matched C3 compliance variant for Biakanja. Tests the prediction that Rowland-family factors (Biakanja is the Rowland precursor) resist clean compliance reformulation in the same way Cabral's Rowland factors did. Expected to replicate Cabral's large C0/C3 delta.",
+
+  "construction_observations_from_drafting": [
+    "Biakanja factors reformulated as compliance requirements with the same difficulty as Cabral Rowland factors. 4 of 6 requirements below required converting gestalt considerations into bright-line thresholds (R1 intent-to-affect, R5 moral_blame as regulatory violation, R6 policy as quantified deterrence). This replicates the Cabral pattern.",
+    "R5 and R6 are expected to fail on structural grounds — courts do not require the defendant to violate a named statute or quantify deterrence to impose duty. This means C3 will likely return 'no' on R5 and R6 just as Cabral did on R4, R5, R6.",
+    "If the C0/C3 delta on Biakanja replicates Cabral's (3/6 or 4/6 satisfied on C3 vs 'yes' on C0), it confirms that the Rowland-family compliance-reformulation difficulty is a property of the doctrine, not an artifact of the Cabral case specifically."
+  ],
+
+  "case_background": "(same as base instance facet-neg-0004) Irving, a notary, drafted a will for Maroevich that was improperly executed (no witnesses). The will failed probate, Biakanja (the named beneficiary) lost the intended bequest, and sued Irving. Question: did Irving owe a duty of care to the intended beneficiary of the will despite no contractual relationship?",
+
+  "compliance_requirements": [
+    {
+      "requirement_id": "R1",
+      "maps_to_base_factor": "f1 (moral_blame / Biakanja factor 1 intent-to-affect)",
+      "requirement_text": "The defendant must have explicitly named or intended the plaintiff as a direct beneficiary of the transaction, as documented in the transaction's written record.",
+      "independently_checkable": true,
+      "expected_answer": "yes (Biakanja was named as sole beneficiary in the will itself)",
+      "compliance_construction_note": "Natural yes/no — the intent-to-affect requirement has compliance form because 'named in the will' is checkable."
+    },
+    {
+      "requirement_id": "R2",
+      "maps_to_base_factor": "f2 (probability_of_harm / Biakanja foreseeability)",
+      "requirement_text": "The harm to the plaintiff must have been foreseeable at the time of the defendant's conduct, demonstrable by showing that at least one earlier published case found similar harm foreseeable.",
+      "independently_checkable": true,
+      "expected_answer": "contested (by 1958, invalid-will-fails-probate was foreseeable as a matter of general knowledge, but prior published cases on duty-to-beneficiary were scarce)",
+      "compliance_construction_note": "Bright-line via 'at least one earlier published case.' Harder to satisfy than Rowland foreseeability but still a compliance-form reformulation."
+    },
+    {
+      "requirement_id": "R3",
+      "maps_to_base_factor": "f3 (certainty_of_injury / Biakanja factor 3)",
+      "requirement_text": "The plaintiff's injury must be documented as actual and quantifiable in the complaint — not hypothetical or speculative.",
+      "independently_checkable": true,
+      "expected_answer": "yes (the intestate share vs named bequest difference is definite and quantifiable)",
+      "compliance_construction_note": "Natural yes/no."
+    },
+    {
+      "requirement_id": "R4",
+      "maps_to_base_factor": "f4 (scope_of_risk / Biakanja closeness of connection)",
+      "requirement_text": "The causal chain from defendant's conduct to plaintiff's injury must not be broken by more than one intervening cause.",
+      "independently_checkable": true,
+      "expected_answer": "yes (chain: defective drafting → probate failure → lost bequest; one intervening step but no independent cause)",
+      "compliance_construction_note": "Bright-line on intervening-cause count."
+    },
+    {
+      "requirement_id": "R5",
+      "maps_to_base_factor": "f5 (moral_blame / Biakanja factor 5 unauthorized practice)",
+      "requirement_text": "The defendant's conduct must violate at least one affirmative statute, regulation, or licensing requirement applicable to the defendant's professional conduct.",
+      "independently_checkable": true,
+      "expected_answer": "contested (unauthorized practice of law was a violation in California in 1958, but whether will-drafting by a notary specifically was a named violation is less clear)",
+      "compliance_construction_note": "CONSTRUCTION DIFFICULTY — replicates the Cabral R4 pattern. Converts gestalt 'moral blame' into 'regulatory violation' which is a different concept."
+    },
+    {
+      "requirement_id": "R6",
+      "maps_to_base_factor": "f6 (public_policy_externality / Biakanja factor 6 prevention of future harm)",
+      "requirement_text": "The decision to hold the defendant liable must be accompanied by a quantified deterrence estimate in the court's rationale (e.g., 'imposing this duty is expected to reduce incidents of type X by Y%').",
+      "independently_checkable": true,
+      "expected_answer": "no (courts rarely quantify deterrence this way — particularly not in 1958)",
+      "compliance_construction_note": "STRUCTURAL FAIL — replicates the Cabral R5 pattern. Courts do not quantify deterrence. This requirement is expected to return 'no' on nearly every real case, contributing a constant-negative to the C3 signal."
+    }
+  ],
+
+  "question": "Are all six compliance requirements above independently satisfied?",
+
+  "ground_truth": {
+    "answer": "no",
+    "rationale": "R1, R3, R4 are satisfied. R2 and R5 are contested. R6 fails structurally. A compliance-style answer is therefore '3 of 6 clearly yes, 2 contested, 1 fails' — distinct from the C0 answer of 'yes, duty exists.' This replicates the Cabral Rowland-family pattern: the C0/C3 delta is meaningful on Rowland-precursor cases because the underlying factors resist compliance reformulation.",
+    "note": "Predicted replication of Cabral's C0/C3 delta. Successful replication would establish that the compliance-vs-integration distinction is a property of the Rowland doctrinal family, not just of a single case."
+  },
+
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "reviewer": null,
+    "base_instance_id": "facet-neg-0004",
+    "c3_construction_difficulty_score": "MODERATE_TO_HARD",
+    "requirements_flagged_for_review": ["R5", "R6"],
+    "construction_flags": [
+      "R5 replicates the Cabral regulatory-violation conversion pattern for moral_blame.",
+      "R6 replicates the Cabral quantified-deterrence conversion pattern for policy. Expected structural fail."
+    ]
+  },
+
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification.",
+    "Pilot run to check whether C0/C3 delta replicates Cabral's Rowland-family pattern.",
+    "If the Biakanja C0/C3 delta is similar to Cabral's, the compliance-vs-integration doctrine-dependence hypothesis is confirmed across two instances — a replication finding."
+  ]
+}

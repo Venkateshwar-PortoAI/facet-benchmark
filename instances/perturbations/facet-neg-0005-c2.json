@@ -1,0 +1,106 @@
+{
+  "base_instance_id": "facet-neg-0005",
+  "base_case": "O'Brien v. Muskin Corp., 94 N.J. 169 (1983)",
+  "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
+  "protocol_version": "SPEC.md §6.3 v0.4",
+  "taxonomy_version": "v1.2",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+  "construction_date": "2026-04-11",
+  "status": "draft_pending_primary_text_verification",
+
+  "purpose": "Seven per-factor weight-perturbation variants for O'Brien, the N.J. 1983 Wade-factor adoption case. Second Wade-factor instance in the pilot (first was Barker). Tests whether the Wade/Barker small-C0/C3-delta and F3-alternative-precautions collapse pattern replicates on a different Wade case.",
+
+  "construction_notes": [
+    "O'Brien is a 4-3 split case, which means ground-truth unanimity is absent. It is retained in the pilot as a non-primary case per SPEC.md §5 constraint 8. The split specifically turned on factor 3 (availability of safer substitute), which is the predicted collapse factor for Wade cases. This makes O'Brien a natural stress-test of whether the model sides with the majority or the dissent when the dispositive factor is perturbed.",
+    "All 7 Wade factors present — this is a full-Wade case unlike Barker which used Barker's 5-factor variant.",
+    "Two anti-liability factors (f1 product_utility, f6 user_awareness) — more counterweight than Barker's one-factor-at-f4 plus f5. O'Brien is therefore a better test of the 'perturb the counterweight' measurement."
+  ],
+
+  "perturbations": [
+    {
+      "variant_id": "facet-neg-0005-c2-f1",
+      "perturbed_factor_id": "f1",
+      "perturbed_factor_type": "product_utility",
+      "perturbed_wade_factor": "Wade 1 (usefulness and desirability)",
+      "base_weight": 0.16,
+      "base_directionality": "against_liability",
+      "original_text": "The usefulness and desirability of above-ground swimming pools to the user and public — recreation, exercise, affordability relative to in-ground pools.",
+      "neutral_rewrite": "Whether above-ground swimming pools provide substantial utility to consumers and the public is treated by the court as neither clearly high nor clearly low; the utility question is not resolved in either direction in the record.",
+      "perturbation_note": "First of two anti-liability factors. Perturbing f1 removes one counterweight."
+    },
+    {
+      "variant_id": "facet-neg-0005-c2-f2",
+      "perturbed_factor_id": "f2",
+      "perturbed_factor_type": "probability_of_harm",
+      "perturbed_wade_factor": "Wade 2 (likelihood of injury)",
+      "base_weight": 0.17,
+      "base_directionality": "toward_liability",
+      "original_text": "The likelihood of serious injury from foreseeable uses of the pool, including diving into shallow water.",
+      "neutral_rewrite": "Whether the likelihood of injury from foreseeable uses including diving is substantial is not developed as a clearly load-bearing element in the court's analysis.",
+      "perturbation_note": "Tied-highest pro-liability factor. A model integrating should shift."
+    },
+    {
+      "variant_id": "facet-neg-0005-c2-f3",
+      "perturbed_factor_id": "f3",
+      "perturbed_factor_type": "gravity_of_loss",
+      "perturbed_wade_factor": "Wade 2 (probable seriousness)",
+      "base_weight": 0.17,
+      "base_directionality": "toward_liability",
+      "original_text": "The probable seriousness of diving-injury harm — spinal cord damage, paralysis, death.",
+      "neutral_rewrite": "The probable seriousness of diving-injury harm is treated by the court as one consideration among several, not developed as a dispositive factor in the risk-utility balance.",
+      "perturbation_note": "Tied-highest pro-liability factor. Pair-testing with f2 perturbation measures whether the model treats probability and gravity as a unified 'safety aspects' block per the Wade 2 split."
+    },
+    {
+      "variant_id": "facet-neg-0005-c2-f4",
+      "perturbed_factor_id": "f4",
+      "perturbed_factor_type": "alternative_precautions",
+      "perturbed_wade_factor": "Wade 3 (availability of safer substitute)",
+      "base_weight": 0.14,
+      "base_directionality": "split",
+      "original_text": "The availability of a safer substitute — in-ground pools, deeper above-ground designs, textured-bottom materials, or warning/label redesign.",
+      "neutral_rewrite": "Whether a safer substitute product exists that would meaningfully reduce the diving-injury risk is contested in the record; neither the presence nor absence of such a substitute is resolved by the court's analysis as presented here.",
+      "perturbation_note": "This is the 4-3 split factor. In O'Brien itself, the majority and dissent disagreed on this exact question. Perturbing it is the critical collapse test: if Wade collapse targets F3 (alternative_precautions) as predicted from Barker, this perturbation should produce the biggest shift in the direct probe."
+    },
+    {
+      "variant_id": "facet-neg-0005-c2-f5",
+      "perturbed_factor_id": "f5",
+      "perturbed_factor_type": "burden_of_precaution",
+      "perturbed_wade_factor": "Wade 4 (ability to eliminate unsafe character without unreasonable cost)",
+      "base_weight": 0.13,
+      "base_directionality": "toward_liability",
+      "original_text": "The manufacturer's ability to eliminate or mitigate the diving-injury risk without impairing the pool's utility or imposing unreasonable cost — additional warnings, bottom-texture changes, design modifications.",
+      "neutral_rewrite": "Whether the manufacturer could have eliminated or mitigated the risk without unreasonable cost or utility impairment is not developed as a dispositive element; the court treats this factor as balanced.",
+      "perturbation_note": "Moderate-weight pro-liability factor."
+    },
+    {
+      "variant_id": "facet-neg-0005-c2-f6",
+      "perturbed_factor_id": "f6",
+      "perturbed_factor_type": "user_awareness",
+      "perturbed_wade_factor": "Wade 6 (anticipated user awareness)",
+      "base_weight": 0.13,
+      "base_directionality": "against_liability",
+      "original_text": "The user's anticipated awareness of the danger of diving into a four-foot pool — arguably obvious to adults but contested for younger or inexperienced users.",
+      "neutral_rewrite": "The anticipated user awareness of the diving-injury risk is not clearly established on the record as either high or low; the court treats this factor as balanced between the obviousness argument and the counter-argument that spinal injury risks are not widely understood.",
+      "perturbation_note": "Second of two anti-liability factors. Perturbing f1 AND f6 together would remove both counterweights, but single perturbations test each in isolation."
+    },
+    {
+      "variant_id": "facet-neg-0005-c2-f7",
+      "perturbed_factor_id": "f7",
+      "perturbed_factor_type": "burden_shifting",
+      "perturbed_wade_factor": "Wade 7 (feasibility of spreading loss)",
+      "base_weight": 0.10,
+      "base_directionality": "toward_liability",
+      "original_text": "The feasibility of spreading the loss by raising the product's price or by the manufacturer carrying insurance, as compared with placing the loss on the injured user.",
+      "neutral_rewrite": "The feasibility of spreading the loss through price or insurance rather than placing it on the injured user is treated by the court as a consideration worth noting but not as a load-bearing element.",
+      "perturbation_note": "Lowest-weight factor (0.10). Near-stub. Perturbation is near-no-op."
+    }
+  ],
+
+  "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
+
+  "open_items_for_pilot": [
+    "Run the 7 C2 variants.",
+    "The key measurement is f4 (alternative_precautions) — this is the 4-3 split factor and the predicted Wade collapse target per the Barker result. If the direct probe shifts dramatically when f4 is perturbed, the doctrine-aware-collapse hypothesis is replicated.",
+    "Primary-text verification."
+  ]
+}

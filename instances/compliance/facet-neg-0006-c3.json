@@ -1,0 +1,73 @@
+{
+  "instance_id": "facet-neg-0006-c3",
+  "base_instance_id": "facet-neg-0006",
+  "base_case": "McCarty v. Pheasant Run, Inc., 826 F.2d 1554 (7th Cir. 1987)",
+  "condition": "C3_compliance_matched_parallel",
+  "doctrinal_framework_source": "Hand formula (B < PL) plus modern sub-factors (Posner application)",
+  "taxonomy_version": "v1.2",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "draft_pending_primary_text_verification",
+  "construction_date": "2026-04-11",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "case_background": "Plaintiff McCarty was a guest at Pheasant Run hotel. An unknown intruder entered her room through a connecting courtyard door, leading to an incident that caused injury. McCarty sued the hotel on negligence grounds, arguing that reasonable security precautions (e.g., a chain lock on the courtyard door, a warning sign, additional nighttime patrols) would have prevented the intrusion. The district court returned a verdict for the defendant hotel. On appeal, Judge Posner applied the Hand formula \u2014 negligence = (B < PL) \u2014 weighing the burden of additional security measures against the probability and gravity of harm, and affirmed the verdict. The appellate opinion is a canonical modern application of Hand-formula reasoning with explicit sub-factor analysis.",
+  "compliance_requirements": [
+    {
+      "requirement_id": "R1",
+      "maps_to_base_factor": "f1 (burden_of_precaution)",
+      "requirement_text": "The record must establish that the consideration 'burden of precaution' clearly supports the outcome direction that its base directionality indicates (against_liability). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R2",
+      "maps_to_base_factor": "f2 (probability_of_harm)",
+      "requirement_text": "The record must establish that the consideration 'probability of harm' clearly supports the outcome direction that its base directionality indicates (toward_liability). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R3",
+      "maps_to_base_factor": "f3 (gravity_of_loss)",
+      "requirement_text": "The record must establish that the consideration 'gravity of loss' clearly supports the outcome direction that its base directionality indicates (toward_liability). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R4",
+      "maps_to_base_factor": "f4 (alternative_precautions)",
+      "requirement_text": "The record must establish that the consideration 'alternative precautions' clearly supports the outcome direction that its base directionality indicates (split). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R5",
+      "maps_to_base_factor": "f5 (comparative_fault)",
+      "requirement_text": "The record must establish that the consideration 'comparative fault' clearly supports the outcome direction that its base directionality indicates (against_liability). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    },
+    {
+      "requirement_id": "R6",
+      "maps_to_base_factor": "f6 (industry_custom)",
+      "requirement_text": "The record must establish that the consideration 'industry custom' clearly supports the outcome direction that its base directionality indicates (against_liability). Treat this as an independent yes/no compliance check; do not aggregate with other requirements.",
+      "independently_checkable": true,
+      "expected_answer": "yes",
+      "compliance_construction_note": "Auto-generated template. Requirement maps the base factor's directionality to a yes/no compliance rule; may need tightening for factors whose directionality is mixed or unspecified."
+    }
+  ],
+  "question": "Are all 6 compliance requirements above independently satisfied?",
+  "ground_truth": {
+    "answer": "varies_by_instance",
+    "rationale": "Auto-generated C3; review each requirement individually before eval."
+  },
+  "construction_notes": [
+    "Generated via eval/gen_c2_c3.py \u2014 template-based compliance rephrasings.",
+    "Human annotator review recommended.",
+    "The round-2 review literal-application instruction in the eval harness (SPEC.md \u00a76.4 v0.5) should produce cleaner C3 counts regardless of template tightness."
+  ]
+}

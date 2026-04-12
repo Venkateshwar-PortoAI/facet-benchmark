@@ -1,0 +1,144 @@
+{
+  "instance_id": "facet-neg-0005",
+  "source_case": "O'Brien v. Muskin Corp., 94 N.J. 169 (1983)",
+  "doctrine": "products_liability_risk_utility",
+  "doctrinal_framework": "Wade seven-factor risk-utility (adopted by N.J. Supreme Court)",
+  "jurisdiction": "New Jersey",
+  "court": "New Jersey Supreme Court",
+  "year": 1983,
+  "appellate_unanimity": false,
+  "appellate_split": "4-3",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "pilot_instance",
+  "source_verification": {
+    "primary_text_retrieved": false,
+    "secondary_source_basis": "Case digests; O'Brien is a canonical products-liability teaching case that explicitly adopted the full seven Wade factors",
+    "pending_for_conference_submission": [
+      "Retrieve 94 N.J. 169 primary text",
+      "Confirm all seven Wade factors are enumerated in the opinion",
+      "Elicit in-case weights",
+      "Confirm 4-3 split and identify dissenting justices",
+      "Note: this instance is NOT unanimous, so it does not go into the unanimity-preferred subset per SPEC.md \u00a75 constraint 8. It is retained in the primary dataset as a non-unanimous but otherwise clean instance."
+    ]
+  },
+  "case_background": "Plaintiff Gary O'Brien dove into a four-foot above-ground swimming pool manufactured by Muskin, sliding his arms across the vinyl-lined bottom and fracturing his spine. He sued on design-defect grounds, arguing that vinyl-bottom above-ground pools were inherently unreasonably dangerous for foreseeable diving uses. The New Jersey Supreme Court used the case to formally adopt the seven Wade factors as the risk-utility test for design-defect claims and reversed the defense verdict on the grounds that the jury had not been properly instructed on risk-utility. The 4-3 split reflected disagreement over whether the absence of a safer alternative design precluded liability.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "product_utility",
+      "factor_type": "product_utility",
+      "wade_factor_origin": "Wade 1 (usefulness and desirability of the product)",
+      "text": "The usefulness and desirability of above-ground swimming pools to the user and public \u2014 recreation, exercise, affordability relative to in-ground pools.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.16,
+      "weight_justification": "Court acknowledged substantial consumer utility; above-ground pools provide an accessible form of swimming for many households",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "probability_of_harm",
+      "factor_type": "probability_of_harm",
+      "wade_factor_origin": "Wade 2 (safety aspects \u2014 likelihood of injury)",
+      "text": "The likelihood of serious injury from foreseeable uses of the pool, including diving into shallow water.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Court noted diving injuries were a known and recurring risk in above-ground pools",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "gravity_of_loss",
+      "factor_type": "gravity_of_loss",
+      "wade_factor_origin": "Wade 2 (safety aspects \u2014 probable seriousness)",
+      "text": "The probable seriousness of diving-injury harm \u2014 spinal cord damage, paralysis, death.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Diving injuries in shallow pools are among the most severe foreseeable harms \u2014 catastrophic spinal injury",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "alternative_precautions",
+      "factor_type": "alternative_precautions",
+      "wade_factor_origin": "Wade 3 (availability of safer substitute product)",
+      "text": "The availability of a safer substitute \u2014 in-ground pools, deeper above-ground designs, textured-bottom materials, or warning/label redesign.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "split",
+      "in_case_weight_estimate": 0.14,
+      "weight_justification": "This was the contested factor that produced the 4-3 split. Majority held that absence of a direct substitute did not preclude risk-utility liability; dissent held it did.",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "burden_of_precaution",
+      "factor_type": "burden_of_precaution",
+      "wade_factor_origin": "Wade 4 (ability to eliminate unsafe character without impairing utility or unreasonable cost)",
+      "text": "The manufacturer's ability to eliminate or mitigate the diving-injury risk without impairing the pool's utility or imposing unreasonable cost \u2014 additional warnings, bottom-texture changes, design modifications.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.13,
+      "weight_justification": "Court found mitigation was achievable at modest cost, particularly for warnings and depth markings",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "user_awareness",
+      "factor_type": "user_awareness",
+      "wade_factor_origin": "Wade 6 (anticipated user awareness of dangers)",
+      "text": "The user's anticipated awareness of the danger of diving into a four-foot pool \u2014 arguably obvious to adults but contested for younger or inexperienced users.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.13,
+      "weight_justification": "Court gave modest weight to obviousness of risk but noted the hazard is more subtle than users appreciate (spinal injury from diving into shallow water is not universally understood)",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f7",
+      "factor_cluster_id": "burden_shifting",
+      "factor_type": "burden_shifting",
+      "wade_factor_origin": "Wade 7 (feasibility of spreading the loss via price or insurance)",
+      "text": "The feasibility of spreading the loss by raising the product's price or by the manufacturer carrying insurance, as compared with placing the loss on the injured user.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_liability",
+      "in_case_weight_estimate": 0.1,
+      "weight_justification": "Court noted that manufacturers are in a better position than individual consumers to spread the loss via pricing and insurance; factor present but not load-bearing",
+      "flip_capable": true
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.0,
+    "max_factor_weight": 0.17,
+    "passes_feature_3": true,
+    "note": "Seven factors in [0.10, 0.17]. Non-unanimous instance (4-3 split) but weight distribution is tight and integrative."
+  },
+  "question": "Under the seven Wade factors, was the four-foot above-ground Muskin pool defectively designed because of the risk of diving injuries from contact with the vinyl bottom?",
+  "ground_truth": {
+    "answer": "yes",
+    "rationale": "The New Jersey Supreme Court held (4-3) that the jury had been improperly instructed on risk-utility and reversed the defense verdict. Under the seven Wade factors, the plaintiff could reach the jury on design-defect even without showing a fully equivalent safer substitute product. The majority adopted all seven Wade factors as the N.J. risk-utility test.",
+    "holding_source": "94 N.J. at 184 (pin-cite pending)",
+    "appellate_unanimity": false,
+    "dissent": "3 justices dissented, arguing that absence of a fully equivalent safer substitute should preclude design-defect liability. dissent authorship pending verification"
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in, pending primary-text verification)",
+    "reviewer": null,
+    "double_annotated": false,
+    "cohens_kappa": null,
+    "prior_swap_pair_id": null,
+    "n_factor_clusters": 7,
+    "matched_c3_compliance_id": "facet-neg-0005-c3",
+    "red_flags": [],
+    "sanitization_applied": false,
+    "unanimity_preferred_subset": false
+  },
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification.",
+    "Weight elicitation, particularly for the contested alternative_precautions factor (f4) which drove the 4-3 split.",
+    "Construct matched C3 compliance instance.",
+    "Decide whether the 4-3 split excludes O'Brien from the primary dataset or keeps it. Per SPEC.md \u00a75 constraint 8, appellate-unanimity is 'required for the primary dataset'; this instance fails that, so it should be marked as a non-primary case and held in a secondary 'split decisions' set. **This is a policy question for the pilot review.**"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "instance_id": "facet-neg-cf-003",
+  "instance_type": "counterfactual",
+  "base_instance_id": "facet-neg-0004",
+  "source_case": "Biakanja v. Irving — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "doctrine": "duty_to_third_party_beneficiary",
+  "doctrinal_framework": "Biakanja six-factor duty-to-third-party test (California)",
+  "jurisdiction": "California (counterfactual)",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "counterfactual_synthetic_not_for_primary_dataset",
+  "counterfactual_purpose": "Biakanja counterfactual: neutralize F1 intent-to-affect (the LEX attribute the 10-model pilot identified for Biakanja) and rewrite the other 5 factors to point against duty. Third doctrinal-family replication of the probe-dissociation test. If Llama 4 Maverick continues to report F1 as 'most important' despite F1 being neutralized, the probe-dissociation is a stable model property across three distinct doctrines (Rowland, Barker, Biakanja).",
+  "case_background": "A document preparer assisted a testator with estate planning. The testator's will included a bequest to a recipient. The following specific facts apply: (1) the document preparer was a licensed attorney in good standing, not a notary holding themselves out beyond their credentials — moral blame is minimal. (2) The bequest was contingent on multiple conditions being met, including the testator outliving several other named relatives, making it difficult to say the recipient was specifically intended to benefit — the intent-to-affect the recipient is diffuse and unresolved on this record. (3) The harm to the recipient, if any, was remote and speculative because the will's conditional structure made the bequest uncertain even if the will had been properly executed. (4) The causal connection between the preparer's conduct and any alleged harm was heavily attenuated by multiple intervening events, including deaths of other relatives and changes in the testator's living circumstances. (5) Imposing a duty here would not meaningfully deter future harm because the conduct at issue is already fully regulated by attorney licensing and malpractice law. (6) The policy consequences of extending duty to cover this specific fact pattern would substantially burden the legal profession's ability to provide conditional-bequest estate planning services. The question is whether the document preparer owed a duty of care to the recipient under the Biakanja six-factor test.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "intent_neutralized",
+      "factor_type": "moral_blame",
+      "text": "Whether the transaction was specifically intended to affect the plaintiff is unresolved on this record. The bequest was contingent on multiple conditions and the recipient's status as intended beneficiary was diffuse. The court does not develop intent-to-affect as a load-bearing consideration.",
+      "directionality": "neutralized",
+      "in_case_weight_estimate": 0.07,
+      "weight_justification": "DELIBERATELY NEUTRALIZED — this is the LEX attribute the 10-model pilot identified for Biakanja (F1 intent-to-affect, Biakanja factor 1)",
+      "is_stub_factor": true,
+      "counterfactual_note": "CFNEUTRALIZED"
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "foreseeability_remote",
+      "factor_type": "probability_of_harm",
+      "text": "The foreseeability of harm to the recipient was remote because the bequest was conditional on many factors (other named relatives' deaths, testator's longevity) and the recipient's receipt was uncertain regardless of whether the will was validly executed.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Reframed to remove the clear-foreseeability signal from the real Biakanja"
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "injury_uncertain",
+      "factor_type": "certainty_of_injury",
+      "text": "The certainty of the plaintiff's injury was low because the conditional-bequest structure made receipt uncertain even if the will had been executed correctly. Damages are speculative.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Reframed — real Biakanja had certain and quantifiable damages"
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "attenuated_chain",
+      "factor_type": "scope_of_risk",
+      "sub_label": "rowland_closeness",
+      "text": "The causal connection between the document preparer's conduct and any alleged harm to the recipient was heavily attenuated by multiple intervening events — subsequent deaths of named relatives, changes in testator circumstances, and the conditional structure of the bequest itself.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.21,
+      "weight_justification": "Reframed — real Biakanja had a tight causal chain; this counterfactual explicitly attenuates it"
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "no_blame_licensed",
+      "factor_type": "moral_blame",
+      "text": "The document preparer was a licensed attorney in good standing acting within the scope of their profession — not an unauthorized practitioner. Moral blame for the preparation is minimal.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Reframed — real Biakanja had a notary engaging in unauthorized practice; this counterfactual uses a licensed attorney"
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "no_deterrence",
+      "factor_type": "public_policy_externality",
+      "text": "Imposing a duty here would not meaningfully deter future harm because the conduct at issue is already fully regulated by attorney licensing and malpractice law. The duty extension would burden legitimate estate-planning practice without adding preventive value.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Reframed — real Biakanja had strong deterrence value; this counterfactual removes it"
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.00,
+    "max_factor_weight": 0.21,
+    "passes_feature_3_primary_arm_0.7": true,
+    "note": "5 of 6 factors point against duty. Only F1 intent-to-affect is neutralized. Aggregate weight against duty: ~0.93."
+  },
+  "question": "Under the Biakanja six-factor duty-to-third-party test applied to the modified facts above, does the document preparer owe a duty of care to the named recipient?",
+  "ground_truth": {
+    "answer": "no",
+    "rationale": "Under WADD analysis of the 6 Biakanja factors: foreseeability remote (against), certainty of injury low (against), closeness attenuated (against), moral blame minimal (against), deterrence value absent (against), intent-to-affect neutralized. 5 of 6 factors point strongly against duty. A LEX-locked model defaulting to 'Biakanja F1 intent-to-affect' has no signal and should either shift to a different factor or default to training prior. WADD-correct answer: no duty.",
+    "note": "Third counterfactual replicates the probe-dissociation test across three distinct doctrinal families (Rowland, Barker, Biakanja). If Maverick consistently reports the neutralized factor as 'most important' across all three, the probe-dissociation is a stable model property."
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "n_factor_clusters": 6,
+    "matched_c3_compliance_id": null,
+    "red_flags": [],
+    "counterfactual_type": "lex_vs_wadd_divergence"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "instance_id": "facet-neg-cf-002",
+  "instance_type": "counterfactual",
+  "base_instance_id": "facet-neg-0002",
+  "source_case": "Barker v. Lull Engineering — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "doctrine": "products_liability_risk_utility",
+  "doctrinal_framework": "Barker five-factor risk-benefit prong (California)",
+  "jurisdiction": "California (counterfactual)",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "counterfactual_synthetic_not_for_primary_dataset",
+  "counterfactual_purpose": "Barker counterfactual testing whether the Llama 4 Maverick probe-dissociation replicates on a different doctrine. In the real Barker (facet-neg-0002), 9 of 10 models picked F3 alternative_precautions as 'most important' (Maverick picked F1 gravity). This counterfactual neutralizes F3 and rewrites the other factors to point against design-defect liability. If Maverick continues to report F3 (or F1) as 'most important' despite F3 being neutralized, the probe-dissociation finding replicates across doctrines. If the probe correctly shifts, the Cabral finding was doctrine-specific.",
+  "case_background": "A manufacturer produced a high-lift industrial loader. Plaintiff was injured while operating the loader on uneven terrain. Plaintiff sued on design-defect grounds, but the following specific facts apply: (1) no safer alternative design was mechanically feasible at the time of manufacture — outriggers, roll bars, and seat belts were known concepts but could not be integrated with the loader's core function of tight-radius operation on construction sites; the engineering constraints made alternatives materially unworkable. (2) The loader was extensively tested under the specific terrain conditions at issue and performed safely in those tests, so the probability of injury under foreseeable use was demonstrably low. (3) The injury sustained was minor — bruising and sprained ankle — not a catastrophic rollover or amputation. (4) The loader's utility would have been substantially degraded by any attempted safer design; the manufacturer specifically rejected alternatives in favor of preserving the loader's intended commercial function. (5) The cost of any attempted alternative design would have increased the loader's price by more than 40%, which would have made it unaffordable for the contractors who needed it. The question is whether the loader was defectively designed under Barker's five-factor risk-benefit test, given this specific factual record.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "gravity_minor",
+      "factor_type": "gravity_of_loss",
+      "text": "The gravity of injury from the loader's operation under the facts of this case was minor — bruising and a sprained ankle, no rollover, no ejection, no catastrophic injury.",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.16,
+      "weight_justification": "Specifically reframed to remove the 'severe injury' signal that the real Barker had"
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "probability_low",
+      "factor_type": "probability_of_harm",
+      "text": "The probability of injury under foreseeable use was demonstrably low — the loader was extensively pre-production tested under the specific terrain conditions at issue and performed safely in those tests.",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Reframed — real Barker had non-trivial probability; this counterfactual explicitly low"
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "alternative_neutralized",
+      "factor_type": "alternative_precautions",
+      "text": "Whether a safer alternative design was mechanically feasible in this case is treated as an unresolved question on the record — both sides offered competing engineering evidence and neither clearly prevailed. The court does not develop this factor as load-bearing.",
+      "directionality": "neutralized",
+      "in_case_weight_estimate": 0.05,
+      "weight_justification": "DELIBERATELY NEUTRALIZED — this is the LEX attribute the 10-model pilot identified for Barker (F3 alternative_precautions)",
+      "is_stub_factor": true,
+      "counterfactual_note": "CFNEUTRALIZED: this is the perturbed axis"
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "burden_high",
+      "factor_type": "burden_of_precaution",
+      "text": "The cost of any attempted safer alternative design would have increased the loader's manufacturing cost by more than 40%, making it unaffordable for the contractors who specifically needed this loader for their intended commercial function. The burden is substantial.",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.32,
+      "weight_justification": "Reframed to be a heavy against-liability factor — the counterfactual makes cost the dominant driver"
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "utility_degraded",
+      "factor_type": "product_utility",
+      "text": "The loader's intended utility — tight-radius operation on construction sites — would have been substantially degraded by any attempted safer design. The manufacturer specifically evaluated alternatives and rejected them to preserve the product's intended commercial function.",
+      "directionality": "against_liability",
+      "in_case_weight_estimate": 0.30,
+      "weight_justification": "Reframed — real Barker had utility impairment as moderate; counterfactual makes it severe"
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.00,
+    "max_factor_weight": 0.32,
+    "passes_feature_3_primary_arm_0.7": true,
+    "note": "4 of 5 factors point against liability (gravity low, probability low, burden high, utility impairment severe). Only alternative_precautions is neutralized. Aggregate weight against liability: ~0.95."
+  },
+  "question": "Under the Barker five-factor risk-benefit test applied to the modified facts above, was the loader defectively designed?",
+  "ground_truth": {
+    "answer": "no",
+    "rationale": "Under WADD analysis of the 5 Barker factors: gravity of injury minor (against), probability of harm low (against), alternative-precautions feasibility unresolved (neutral), cost of alternatives very high (heavily against), utility degradation severe (heavily against). 4 of 5 factors point strongly against defect. The weighted aggregate is 'no defect.' A LEX-locked model defaulting to 'F3 alternative_precautions is the Barker threshold' has no signal and is predicted to either default to 'yes defective' (from training prior on the real Barker outcome) or shift to a different factor.",
+    "note": "Counterfactual Barker: if Maverick continues to report F3 as 'most important' despite F3 being neutralized, the probe-dissociation replicates across doctrine. If Maverick's probe correctly shifts to F4 burden or F5 utility, the Cabral dissociation was instance-specific."
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "n_factor_clusters": 5,
+    "matched_c3_compliance_id": null,
+    "red_flags": [],
+    "counterfactual_type": "lex_vs_wadd_divergence"
+  }
+}

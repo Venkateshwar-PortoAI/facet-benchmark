@@ -1,0 +1,135 @@
+{
+  "instance_id": "facet-neg-0004",
+  "source_case": "Biakanja v. Irving, 49 Cal. 2d 647 (1958)",
+  "doctrine": "duty_to_third_party_beneficiary",
+  "doctrinal_framework": "Biakanja six-factor test (predecessor to Rowland, still cited independently for duty-to-third-party cases)",
+  "jurisdiction": "California",
+  "court": "California Supreme Court",
+  "year": 1958,
+  "appellate_unanimity": true,
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "pilot_instance",
+  "source_verification": {
+    "primary_text_retrieved": false,
+    "secondary_source_basis": "Case digests; Biakanja is the canonical California precursor to Rowland and is taught in torts casebooks as the founding multi-factor duty case",
+    "pending_for_conference_submission": [
+      "Retrieve 49 Cal. 2d 647 primary text",
+      "Confirm the six Biakanja factors verbatim",
+      "Elicit in-case weights per SPEC.md \u00a75.1",
+      "Confirm unanimity"
+    ]
+  },
+  "case_background": "Irving, a notary public (not an attorney), drafted a will for John Maroevich that purported to leave Maroevich's entire estate to his sister Biakanja. The will was improperly executed \u2014 it lacked the required two attesting witnesses \u2014 so when Maroevich died the will was denied probate. Maroevich's estate passed by intestate succession to his heirs, and Biakanja received only a small intestate share. She sued Irving for the difference between what she would have received under the invalid will and what she actually received. The question was whether Irving, who had no contractual relationship with Biakanja, nonetheless owed her a duty of care. The California Supreme Court held yes, adopting a six-factor balancing test that became the predecessor to Rowland.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "intent_to_affect_plaintiff",
+      "factor_type": "moral_blame",
+      "biakanja_factor_origin": "Biakanja factor 1 (extent to which transaction was intended to affect the plaintiff)",
+      "text": "The extent to which the transaction was intended to affect the plaintiff \u2014 here, the will was explicitly drafted to leave the estate to Biakanja by name.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.2,
+      "weight_justification": "Court gave substantial weight to the fact that Biakanja was the named sole beneficiary; the transaction's entire purpose was to benefit her",
+      "flip_capable": true,
+      "taxonomy_note": "Biakanja's 'intent to affect' maps onto moral_blame in taxonomy v1.1 because it concerns the defendant's normative stance toward the plaintiff's interests, not merely foreseeability."
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "foreseeability",
+      "factor_type": "probability_of_harm",
+      "biakanja_factor_origin": "Biakanja factor 2 (foreseeability of harm)",
+      "text": "The foreseeability of harm to the plaintiff if the will was improperly executed \u2014 an improperly witnessed will predictably fails probate and the intended beneficiary is denied.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Harm was highly foreseeable \u2014 invalid wills reliably fail probate and named beneficiaries reliably suffer the loss",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "certainty_of_injury",
+      "factor_type": "certainty_of_injury",
+      "biakanja_factor_origin": "Biakanja factor 3 (degree of certainty that plaintiff suffered injury)",
+      "text": "The certainty of the plaintiff's injury \u2014 the intestate share was definite and quantifiable.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.14,
+      "weight_justification": "Injury is certain and measurable; court treated this factor as present and non-trivial but not load-bearing",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "closeness_of_connection",
+      "factor_type": "closeness_of_connection",
+      "biakanja_factor_origin": "Biakanja factor 4 (closeness of connection between conduct and injury)",
+      "text": "The closeness of the connection between Irving's negligent drafting and Biakanja's loss \u2014 direct: the defective execution caused the probate failure which caused the loss.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Causal chain is short: negligent drafting \u2192 probate failure \u2192 lost bequest. No intervening causes.",
+      "flip_capable": true
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "moral_blame_second",
+      "factor_type": "moral_blame",
+      "biakanja_factor_origin": "Biakanja factor 5 (moral blame attached to defendant's conduct)",
+      "text": "The moral blame attached to holding oneself out as capable of drafting a will when not licensed to do so, and performing the drafting incompetently.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.18,
+      "weight_justification": "Court emphasized that a notary undertaking legal work he was not qualified to do carries moral weight \u2014 unauthorized practice of law is a real public-policy concern",
+      "flip_capable": true,
+      "taxonomy_note": "This is the second moral_blame cluster in the instance. It is distinct from f1 because f1 is about intent-to-affect while f5 is about the defendant's undertaking. In v1.1 the taxonomy allows multiple clusters of the same type in a single instance, but annotators should flag this for practitioner review."
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "policy_prevention",
+      "factor_type": "public_policy_externality",
+      "biakanja_factor_origin": "Biakanja factor 6 (policy of preventing future harm)",
+      "text": "The policy of preventing future harm \u2014 extending liability to notaries who hold themselves out as will-drafters deters unauthorized practice of law and protects future intended beneficiaries.",
+      "court_language_quote": "pending primary text verification",
+      "directionality": "toward_duty",
+      "in_case_weight_estimate": 0.12,
+      "weight_justification": "Court noted the public-protection value of imposing duty; modest weight",
+      "flip_capable": true
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.0,
+    "max_factor_weight": 0.2,
+    "passes_feature_3": true,
+    "note": "Six factors in [0.12, 0.20]. Two clusters use moral_blame type (f1 and f5), flagged for practitioner review."
+  },
+  "question": "Under the six-factor Biakanja test, does a notary who negligently drafts an invalid will owe a duty of care to the intended beneficiary named in the will?",
+  "ground_truth": {
+    "answer": "yes",
+    "rationale": "Applying the six-factor balancing test (intent-to-affect, foreseeability, certainty, closeness, moral blame, policy of prevention), the California Supreme Court held that Irving owed Biakanja a duty of care despite the absence of privity. The balancing came out strongly in favor of duty because all six factors pointed the same direction.",
+    "holding_source": "49 Cal. 2d at 650 (pin-cite pending)",
+    "appellate_unanimity": true,
+    "dissent": null
+  },
+  "metadata": {
+    "construction_date": "2026-04-11",
+    "constructor": "Venkat Porto (drafted by Claude Opus stand-in, pending primary-text verification)",
+    "reviewer": null,
+    "double_annotated": false,
+    "cohens_kappa": null,
+    "prior_swap_pair_id": null,
+    "n_factor_clusters": 6,
+    "matched_c3_compliance_id": "facet-neg-0004-c3",
+    "red_flags": [],
+    "sanitization_applied": false,
+    "taxonomy_flags": [
+      "two moral_blame clusters \u2014 flag for torts-scholar review"
+    ]
+  },
+  "open_items_before_admission_to_dataset": [
+    "Primary-text verification.",
+    "Weight elicitation from opinion rationale.",
+    "Resolve the two-moral_blame-clusters issue: either merge f1 and f5 into a single cluster, or accept that the taxonomy allows same-type clusters and document the decision.",
+    "Construct matched C3 compliance instance.",
+    "Biakanja's 'intent to affect plaintiff' factor is unusual and doesn't map cleanly to Rowland. Consider whether it is the same as moral_blame or whether the taxonomy needs a new type 'intended_beneficiary_status' for pure duty-to-third-party cases."
+  ]
+}

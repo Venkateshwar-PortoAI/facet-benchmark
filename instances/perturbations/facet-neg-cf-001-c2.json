@@ -1,0 +1,95 @@
+{
+  "base_instance_id": "facet-neg-cf-001",
+  "base_case": "Cabral v. Ralphs Grocery Co. \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
+  "protocol_version": "SPEC.md \u00a76.3 v0.4",
+  "taxonomy_version": "v1.2",
+  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "construction_date": "2026-04-11",
+  "status": "draft_pending_primary_text_verification",
+  "perturbations": [
+    {
+      "variant_id": "facet-neg-cf-001-c2-f1",
+      "perturbed_factor_id": "f1",
+      "perturbed_factor_type": "probability_of_harm",
+      "base_weight": 0.05,
+      "base_directionality": "neutralized",
+      "original_text": "Whether the foreseeability of collision on a clear, fully-paved, high-visibility shoulder location is sufficient to support a general duty of care is treated here as an unresolved question on the record \u2014 neither clearly foreseeable nor clearly unforeseeable. The location was not in any prior-incident database, the visibility was excellent, and no prior similar collision has been documented at or near this milepost.",
+      "neutral_rewrite": "Whether this consideration (probability of harm) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f1 (probability_of_harm). Human review recommended before final dataset admission.",
+      "is_stub_factor": true
+    },
+    {
+      "variant_id": "facet-neg-cf-001-c2-f2",
+      "perturbed_factor_id": "f2",
+      "perturbed_factor_type": "certainty_of_injury",
+      "base_weight": 0.15,
+      "base_directionality": "against_duty",
+      "original_text": "The causal chain between the truck's presence and Cabral's death is heavily mediated by Cabral's own medical event. Absent the medical event, no collision would have occurred. The 'certainty of injury from the defendant's conduct' is low because the conduct alone, without the intervening medical cause, produces no injury.",
+      "neutral_rewrite": "Whether this consideration (certainty of injury) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f2 (certainty_of_injury). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-cf-001-c2-f3",
+      "perturbed_factor_id": "f3",
+      "perturbed_factor_type": "scope_of_risk",
+      "base_weight": 0.17,
+      "base_directionality": "against_duty",
+      "original_text": "The causal connection between the driver's brief compliant stop and the plaintiff's death is substantially attenuated by the intervening medical event, the distance of plaintiff's drift, the clear visibility conditions, and the fact that comparable roadside conditions exist at countless other locations. Attributing this specific outcome to this specific driver's stop requires a long causal chain.",
+      "neutral_rewrite": "Whether this consideration (scope of risk) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f3 (scope_of_risk). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-cf-001-c2-f4",
+      "perturbed_factor_id": "f4",
+      "perturbed_factor_type": "moral_blame",
+      "base_weight": 0.17,
+      "base_directionality": "against_duty",
+      "original_text": "The driver's conduct carries no moral blame. The stop was permitted by company policy, consistent with industry commercial-driver wellness guidelines, executed in compliance with traffic regulations, and motivated by reasonable safety considerations (driver fatigue management). A morally-blameworthy act is not present.",
+      "neutral_rewrite": "Whether this consideration (moral blame) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f4 (moral_blame). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-cf-001-c2-f5",
+      "perturbed_factor_id": "f5",
+      "perturbed_factor_type": "public_policy_externality",
+      "base_weight": 0.17,
+      "base_directionality": "against_duty",
+      "original_text": "Imposing a duty here would not meaningfully prevent future harm. The underlying cause of the incident was the plaintiff's medical event, not the driver's conduct. Prohibiting commercial driver wellness stops would not prevent similar outcomes from unexpected medical events among other highway users, and would impose substantial cost on commercial driver safety.",
+      "neutral_rewrite": "Whether this consideration (public policy externality) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f5 (public_policy_externality). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-cf-001-c2-f6",
+      "perturbed_factor_id": "f6",
+      "perturbed_factor_type": "burden_of_precaution",
+      "base_weight": 0.18,
+      "base_directionality": "against_duty",
+      "original_text": "Imposing a duty to refrain from all non-emergency shoulder stops would be substantially burdensome on commercial trucking operations industry-wide. It would conflict with Federal Motor Carrier Safety Administration driver-wellness guidelines, increase fatigue-related incidents, and impose operational constraints on every commercial driver in every state. The community-wide cost is substantial.",
+      "neutral_rewrite": "Whether this consideration (burden of precaution) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f6 (burden_of_precaution). Human review recommended before final dataset admission.",
+      "is_stub_factor": false
+    },
+    {
+      "variant_id": "facet-neg-cf-001-c2-f7",
+      "perturbed_factor_id": "f7",
+      "perturbed_factor_type": "insurance_availability",
+      "base_weight": 0.11,
+      "base_directionality": "neutral",
+      "original_text": "Commercial liability insurance is available, but this factor carries near-zero weight in the counterfactual analysis because the underlying duty question does not turn on loss-spreading.",
+      "neutral_rewrite": "Whether this consideration (insurance availability) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
+      "perturbation_note": "Auto-generated template rewrite for factor f7 (insurance_availability). Human review recommended before final dataset admission.",
+      "is_stub_factor": true
+    }
+  ],
+  "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
+  "construction_notes": [
+    "Generated via eval/gen_c2_c3.py \u2014 template-based neutral rewrites.",
+    "Human annotator review recommended before final dataset admission.",
+    "Reconstruction-check disqualification (SPEC.md \u00a76.3 v0.4) applies at eval time."
+  ]
+}
