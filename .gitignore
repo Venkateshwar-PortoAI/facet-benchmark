@@ -22,3 +22,15 @@ results/FINDINGS_pilot_v0.1.md
 results/FINDINGS_pilot_v0.2.md
 results/FINDINGS_pilot_v0.5.md
 results/*-dry-run-*.json
+
+# Internal process docs (not for public repo)
+PRIOR_ART.md
+CASE_CANDIDATES.md
+PHENOMENON.md
+SPEC.md
+results/FINDINGS_pilot_v0.6.md
+
+# Duplicate figures (originals in figures/)
+latex/fig1_heatmap.png
+latex/fig2_embedding_strength.png
+latex/fig3_protocol.png
