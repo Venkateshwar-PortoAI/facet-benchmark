@@ -1,7 +1,7 @@
 # FACET — Factor Type Taxonomy v1.2
 
-**Domain:** multi-factor tort balancing, covering Hand-formula negligence, Restatement (Third) of Torts §3, Rowland-line duty analysis (Cal. 1968 and adopting states), Wade-factor products-liability risk-utility analysis (36 states post-1965), and Restatement (Second) §520 abnormally-dangerous activity. v1.1 extends the v1.0 taxonomy after `CASE_CANDIDATES.md` round 1 retrieval revealed that pure Hand-formula cases are N=3 (below the FACET N≥5 floor) and the real scalable instance pools live in the Rowland and Wade lines. Version bumped from v1.0 to v1.1 on 2026-04-11.
-**Purpose:** fixed factor-type vocabulary for instance construction (see `SPEC.md` §5.2). Every factor-cluster in a FACET negligence instance must be labeled with exactly one type from this taxonomy. Ad hoc type labels are not permitted.
+**Domain:** multi-factor tort balancing, covering Hand-formula negligence, Restatement (Third) of Torts §3, Rowland-line duty analysis (Cal. 1968 and adopting states), Wade-factor products-liability risk-utility analysis (36 states post-1965), and Restatement (Second) §520 abnormally-dangerous activity. v1.1 extends the v1.0 taxonomy after case-candidate retrieval revealed that pure Hand-formula cases are N=3 (below the FACET N≥5 floor) and the real scalable instance pools live in the Rowland and Wade lines. Version bumped from v1.0 to v1.1 on 2026-04-11.
+**Purpose:** fixed factor-type vocabulary for instance construction (applied during instance construction). Every factor-cluster in a FACET negligence instance must be labeled with exactly one type from this taxonomy. Ad hoc type labels are not permitted.
 **Status:** v1.0 draft, fixed for v1 instance construction. Revisions require a version bump and re-annotation.
 **Last updated:** 2026-04-11.
 
@@ -10,7 +10,7 @@
 ## How to use this taxonomy
 
 1. When annotating a case, read the appellate opinion's rationale and identify the discrete *considerations* the court weighed.
-2. Group raw propositions into factor-clusters (per `PHENOMENON.md` §8.5).
+2. Group raw propositions into factor-clusters .
 3. For each cluster, assign exactly one type from the numbered list below. If a cluster seems to span two types, use the decision rules in §3 below to break the tie. If a cluster genuinely does not fit any type, flag it for taxonomy revision — do NOT create an ad hoc type.
 4. Record the taxonomy version (`"factor_type_taxonomy_version": "v1.0"`) in every instance.
 
@@ -82,7 +82,7 @@ Adherence to or violation of statutes, regulations, codes, or licensing requirem
 
 **Canonical example.** A product manufacturer that complied with FDA labeling requirements but is still sued for failure to warn.
 
-**Boundary rule.** If the court treats statutory violation as fully dispositive (negligence per se), flag the instance as a dominant-factor case and exclude from the primary dataset — it fails the `PHENOMENON.md` §2.3 ≤0.5 requirement.
+**Boundary rule.** If the court treats statutory violation as fully dispositive (negligence per se), flag the instance as a dominant-factor case and exclude from the primary dataset — it fails the dominance threshold (no factor > 0.5 of decision weight).
 
 ### 2.5 `alternative_precautions`
 
@@ -194,7 +194,7 @@ The remaining five Wade factors map onto types already defined:
 - **Wade 5 (user's ability to avoid danger)** → `comparative_fault` (§2.10) or `user_awareness` (§2B.2) depending on framing.
 - **Wade 7 (feasibility of spreading loss)** → `burden_shifting` (§2.9).
 
-When a court's opinion uses Wade-factor terminology, label the cluster with the mapped FACET type and record the Wade-factor number as a `wade_factor_origin` metadata field on the cluster (see `SPEC.md` §5 instance schema revision).
+When a court's opinion uses Wade-factor terminology, label the cluster with the mapped FACET type and record the Wade-factor number as a `wade_factor_origin` metadata field on the cluster (recorded as metadata in the instance schema).
 
 ---
 
@@ -234,9 +234,9 @@ Most clusters in most cases can be labeled from a ~10-type working vocabulary wi
 
 ### 3.2 Weight floor for N-counting *(added v1.2 after round 2 review finding F7)*
 
-A factor-cluster's in-case weight must be **≥0.05** to count toward the decision-relevant N in `PHENOMENON.md` §8.5 criterion 5. Factors below the floor are recorded in the instance for completeness (they appear in the `factors` array with their weight) but do not count toward the N≥5 floor or the ⌈N/2⌉ counterfactual-flip requirement.
+A factor-cluster's in-case weight must be **≥0.05** to count toward the decision-relevant N in the decision-relevance criterion. Factors below the floor are recorded in the instance for completeness (they appear in the `factors` array with their weight) but do not count toward the N≥5 floor or the ⌈N/2⌉ counterfactual-flip requirement.
 
-**Why this matters:** Rowland factors 2 (`certainty_of_injury`) and 7 (`insurance_availability`) are doctrinally mandated but substantively near-zero in ~80% of cases. Without the floor, every Rowland case claims N=7 when the substantive analytical N is 5. The N-sweep analysis in `SPEC.md` §6.2 would treat this as real signal, inflating the measured phase-transition.
+**Why this matters:** Rowland factors 2 (`certainty_of_injury`) and 7 (`insurance_availability`) are doctrinally mandated but substantively near-zero in ~80% of cases. Without the floor, every Rowland case claims N=7 when the substantive analytical N is 5. The N-sweep analysis in the N-sweep analysis would treat this as real signal, inflating the measured phase-transition.
 
 ---
 
@@ -254,7 +254,7 @@ Factors that might appear in a negligence case but do NOT get their own taxonomy
 ## 5. Version history
 
 - **v1.0 (2026-04-11):** initial taxonomy. 13 types: 3 Hand-formula core + 10 modern-doctrinal.
-- **v1.1 (2026-04-11):** extended after `CASE_CANDIDATES.md` round 1 retrieval found pure Hand-formula cases are N=3 and the scalable instance pools are Rowland-line duty cases and Wade-factor products-liability cases. Added 4 Rowland-specific types (§2A: certainty_of_injury, moral_blame, insurance_availability, closeness_of_connection) and 2 Wade-specific types (§2B: product_utility, user_awareness). Remaining Wade factors mapped onto existing types via §2B.3. Total: **19 types** (3 Hand core + 10 modern-doctrinal + 4 Rowland + 2 Wade).
+- **v1.1 (2026-04-11):** extended after case-candidate retrieval found pure Hand-formula cases are N=3 and the scalable instance pools are Rowland-line duty cases and Wade-factor products-liability cases. Added 4 Rowland-specific types (§2A: certainty_of_injury, moral_blame, insurance_availability, closeness_of_connection) and 2 Wade-specific types (§2B: product_utility, user_awareness). Remaining Wade factors mapped onto existing types via §2B.3. Total: **19 types** (3 Hand core + 10 modern-doctrinal + 4 Rowland + 2 Wade).
 - **v1.2 (2026-04-11):** revised after round 2 face-validity review (`REVIEW_v0.2.md`). Major changes:
   - **Type merge:** `foreseeability_plaintiff` (§2.1 old), `causal_proximity` (§2.2 old), and `closeness_of_connection` (§2A.4 old) merged into a single `scope_of_risk` type (§2.1 new) with three sub-labels. Round 2 found these were not cleanly separable in modern tort doctrine and annotator disagreement would be systematic.
   - **Doctrine-specific tie-breaking.** v1.1 rule 1 preferred Hand types globally. v1.2 §3 rule 1 picks the preferred-type set from the case's actual doctrinal framework (Hand/Rowland/Wade), eliminating the v1.1 bias toward Hand-formula reading of Rowland-language cases.
