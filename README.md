@@ -4,8 +4,6 @@
 
 Venkateshwar Reddy Jambula — Pranaalpha Labs
 
-[Paper (PDF)](PAPER_ARXIV_v1.pdf)
-
 ---
 
 ## What is FACET?
@@ -30,16 +28,15 @@ We evaluate 9 frontier model configurations from 6 labs (Anthropic, OpenAI, Meta
 
 ```
 facet-benchmark/
-├── PAPER_ARXIV_v1.pdf       # Preprint PDF
 ├── README.md                # This file
+├── LICENSE                  # MIT (code)
+├── LICENSE-DATA             # CC BY 4.0 (data)
 ├── factor_type_taxonomy.md  # Factor type definitions (schema reference)
 ├── eval/
 │   ├── run_cabral_pilot.py  # 5-backend evaluation harness
-│   ├── analyze_pilot.py     # Reproduces all tables from the paper
-│   ├── gen_figures.py       # Generates paper figures
+│   ├── analyze_pilot.py     # Reproduces the tables from raw results
 │   ├── gen_c2_c3.py         # Generates C2 perturbation and C3 compliance variants
 │   └── requirements.txt
-├── figures/                 # Paper figures (PNG)
 ├── instances/               # Benchmark dataset
 │   ├── facet-neg-00NN.json  # 10 in-distribution instances
 │   ├── facet-neg-cf-00N.json # 3 counterfactual variants
@@ -48,17 +45,14 @@ facet-benchmark/
 └── results/                 # Raw model output JSON (~100 files)
 ```
 
-## Reproducing Results
+## Reproducing the Results
 
 ```bash
 # Install dependencies
 pip install -r eval/requirements.txt
 
-# Reproduce the tables from the paper
+# Regenerate the cross-family matrix from raw results
 python3 eval/analyze_pilot.py
-
-# Regenerate figures
-python3 eval/gen_figures.py
 ```
 
 ## Running New Models
@@ -90,11 +84,13 @@ Each instance JSON contains:
   - `factor_type` — from `factor_type_taxonomy.md`
   - `text` — the factor statement
   - `directionality` — which party the factor favors
-  - `in_case_weight_estimate` — author-estimated weight (sum to 1.0)
+  - `in_case_weight_estimate` — author-estimated weight (sum to ~1.0)
 - `question` — the question posed to the model
 - `ground_truth` — the appellate holding
 
 Counterfactual instances (`facet-neg-cf-*.json`) additionally mark the neutralized factor with `counterfactual_note: "CFNEUTRALIZED"`.
+
+See `factor_type_taxonomy.md` for the full factor-type vocabulary.
 
 ## Models Evaluated
 
@@ -114,11 +110,16 @@ Counterfactual instances (`facet-neg-cf-*.json`) additionally mark the neutraliz
 
 This is a **pilot study**. The benchmark protocol is domain-general; legal balancing tests are the first instantiation. Medical differential diagnosis and multi-criteria compliance review are planned extensions.
 
-**Known limitations** (see paper §6 for full list):
+**Known limitations:**
 - 13 instances is pilot scale; expansion to 20–40 is planned
 - Factor definitions and weights are sourced from secondary legal digests; verification against primary opinion texts is ongoing
 - Single-temperature, single-sample evaluation
 - California-only instances
+- Counterfactual ground truth is author-declared (synthetic counterfactuals cannot be adjudicated)
+
+## Paper
+
+A pilot study describing the benchmark protocol, findings, and full methodology is available on SSRN (link forthcoming).
 
 ## Citation
 
