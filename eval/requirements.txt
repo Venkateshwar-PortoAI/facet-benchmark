@@ -1,2 +1,14 @@
-anthropic>=0.43.0
-python-dotenv>=1.0.0
+# FACET evaluation and analysis dependencies
+# Python 3.9+ required
+
+# For figure generation (gen_figures.py)
+matplotlib>=3.7.0
+numpy>=1.24.0
+
+# analyze_pilot.py uses only stdlib — no extra deps
+# run_cabral_pilot.py dispatches to external CLIs:
+#   - Anthropic Claude CLI (claude)
+#   - OpenAI Codex CLI (codex)
+#   - AWS CLI with Bedrock access (aws)
+#   - Google Gemini CLI (gemini) — optional
+#   - Ollama (ollama) — optional

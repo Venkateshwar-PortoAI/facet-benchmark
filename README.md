@@ -1,45 +1,51 @@
-# FACET: Factor Accessibility, Coverage, and Evidence Test
+# FACET — Factor Accessibility, Coverage, and Evidence Test
 
-**Doctrine-Dependent Probe Dissociation in Frontier LLM Legal Reasoning**
+**Measuring Attribution Faithfulness in Multi-Factor LLM Reasoning**
 
-Venkateshwar Reddy Jambula | Pranaalpha Labs | [Paper (PDF)](PAPER_ARXIV_v1.pdf)
+Venkateshwar Reddy Jambula — Pranaalpha Labs
+
+[Paper (PDF)](PAPER_ARXIV_v1.pdf)
 
 ---
 
 ## What is FACET?
 
-FACET is a benchmark that measures whether large language models genuinely integrate multiple factors in legal balancing tests or collapse onto a single canonical factor. US tort law requires judges to weigh 5-10 heterogeneous factors simultaneously — FACET tests whether LLMs actually do this or just pick one factor and report the answer it drives.
+When LLMs are deployed in domains that require weighing 5–10 different factors simultaneously — medical diagnosis, regulatory compliance, legal balancing tests — do they actually integrate all the factors, or do they collapse onto whichever one is most canonical in their training data?
+
+FACET answers this with a **counterfactual-outcome protocol**: neutralize the canonical factor, flip the remaining factors to the opposite direction, and measure whether the model's self-reported factor attribution updates to reflect the new case. We instantiate FACET on US tort law because legal balancing tests have explicit factor lists, verifiable ground truth, and naturally varying canonicity.
 
 ## Key Finding
 
-We evaluate 9 frontier model configurations from 6 labs (Anthropic, OpenAI, Meta, Mistral, DeepSeek, Alibaba/Qwen) on 10 real tort cases and 3 counterfactual variants. **All models get the right answer, but their self-reported factor attributions are unreliable in a doctrine-dependent way:**
+We evaluate 9 frontier model configurations from 6 labs (Anthropic, OpenAI, Meta, Mistral, DeepSeek, Alibaba/Qwen) on 10 real tort cases and 3 counterfactual variants. **All models reach the correct outcome on counterfactuals, but probe faithfulness varies sharply by how canonical the factor is:**
 
-| Counterfactual | Neutralized Factor | Models with Faithful Probe |
-|---|---|---|
-| Cabral / Rowland (duty) | F1 foreseeability | **7/8** |
-| Barker / Risk-Utility (product liability) | F3 safer alternative design | **0/8** |
-| Biakanja / Third-Party (duty) | F1 intent-to-affect | **4/8** |
+| Counterfactual | Neutralized Factor | Canonicity | Models with Faithful Probe |
+|---|---|---|---|
+| CF-Cabral (Rowland duty) | F1 foreseeability | moderate | **7/8** |
+| CF-Barker (risk-utility) | F3 feasibility of safer alternative | high | **0/8** |
+| CF-Biakanja (third-party) | F1 intent-to-affect | intermediate | **4/8** |
 
-**The more textbook-canonical the factor, the less trustworthy the model's self-report.** Barker's F3 is so deeply embedded in training data that every model reports it as "most important" even when it's explicitly neutralized in the prompt.
+**The more textbook-canonical the factor, the less trustworthy the model's self-report.** Barker's F3 is so deeply embedded in training data that every model reports it as "most important" even when the prompt explicitly says no such factor exists in the case.
 
 ## Repository Structure
 
 ```
 facet-benchmark/
-├── instances/              # JSON instance definitions (10 real + 3 counterfactual)
-├── results/                # Raw model output JSON (~100 files)
+├── PAPER_ARXIV_v1.pdf       # Preprint PDF
+├── README.md                # This file
+├── factor_type_taxonomy.md  # Factor type definitions (schema reference)
 ├── eval/
-│   ├── run_cabral_pilot.py # 5-backend evaluation harness
-│   ├── analyze_pilot.py    # Reproduces all tables from the paper
-│   ├── gen_figures.py      # Generates paper figures
+│   ├── run_cabral_pilot.py  # 5-backend evaluation harness
+│   ├── analyze_pilot.py     # Reproduces all tables from the paper
+│   ├── gen_figures.py       # Generates paper figures
+│   ├── gen_c2_c3.py         # Generates C2 perturbation and C3 compliance variants
 │   └── requirements.txt
-├── figures/                # Generated figures (PNG)
-├── latex/                  # LaTeX source for the paper
-├── PHENOMENON.md           # Formal phenomenon definition
-├── SPEC.md                 # Benchmark specification
-├── PRIOR_ART.md            # Literature review and novelty analysis
-├── factor_type_taxonomy.md # Factor type definitions
-└── PAPER_ARXIV_v1.pdf      # Preprint PDF
+├── figures/                 # Paper figures (PNG)
+├── instances/               # Benchmark dataset
+│   ├── facet-neg-00NN.json  # 10 in-distribution instances
+│   ├── facet-neg-cf-00N.json # 3 counterfactual variants
+│   ├── perturbations/       # C2 weight-perturbation variants
+│   └── compliance/          # C3 compliance-matched variants
+└── results/                 # Raw model output JSON (~100 files)
 ```
 
 ## Reproducing Results
@@ -55,12 +61,48 @@ python3 eval/analyze_pilot.py
 python3 eval/gen_figures.py
 ```
 
+## Running New Models
+
+The harness dispatches to five backends:
+
+| Backend | Models supported |
+|---|---|
+| **Anthropic CLI** | Claude Sonnet, Opus, extended thinking |
+| **OpenAI Codex CLI** | GPT-5.4 |
+| **AWS Bedrock** | DeepSeek, Mistral, Llama 4, Qwen3 (via Converse API) |
+| **Google Gemini CLI** | Gemini (removed from default due to quota limits) |
+| **Ollama** | Local models |
+
+```bash
+python3 eval/run_cabral_pilot.py --instance facet-neg-0002 --backend anthropic --model claude-opus-4-6
+```
+
+## Instance Schema
+
+Each instance JSON contains:
+
+- `instance_id` — unique ID
+- `source_case` — citation to the real case
+- `doctrine` — doctrinal framework (e.g., `rowland_duty`)
+- `case_background` — factual narrative
+- `factors[]` — array of factor objects with:
+  - `factor_id` — `f1` through `fN`
+  - `factor_type` — from `factor_type_taxonomy.md`
+  - `text` — the factor statement
+  - `directionality` — which party the factor favors
+  - `in_case_weight_estimate` — author-estimated weight (sum to 1.0)
+- `question` — the question posed to the model
+- `ground_truth` — the appellate holding
+
+Counterfactual instances (`facet-neg-cf-*.json`) additionally mark the neutralized factor with `counterfactual_note: "CFNEUTRALIZED"`.
+
 ## Models Evaluated
 
 | Model | Parameters | Probe Faithfulness |
 |---|---|---|
 | Claude Sonnet 4.6 | undisclosed | 1/3 |
 | Claude Opus 4.6 | undisclosed | 1/3 |
+| Claude Opus 4.6 (extended thinking) | undisclosed | 1/3 |
 | GPT-5.4 | undisclosed | 1/3 |
 | DeepSeek v3.2 | 671B / 37B active | 2/3 |
 | Mistral Large 3 | 675B / 41B active | 2/3 |
@@ -68,29 +110,32 @@ python3 eval/gen_figures.py
 | Llama 4 Scout | 109B / 17B active | 2/3 |
 | Qwen3 Next 80B-A3B | 80B / 3.9B active | 1/3 |
 
-## Evaluation Harness
+## Status
 
-The harness supports five backends:
-- **Anthropic** (Claude CLI)
-- **OpenAI** (Codex CLI)
-- **AWS Bedrock** (DeepSeek, Mistral, Meta, Qwen via Converse API)
-- **Google Gemini** (CLI, removed from default due to quota limits)
-- **Ollama** (local models)
+This is a **pilot study**. The benchmark protocol is domain-general; legal balancing tests are the first instantiation. Medical differential diagnosis and multi-criteria compliance review are planned extensions.
+
+**Known limitations** (see paper §6 for full list):
+- 13 instances is pilot scale; expansion to 20–40 is planned
+- Factor definitions and weights are sourced from secondary legal digests; verification against primary opinion texts is ongoing
+- Single-temperature, single-sample evaluation
+- California-only instances
 
 ## Citation
 
 ```bibtex
-@article{jambula2026facet,
-  title={FACET: Doctrine-Dependent Probe Dissociation in Frontier LLM Legal Reasoning},
+@unpublished{jambula2026facet,
+  title={{FACET}: Measuring Attribution Faithfulness in Multi-Factor {LLM} Reasoning},
   author={Jambula, Venkateshwar Reddy},
   year={2026},
-  note={Preprint}
+  note={Preprint},
+  url={https://github.com/Venkateshwar-PortoAI/facet-benchmark}
 }
 ```
 
 ## License
 
-Code: MIT. Instance data and model outputs: CC-BY-4.0.
+- **Code** (everything in `eval/`): MIT License — see [LICENSE](LICENSE)
+- **Data** (everything in `instances/` and `results/`): CC BY 4.0 — see [LICENSE-DATA](LICENSE-DATA)
 
 ## Contact
 
