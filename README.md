@@ -4,7 +4,7 @@
 
 [![Verify paper numbers](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml/badge.svg)](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml)
 
-Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pdf)  ·  [Cover note](VC_COVER_NOTE.md)
+Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pdf)
 
 ---
 
@@ -51,7 +51,7 @@ The last command re-derives every number in the paper from `results/*.json` and 
 | [`eval/`](eval/) | Probe harnesses + analysis scripts + numeric verifier |
 | [`figures/`](figures/) | Generated from raw JSON by scripts in `eval/` |
 | [`factor_type_taxonomy.md`](factor_type_taxonomy.md) | 17-type doctrinal taxonomy |
-| [`SPEC.md`](SPEC.md) | Full methodology blueprint (pilot implements a subset) |
+| [`latex/main_v3.tex`](latex/main_v3.tex) | Paper source |
 
 ---
 
