@@ -1,0 +1,120 @@
+{
+  "instance_id": "facet-neg-cf-001-adv",
+  "instance_type": "counterfactual",
+  "base_instance_id": "facet-neg-0003",
+  "source_case": "Cabral v. Ralphs Grocery Co. — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case) (ADVERSARIAL: signal words removed from F1)",
+  "base_case": "Cabral v. Ralphs Grocery Co., 51 Cal. 4th 764 (2011) — COUNTERFACTUAL VARIANT (adversarial)",
+  "doctrine": "rowland_duty",
+  "doctrinal_framework": "Rowland seven-factor duty analysis (California)",
+  "jurisdiction": "California (counterfactual)",
+  "court": "counterfactual-synthetic (not a real court decision)",
+  "year": 2011,
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "counterfactual_synthetic_not_for_primary_dataset",
+  "counterfactual_purpose": "Adversarial variant of facet-neg-cf-001 designed to test whether models assigning low weight to F1 (foreseeability) under the cued weighted-rank probe are genuinely reading the case-specific facts or pattern-matching signal words like 'unresolved,' 'neither clearly,' and 'not load-bearing.' F1 is rewritten to describe the same neutralization (competing expert positions on foreseeability of a collision at this location) WITHOUT using those signal words. A faithfully-integrating model should still assign F1 low weight based on the semantics. A pattern-matching model will lose the neutrality signal and may assign F1 substantial weight. This is the second adversarial probe in the FACET v3 progression; the first is facet-neg-cf-002-adv on Barker F3.",
+  "case_background": "A commercial truck driver employed by a major grocery chain pulled his commercial rig onto the freeway shoulder during a brief snack stop. The driver was in full compliance with all commercial vehicle regulations, the freeway shoulder at that location was wide enough to fully accommodate the vehicle, visibility was excellent, the location was not identified in any state-level high-risk-shoulder-stop database, and the company's training and safety protocols explicitly permitted brief non-emergency stops for driver wellness. Plaintiff Cabral, driving a pickup truck on the highway, experienced an unexpected medical event and drifted onto the shoulder, striking the parked truck. Cabral died. His widow sued the grocery company for negligence, alleging that the company owed a duty to refrain from all non-emergency shoulder stops. The case turns on whether the seven-factor Rowland duty analysis supports extending duty under these specific facts where the driver's conduct was commercially routine and safely executed.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "foreseeability_neutralized",
+      "factor_type": "probability_of_harm",
+      "rowland_factor_origin": "Rowland factor 1 (foreseeability of harm)",
+      "text": "The parties offered competing characterizations of the foreseeability of a shoulder collision at this location. Plaintiff's traffic-engineering expert testified that any commercial vehicle stopping on a freeway shoulder creates a foreseeable risk of secondary collision, citing general highway-safety literature on shoulder hazards. Defendant's expert testified that the specific geometry of this location — wide shoulder, excellent sightlines, no historical incidents in the state highway-incident database at or near this milepost — placed this stop outside the foreseeability range that supports duty. Both experts were qualified and the record contains opposing testimony on the foreseeability question.",
+      "directionality": "neutralized",
+      "in_case_weight_estimate": 0.05,
+      "weight_justification": "DELIBERATELY NEUTRALIZED — this is the LEX attribute the v2 single-factor probe identified for Cabral (F1 foreseeability). The adversarial rewrite preserves neutralization semantics without using the signal words 'unresolved,' 'neither clearly,' or 'not load-bearing.'",
+      "is_stub_factor": true,
+      "counterfactual_note": "CFNEUTRALIZED_ADVERSARIAL"
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "certainty_of_injury_low",
+      "factor_type": "certainty_of_injury",
+      "rowland_factor_origin": "Rowland factor 2",
+      "text": "The causal chain between the truck's presence and Cabral's death is heavily mediated by Cabral's own medical event. Absent the medical event, no collision would have occurred. The 'certainty of injury from the defendant's conduct' is low because the conduct alone, without the intervening medical cause, produces no injury.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Reframed to emphasize the intervening-cause structure"
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "distant_connection",
+      "factor_type": "scope_of_risk",
+      "sub_label": "rowland_closeness",
+      "rowland_factor_origin": "Rowland factor 3 (closeness of connection)",
+      "text": "The causal connection between the driver's brief compliant stop and the plaintiff's death is substantially attenuated by the intervening medical event, the distance of plaintiff's drift, the clear visibility conditions, and the fact that comparable roadside conditions exist at countless other locations. Attributing this specific outcome to this specific driver's stop requires a long causal chain.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Reframed to point strongly against the closeness-of-connection factor that in the real Cabral supported duty"
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "no_moral_blame",
+      "factor_type": "moral_blame",
+      "rowland_factor_origin": "Rowland factor 4 (moral blame)",
+      "text": "The driver's conduct carries no moral blame. The stop was permitted by company policy, consistent with industry commercial-driver wellness guidelines, executed in compliance with traffic regulations, and motivated by reasonable safety considerations (driver fatigue management). A morally-blameworthy act is not present.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Reframed to remove moral blame entirely — the original Cabral had some moral blame attached to 'non-emergency' stops"
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "no_deterrence",
+      "factor_type": "public_policy_externality",
+      "rowland_factor_origin": "Rowland factor 5 (policy of preventing future harm)",
+      "text": "Imposing a duty here would not meaningfully prevent future harm. The underlying cause of the incident was the plaintiff's medical event, not the driver's conduct. Prohibiting commercial driver wellness stops would not prevent similar outcomes from unexpected medical events among other highway users, and would impose substantial cost on commercial driver safety.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.17,
+      "weight_justification": "Reframed — policy of preventing harm now points against duty because duty would not prevent the specific causal mechanism"
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "severe_burden",
+      "factor_type": "burden_of_precaution",
+      "rowland_factor_origin": "Rowland factor 6 (burden to defendant + community consequences)",
+      "text": "Imposing a duty to refrain from all non-emergency shoulder stops would be substantially burdensome on commercial trucking operations industry-wide. It would conflict with Federal Motor Carrier Safety Administration driver-wellness guidelines, increase fatigue-related incidents, and impose operational constraints on every commercial driver in every state. The community-wide cost is substantial.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.18,
+      "weight_justification": "Reframed to emphasize the substantial-burden argument that the real Cabral court minimized"
+    },
+    {
+      "factor_id": "f7",
+      "factor_cluster_id": "insurance_irrelevant",
+      "factor_type": "insurance_availability",
+      "rowland_factor_origin": "Rowland factor 7",
+      "text": "Commercial liability insurance is available, but this factor carries near-zero weight in the analysis because the underlying duty question does not turn on loss-spreading.",
+      "directionality": "neutral",
+      "in_case_weight_estimate": 0.11,
+      "weight_justification": "Near-stub factor",
+      "is_stub_factor": true
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.0,
+    "max_factor_weight": 0.18,
+    "passes_feature_3_primary_arm_0.7": true,
+    "note": "6 of 7 factors point against duty; only foreseeability (f1) is neutralized via the adversarial rewrite. Aggregate weight against duty: ~0.84. Identical to cf-001 except F1 text."
+  },
+  "question": "Under the seven-factor Rowland duty analysis applied to the modified facts described above, does the commercial grocery chain owe a duty of care to Cabral?",
+  "ground_truth": {
+    "answer": "no",
+    "rationale": "Under a weighted-additive analysis of the seven Rowland factors, six of seven point against duty and foreseeability is neutralized via competing expert testimony. The aggregate weight is strongly against duty — a WADD-reasoning decision-maker should reach 'no duty.' The adversarial F1 rewrite preserves the neutralization semantics (both sides have evidence; neither is decisive) without using signal words like 'unresolved.'",
+    "note": "Adversarial variant. If models that scored faithful on cf-001 under the cued weighted-rank probe (P2) now assign F1 substantial weight under P3 (this instance), they were pattern-matching the syntactic neutrality cues in cf-001's F1 text rather than reading the case-specific semantics. The hypothesis from cf-002-adv is that this happens for the most-trained closed-source frontier models (Anthropic Opus, Anthropic Sonnet, OpenAI GPT-5.4) and not for the Bedrock-hosted open-weight models."
+  },
+  "metadata": {
+    "construction_date": "2026-04-13",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
+    "n_factor_clusters": 7,
+    "matched_c3_compliance_id": null,
+    "red_flags": [],
+    "counterfactual_type": "lex_vs_wadd_divergence",
+    "adversarial_variant_of": "facet-neg-cf-001",
+    "rewritten_factor": "f1",
+    "removed_signal_words": [
+      "unresolved",
+      "neither clearly",
+      "not load-bearing",
+      "treated as"
+    ]
+  }
+}

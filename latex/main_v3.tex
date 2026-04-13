@@ -1,0 +1,501 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{authblk}
+
+\hypersetup{colorlinks=true, linkcolor=blue!60!black, citecolor=blue!60!black, urlcolor=blue!60!black}
+\captionsetup{font=small, labelfont=bf, skip=6pt}
+\titlespacing*{\section}{0pt}{14pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+\setlist{nosep, leftmargin=1.4em}
+\setlength{\emergencystretch}{3em}
+
+\title{FACET: Measuring Attribution Faithfulness\\in Multi-Factor LLM Reasoning}
+
+\author{Venkateshwar Reddy Jambula}
+\affil{Pranaalpha Labs\\\texttt{venkateshwar.jambula@pranaalpha.com}}
+
+\date{April 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+When you ask a large language model to weigh several factors and reach a decision, how do you know whether it actually weighed them all? The standard test is to ask the model directly: ``which factor mattered most?'' On a small pilot of US tort balancing tests, we find that the answer depends a lot on how the question is phrased, and the dependence looks different across model families.
+
+\smallskip
+We ran eight frontier models from six labs (Anthropic, OpenAI, DeepSeek, Mistral, Meta, Alibaba) on the same cases under four probing techniques: a top-1 single-factor probe, a full-distribution weighted-rank probe, an adversarial variant of the weighted-rank probe that removes surface cues from the case text, and a per-factor ablation control. The four probes disagree with each other in a consistent direction. Closed-source frontier models handle the per-factor ablation cleanly but retain weight on the neutralized factor under the adversarial probe. Open-weight Bedrock models show the opposite pattern. Neither group is uniformly more faithful.
+
+\smallskip
+On an adversarial variant of \emph{Cabral v.\ Ralphs Grocery}, GPT-5.4 produces a two-mode response distribution whose groups look like the two textbook strategies for multi-attribute decisions (weighted-additive integration and lexicographic single-factor default; \citealt{payne1993}). We release the benchmark, the four probing harnesses, and all 350+ raw model outputs.
+\end{abstract}
+
+\noindent\rule{\linewidth}{0.4pt}
+\vspace{-2pt}
+
+\footnotesize
+Code, dataset, and raw model outputs: \url{https://github.com/pranaalpha/facet-benchmark}.
+\normalsize
+
+%==============================================================
+\section{Introduction}
+%==============================================================
+
+A doctor diagnosing a patient weighs symptoms, lab values, and patient history. A compliance officer reviewing a transaction weighs five or six risk indicators against each other. A judge applying a multi-factor balancing test weighs seven factors of duty of care at once. When a large language model is deployed into one of these settings, a basic question becomes load-bearing: is the model actually weighing all the factors, or is it just picking the one most popular in its training data and dressing the answer in the rest?
+
+The natural way to find out is to ask the model. The standard form of the question, used across the LLM faithfulness literature, is ``of all the factors in the case, which one was most important to your answer?'' Prior work has already shown that LLM self-reports of reasoning are not always trustworthy. Chain-of-thought traces can be unfaithful to the computation that actually produced the answer \citep{turpin2023,lanham2023}. We extend that concern to direct attribution probes. On our pilot benchmark we find that the answer to ``which factor mattered most?'' depends a lot on how the question is phrased. The disagreement between different phrasings is itself informative: it reveals two different ways that the closed-source and open-weight model groups in our sample each fail to report their reasoning consistently.
+
+This paper introduces FACET, a small benchmark for measuring attribution faithfulness in multi-factor reasoning. We report the result of running four probing techniques against eight frontier models from six labs on a pilot of US tort balancing tests. The four techniques get progressively more demanding: the first is the standard top-1 probe used in prior work; the second admits a full distribution of weights; the third is the same but with the case text rewritten so the irrelevant factor is no longer flagged by surface words; the fourth is a per-factor ablation that checks whether the model's reported weight on a factor drops to zero when the factor's text is rewritten as neutral. Running all four lets us see probe-format effects that any single probe alone would miss.
+
+The paper has three contributions. First, the four-probe methodology itself: a way to measure attribution faithfulness that combines forced-choice, distributed-weight, adversarial-distributed-weight, and per-factor ablation probes into one protocol. Second, an empirical pattern visible in this pilot at $n = 8$ models. The closed-source frontier configurations (Sonnet, Opus, GPT-5.4, accessed via Anthropic and OpenAI APIs at default temperature) and the open-weight Bedrock configurations (DeepSeek, Mistral, Llama 4, Qwen3, at $T = 0$) show opposite patterns under the adversarial probe and the per-factor ablation. On this benchmark and these probes, neither group is uniformly more faithful. We discuss the grouping with its confounds (model family, inference backend, sampling temperature) in Section~\ref{sec:p3} and bound the claim accordingly. Third, on a counterfactual variant of \emph{Cabral v.\ Ralphs Grocery}, OpenAI's GPT-5.4 produces a two-mode response distribution across 22 trials whose two groups look like the two textbook strategies for multi-attribute decisions (weighted-additive integration and lexicographic single-factor heuristic; \citealt{payne1993}). Section~\ref{sec:bimodality} reports the data and the caveat about how the two modes are defined.
+
+\subsection{What this paper contributes}
+
+\begin{enumerate}
+\item \textbf{Four probing techniques.} (a) Single-factor probe ($P_1$): the standard top-1 attribution probe used in prior direct-probe work \citep{turpin2023,zhang2025}. (b) Cued weighted-rank probe ($P_2$): elicits a full $N$-dimensional weight vector with explicit zero affordance, with the case text containing standard neutralization cues. (c) Adversarial weighted-rank probe ($P_3$): same prompt as $P_2$ but the case text rewritten to remove syntactic neutrality cues while preserving the same semantic neutralization. (d) C2 per-factor ablation: rewrites each factor in turn to a doctrinally neutral value and re-runs the cued weighted-rank probe to test whether the model's self-reported weight on the perturbed factor goes to zero.
+\item \textbf{A pilot benchmark with replication on the headline cells.} 13 instances + 4 adversarial variants. 8 model configurations across 6 labs. 350+ raw model outputs. Replication $n$ varies by cell: most non-headline cells are at $n=1$ or $n=2$; the GPT-5.4 cf-001-adv cell is at $n=16$ and is combined with $n=6$ on a second adversarial wording for the bimodality analysis.
+\item \textbf{A trial-level two-group observation on GPT-5.4.} On the CF-Cabral adversarial case, combined across two adversarial wordings ($16$ trials on cf-001-adv plus $6$ trials on cf-001-adv2, $n=22$ total), GPT-5.4 produces a weight distribution with two response groups separated by a sparsely-populated middle band: $15$ trials cluster at a low group (mean $w_{F1} = 10.3\%$, all correct outcome) and $7$ trials cluster at a high group (mean $w_{F1} = 44.3\%$, all wrong outcome), with only $2$ trials in the $20$--$39\%$ range. The combined wrong-outcome rate is $7/22 = 32\%$ (Wilson 95\% CI $[16\%, 53\%]$). The pattern appears in both adversarial wordings ($3/16$ and $4/6$ wrong outcomes); we discuss the rate variation, the explicit caveat about the data-derived split point, and the alternative continuous-variance reading in Section~\ref{sec:bimodality}.
+\item \textbf{Per-factor ablation under the cued probe.} On C2 across the three in-distribution anchors and all eight models, GPT-5.4's reported weights drop to $0.0\%$ on every perturbed factor (across $18$ ablations); Opus to $0.8\%$ on average; Sonnet to $1.7\%$. Closed-source models update their reported weights cleanly when a factor is perturbed. Open-weight Bedrock models are less consistent ($3.1$--$5.3\%$ mean residual across the five Bedrock configurations). The two probe families ($P_3$ adversarial and C2 ablation) report different patterns for the two model groups; we describe this as an asymmetric faithfulness profile rather than a strong claim about which family is more faithful.
+\item \textbf{An open harness and dataset.} Four probe wrappers runnable end-to-end via Python scripts. The benchmark instances, the adversarial counterfactual variants, the C2 perturbation files, and all $350+$ raw model outputs are released under MIT (code) and CC BY 4.0 (data).
+\end{enumerate}
+
+\subsection{Notation}
+
+\begin{itemize}
+\item $N$: number of factors in a doctrine ($N \in \{5, 6, 7\}$ here).
+\item $F_i$: the $i$-th factor. $w_i$: weight assigned to $F_i$ under a weighted-rank probe, with $\sum_i w_i = 100$.
+\item $F_{\text{neut}}$: the factor neutralized in a counterfactual instance.
+\item \textbf{Faithful response} (single-factor probe): the model's named ``most important'' factor is not $F_{\text{neut}}$.
+\item \textbf{Faithful response} (weighted-rank probe): $w_{\text{neut}} \leq 10$ percentage points. We use a 10-point threshold to allow for floor-effect noise. The median observed value across deterministic Bedrock cells is $0$.
+\item WADD and LEX: weighted additive vs lexicographic decision strategies \citep{payne1993}.
+\end{itemize}
+
+%==============================================================
+\section{Background}
+%==============================================================
+
+\subsection{Multi-Factor Decisions, LEX, and WADD}
+
+The cognitive science literature on multi-attribute choice distinguishes two strategies \citep{payne1993}: \textbf{WADD} (weighted additive) integrates all attributes in proportion to their weights; \textbf{LEX} (lexicographic) picks the single most important attribute and decides on that alone, consulting the rest only as tiebreakers. \citet{lieder2020} reframed LEX as rational under bounded computational resources: LEX minimizes integration cost and is therefore selected when integration cost is high relative to expected gain. The two strategies make different predictions when the most important attribute is removed: a WADD reasoner falls back on the remaining $N{-}1$ attributes; a LEX reasoner has no such fallback and may default to a base prior.
+
+Prior evidence relating LLM behavior to LEX vs WADD has been population-level: aggregate behavior across many models or many trials is sometimes closer to one strategy or the other. The two-group result reported in Section~\ref{sec:bimodality} is a within-model trial-level observation on a single case whose two groups look like the two strategies. We do not claim this is mechanistic mode-switching; the sample is too small. See Section~\ref{sec:bimodality} for the full caveat.
+
+\subsection{Why Legal Balancing Tests}
+
+Legal balancing tests offer three properties that are convenient for measuring multi-factor reasoning. \textbf{Explicit factor lists}: doctrines like \emph{Rowland v.\ Christian} (1968, seven factors for duty of care), \emph{Barker v.\ Lull Engineering} (1978, five factors for risk-utility design defect), and \emph{Biakanja v.\ Irving} (1958, six factors for duty to non-clients) enumerate their factors by name. \textbf{Externally adjudicated outcomes for in-distribution cases}: appellate court holdings provide a published answer that the author has not chosen, although for the present pilot the factor texts and in-case weights are sourced from secondary digests rather than primary opinion texts (Section~\ref{sec:limitations}); the synthetic counterfactual instances necessarily use author-declared ground truth. \textbf{Variable canonicity}: some factor-doctrine associations are deeply embedded in legal training data while others are diffuse, allowing within-benchmark comparison.
+
+The methodology is not specific to law. Section~\ref{sec:future} discusses planned extensions to medical differential diagnosis and multi-criteria compliance review.
+
+\subsection{Related Work}
+
+\textbf{LLM faithfulness measurement.} \citet{turpin2023} and \citet{lanham2023} established that chain-of-thought traces in LLMs are systematically unfaithful to the reasoning that produced an answer. \citet{jacovi2020} formalized the property and distinguishes \emph{plausibility} (does the explanation look reasonable?) from \emph{faithfulness} (does it correspond to the model's actual computation?). \citet{madsen2024} construct faithfulness-measurable masked language models. The present work measures attribution faithfulness via direct probes rather than chain-of-thought traces and shows that probe format itself materially affects what is measured.
+
+\textbf{Legal LLM benchmarks.} LegalBench \citep{guha2023}, LEXam \citep{katz2025}, and MSLR \citep{yu2025} measure outcome accuracy on legal reasoning tasks but do not directly probe whether multi-factor integration is happening at the attribution level. The present work is complementary: it does not measure whether models can answer legal questions correctly (they mostly can on the in-distribution anchors), it measures \emph{how} they reach those answers.
+
+\textbf{Closest neighbor.} \citet{zhang2025} test LLMs on hierarchical CATO factor reasoning in trade-secret misappropriation, measuring \emph{sequential} factor roll-up across a doctrinal hierarchy. The present work tests \emph{parallel} multi-factor integration at the moment of judgment and reports the four-probe progression as the methodological contribution. The two studies are complementary: sequential roll-up (Zhang) and parallel integration (present work) are different cognitive moves and may have different LLM failure modes.
+
+\textbf{LEX/WADD framework.} \citet{payne1993} introduced the lexicographic (LEX) heuristic and the weighted-additive (WADD) integration strategy as the two canonical multi-attribute decision strategies. \citet{lieder2020} later reframed LEX selection as resource-rational under bounded computation. Prior LLM-side evidence relating model behavior to LEX vs WADD has been population-level rather than trial-level. The two-group observation in Section~\ref{sec:bimodality} is a within-model trial-level analog whose groups look like the two strategies, but should not be read as direct mechanistic evidence. See the caveat in Section~\ref{sec:bimodality}.
+
+%==============================================================
+\section{Method}
+%==============================================================
+
+\subsection{Instances}
+
+The pilot dataset has $13$ base instances ($10$ in-distribution anchors plus $3$ counterfactual variants) and $4$ adversarial counterfactual variants. Construction details follow.
+
+\textbf{In-distribution (10 instances).} Real California and Second/Seventh Circuit tort cases drawn from four doctrinal frameworks: Rowland-line duty (\emph{Cabral v.\ Ralphs}, \emph{Parsons v.\ Crown}, \emph{Rowland v.\ Christian}); Wade-factor risk-utility (\emph{Voss v.\ Black \& Decker}, \emph{Barker v.\ Lull}, \emph{O'Brien v.\ Muskin}, \emph{Cepeda}); third-party duty (\emph{Biakanja v.\ Irving}); extended Hand-formula negligence (\emph{Davis v.\ Consolidated Rail}, \emph{McCarty v.\ Pheasant Run}); and premises-liability (\emph{Posecai v.\ Wal-Mart}). Selection criteria: appellate unanimity preferred, $N \geq 5$ factors, no single factor carrying more than half the in-case weight in the constructor's reading, and no fact patterns whose subject matter would confound the cognitive measurement with sociopolitical content. Factor definitions are sourced from secondary legal digests; verification against primary opinion texts is in progress and is documented as a limitation of the present pilot.
+
+\textbf{Counterfactual arm (3 instances + 3 adversarial variants).} For each anchor doctrine, a synthetic variant in which one factor is rewritten to a doctrinally neutral or unresolved value while the remaining $N{-}1$ factors are rewritten to point uniformly against the original holding. CF-Cabral neutralizes F1 (foreseeability); CF-Barker neutralizes F3 (feasibility of safer alternative design); CF-Biakanja neutralizes F1 (intent-to-affect). Author-declared ground truth: ``no'' on all three.
+
+For each cued counterfactual, an adversarial variant rewrites the neutralized factor's case text to remove syntactic neutrality cues (the words ``unresolved,'' ``not load-bearing,'' ``diffuse,'' ``neither clearly,'' ``treated as'') while preserving the semantic neutralization through descriptions of competing expert testimony or conflicting empirical data. We construct one adversarial variant per counterfactual case (cf-001-adv, cf-002-adv, cf-003-adv) plus a second-wording variant of CF-Cabral (cf-001-adv2) in which the F1 neutralization is expressed through conflicting statistical/empirical data rather than competing expert testimony. The second wording is used to test whether the GPT-5.4 mode-switching result on cf-001-adv (Section~\ref{sec:bimodality}) generalizes across surface wordings.
+
+\subsection{Four Probing Techniques}
+
+\textbf{P1, single-factor probe.} ``Of the $N$ factors listed above, which single factor was most important to your answer? Reply with the factor identifier.'' This matches the format used in prior direct-attribution work \citep{turpin2023,zhang2025}.
+
+\textbf{P2, weighted-rank probe (cued).} ``For each factor $F_1$ through $F_N$, assign a weight in $[0, 100]$ representing how much that factor drove your answer. The weights MUST sum to $100$. If a factor is neutral, unresolved, or has no signal in this specific case, assign it $0$.'' The case text for cued counterfactual instances contains the words ``unresolved'' and ``not load-bearing'' as part of the neutralization rewrite for the canonical factor.
+
+\textbf{P3, weighted-rank probe (adversarial).} The same prompt as P2, with one change: the case text is rewritten so the neutralized factor's neutrality is described in terms of disputed expert testimony, competing empirical data, or contested record evidence, without the words ``unresolved,'' ``neither clearly,'' or ``not load-bearing.'' P3 runs on the four adversarial counterfactual instances (cf-001-adv, cf-001-adv2, cf-002-adv, cf-003-adv).
+
+\textbf{C2, per-factor ablation under cued $P_2$.} For each factor $i$ in each in-distribution anchor instance, we rewrite factor $i$'s text to a doctrinally neutral value (using a template-based rewrite) and re-run the cued weighted-rank probe. The reported weight on the perturbed factor tells us whether the $P_2$ self-report is consistent with the perturbation. If $w_i$ drops near zero after factor $i$ has been rewritten as neutral, the self-report tracks the perturbation. If the model keeps substantial weight on the perturbed factor, the self-report is decoupled from the perturbation. We do not read the $w_i \approx 0$ case as causal evidence about underlying attention, because both the $P_2$ prompt and the C2 perturbations contain the same syntactic neutralization cues (Section~\ref{sec:limitations}). C2 ran on the three anchor cases ($N = 5, 7, 6$) across all eight model configurations, for 144 C2 trials total.
+
+The four probes share the same case facts, factor list, doctrinal framing, and yes/no question. They differ only in the question that follows or in the specific factor text being tested. Exact prompt templates are in Appendix~\ref{app:prompts}.
+
+\subsection{Models}
+
+Eight model configurations across six labs (Table~\ref{tab:models}). Inference is single-sample at the provider's default temperature, with tool use disabled. Bedrock calls are pinned to temperature $0$; the other backends use provider defaults, which means the closed-source vs open-weight grouping in our results is confounded with sampling temperature. We discuss this confound in Section~\ref{sec:limitations}. A separate Claude Opus 4.6 extended-thinking configuration produced responses identical to default Opus on every probe and instance and is omitted from the tables. Google models are not included in this pilot.
+
+\begin{table}[t]
+\centering
+\caption{Model configurations evaluated. Active parameters reported where disclosed. ``n/d'' = not disclosed.}
+\label{tab:models}
+\small
+\begin{tabular}{@{}llrl@{}}
+\toprule
+\textbf{Lab} & \textbf{Model} & \textbf{Total / active params} & \textbf{Backend} \\
+\midrule
+Anthropic & Claude Sonnet 4.6 & n/d & Anthropic CLI \\
+Anthropic & Claude Opus 4.6 & n/d & Anthropic CLI \\
+OpenAI & GPT-5.4 & n/d & OpenAI Codex CLI \\
+DeepSeek & DeepSeek v3.2 & 671B / 37B & AWS Bedrock Converse \\
+Mistral & Mistral Large 3 & 675B / 41B & AWS Bedrock Converse \\
+Meta & Llama 4 Maverick & 400B / 17B & AWS Bedrock Converse \\
+Meta & Llama 4 Scout & 109B / 17B & AWS Bedrock Converse \\
+Alibaba & Qwen3 Next 80B-A3B & 80B / 3.9B & AWS Bedrock Converse \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%==============================================================
+\section{Results}
+\label{sec:results}
+%==============================================================
+
+\subsection{Outcome Correctness}
+
+Under $P_1$, $P_2$, and the C2 ablation control, all model-instance pairs reach the correct outcome answer. Under $P_3$ on CF-Cabral, GPT-5.4 produces wrong-outcome responses on a subset of trials (Section~\ref{sec:bimodality}). All other model-instance pairs under $P_3$ reach the correct outcome.
+
+The C2 ablation deserves an explicit observational note: across all $144$ trials ($3$ anchors $\times$ varying factor counts $\times 8$ models), no single-factor perturbation flipped the outcome answer. We report this as an observation, not as evidence for a particular cognitive mechanism: the in-distribution anchors may have redundant signal across factors, the perturbation language may be too weak to flip a strong prior, or both. Distinguishing these explanations requires perturbations that genuinely remove a factor's signal, not just rewrite it as neutral.
+
+\subsection{The $P_1 \to P_2 \to P_3$ Probe Progression}
+
+Figure~\ref{fig:p1p2} presents the $P_1$ vs $P_2$ contrast across all three counterfactual cases and eight models. Under $P_1$, dissociation is doctrine-dependent ($7/8$, $0/8$, $4/8$ faithful across CF-Cabral, CF-Barker, CF-Biakanja). Under $P_2$, the dissociation appears to dissolve entirely ($8/8$ faithful on every case).
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{fig1_probe_comparison.png}
+\caption{The $P_1$ vs $P_2$ contrast across the counterfactual arm. \textit{Left:} the single-factor probe matrix, $7/8$, $0/8$, $4/8$ faithful across the three cases. \textit{Right:} the cued weighted-rank probe assigns $\leq 10\%$ weight to the neutralized factor in every cell. The cued $P_2$ probe appears to dissolve the dissociation; Section~\ref{sec:p3} shows that this is partly a probe artifact.}
+\label{fig:p1p2}
+\end{figure*}
+
+The natural reading is that $P_1$ over-reports dissociation by forcing a top-1 projection from a distributed weight vector. The $P_2$ probe admits zero weights for neutral factors and therefore produces faithful-looking responses. But the case text for $P_2$ contains the words ``unresolved'' and ``not load-bearing'' as part of the canonical-factor neutralization. The question $P_3$ asks is whether the apparent $P_2$ faithfulness depends on those syntactic cues.
+
+\subsection{P3 (Adversarial) Results with Replication}
+\label{sec:p3}
+
+Figure~\ref{fig:adv} shows the $P_3$ matrix across all three counterfactual cases. Each cell is annotated with replication $n$ where greater than 1.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig2_adversarial_3panel.png}
+\caption{$P_3$ (adversarial weighted-rank probe) across the three counterfactual cases. Open-weight Bedrock models (left of dashed line) and closed-source frontier models (right). \textit{(a) CF-Cabral adversarial:} GPT-5.4 is at $44\%$ on the original trial and produces a wrong outcome ($\times$); subsequent replication ($n=16$) shows this is the high group of a bimodal distribution discussed in Section~\ref{sec:bimodality}. \textit{(b) CF-Barker adversarial:} the open-weight vs closed-source pattern is most visible here; we discuss confounds with backend and temperature in the limitations. \textit{(c) CF-Biakanja adversarial:} narrow spread $0$--$15\%$ with no clean grouping.}
+\label{fig:adv}
+\end{figure}
+
+Table~\ref{tab:p3} reports the $P_3$ matrix in tabular form with replication counts and Wilson 95\% confidence intervals on wrong-outcome rates.
+
+\begin{table}[t]
+\centering
+\caption{$P_3$ (adversarial weighted-rank probe) replication summary. ``$\bar{w}$'' = mean weight on neutralized factor. ``Wrong'' = wrong-outcome trials / total trials, with Wilson 95\% CI for cells where $n \geq 5$. The CF-Cabral column reports trials on the original adversarial wording (cf-001-adv); a second adversarial wording (cf-001-adv2) was run for the GPT-5.4 cf-001 cell only, adding $6$ trials and producing $4/6$ wrong outcomes. The combined GPT-5.4 cf-001 family ($n = 22$) is reported in Section~\ref{sec:bimodality} and Figure~\ref{fig:bimodality}; the table here separates the two wordings to keep denominators explicit.}
+\label{tab:p3}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l rrr rrr rrr@{}}
+\toprule
+ & \multicolumn{3}{c}{\textbf{CF-Cabral (F1n)}} & \multicolumn{3}{c}{\textbf{CF-Barker (F3n)}} & \multicolumn{3}{c}{\textbf{CF-Biakanja (F1n)}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+\textbf{Model} & $n$ & $\bar{w}$ & wrong & $n$ & $\bar{w}$ & wrong & $n$ & $\bar{w}$ & wrong \\
+\midrule
+Sonnet 4.6      & 6  & 11.7 & 0/6 & 6 & 4.2  & 0/6 & 6 & 6.7  & 0/6 \\
+Opus 4.6        & 6  & 10.0 & 0/6 & 6 & 11.7 & 0/6 & 6 & 10.0 & 0/6 \\
+GPT-5.4         & 16 & \textbf{18.1} & \textbf{3/16 [6\%, 43\%]} & 6 & \textbf{31.2} & 0/6 & 6 & 1.7 & 0/6 \\
+DeepSeek v3.2   & 2  & 15.0 & 0/2 & 4 & 0.0 & 0/4 & 2 & 0.0 & 0/2 \\
+Mistral L3      & 2  & 10.0 & 0/2 & 1 & 0.0 & 0/1 & 2 & 10.0 & 0/2 \\
+Maverick        & 2  & 10.0 & 0/2 & 1 & 0.0 & 0/1 & 2 & 10.0 & 0/2 \\
+Scout           & 2  & 10.0 & 0/2 & 1 & 0.0 & 0/1 & 2 & 10.0 & 0/2 \\
+Qwen3 Next      & 2  & 10.0 & 0/2 & 1 & 0.0 & 0/1 & 5 & 13.0 & 0/5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three observations from Table~\ref{tab:p3} and Figure~\ref{fig:adv}:
+
+\textbf{On CF-Barker the closed-source vs open-weight pattern is most visible.} In this pilot, on CF-Barker only, the five Bedrock-hosted open-weight models assign $w_{F3} = 0$ across $1$--$4$ trials each. Sonnet (mean $4.2$, $\sigma=6.6$) and Opus (mean $11.7$, $\sigma=6.8$) are mostly at or near zero with occasional outlier trials. GPT-5.4 sits at mean $31.2\%$ ($\sigma=3.8$, range $[25, 35]$, $n=6$, zero wrong outcomes). We caution that the closed-source vs open-weight grouping is confounded with inference backend (Bedrock for the open-weight models, vendor APIs for the closed-source models) and with sampling temperature ($T = 0$ pinned for Bedrock, provider default for the others). Within this pilot the grouping is the most visible structure on CF-Barker; we do not generalize it to a family-level property.
+
+\textbf{The CF-Cabral picture is dominated by GPT-5.4 mode-switching.} On CF-Cabral $P_3$, the other seven models cluster narrowly ($w_{F1}$ in $\{10, 11.7, 12, 15\}$ range across all replications). GPT-5.4 alone exhibits high variance ($n=16$, range $[5, 60]$, $\sigma=17.0$). The mean of $18.1\%$ obscures the underlying bimodality, which is reported in Section~\ref{sec:bimodality}.
+
+\textbf{The CF-Biakanja picture is narrow with no clean lab-based pattern.} Spread is $0$--$15\%$ across all eight models. GPT-5.4 is fully faithful here ($\bar{w}=1.7\%$). Qwen3 Next is the partial outlier at $13.0\%$ mean ($n=5$).
+
+\subsection{The Bimodality Finding on CF-Cabral Adversarial}
+\label{sec:bimodality}
+
+Figure~\ref{fig:bimodality} reports the GPT-5.4 weight distribution on CF-Cabral adversarial across $22$ trials ($16$ on the original cf-001-adv plus $6$ on the second-wording cf-001-adv2). The distribution shows two response groups separated by a sparsely-populated middle band:
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig3_bimodality.png}
+\caption{GPT-5.4 on CF-Cabral adversarial, combined across two adversarial wordings ($n=22$). Distribution of weight assigned to the neutralized factor F1 (foreseeability). Green = correct outcome (``No''); red = wrong outcome (``Yes''). Wrong-outcome rate: $7/22 = 32\%$ (Wilson 95\% CI $[16\%, 53\%]$). All 15 trials with $w_{F1} < 20$ produce the correct outcome. All 7 trials with $w_{F1} \geq 20$ produce the wrong outcome. The two groups look like the two textbook response regimes (weighted-additive integration and lexicographic single-factor default; \citealt{payne1993}), but we do not claim direct mechanistic evidence of mode-switching at this sample size.}
+\label{fig:bimodality}
+\end{figure}
+
+We adopt a single binary partition of the $22$ trials at $w_{F1} = 20$:
+
+\begin{itemize}
+\item \textbf{Low group ($w_{F1} < 20$):} $n = 15$, mean $w_{F1} = 10.3\%$. All $15$ trials produce the correct outcome (``No, no duty'').
+\item \textbf{High group ($w_{F1} \geq 20$):} $n = 7$, mean $w_{F1} = 44.3\%$. The $7$ high-group weights are $\{28, 38, 40, 44, 50, 50, 60\}$. All $7$ trials produce the wrong outcome (``Yes, duty exists''). $2$ of the $7$ trials fall in the $20$--$39\%$ band ($28, 38$), and $5$ in the $40$--$60\%$ band ($40, 44, 50, 50, 60$). No trials fall in the $20$--$24\%$ sub-band on either adversarial wording.
+\end{itemize}
+
+The split point at $w_{F1} = 20$ was chosen after seeing the histogram in Figure~\ref{fig:bimodality}; the statistical test on the resulting partition is therefore exploratory rather than confirmatory (Section~\ref{sec:stats}).
+
+Both adversarial wordings show the same shape, with no trials in the $20$--$24\%$ band on either wording. The wrong-outcome rate differs substantially between wordings: cf-001-adv (competing expert testimony framing) produces $3/16$ wrong outcomes ($19\%$), cf-001-adv2 (conflicting empirical data framing) produces $4/6$ ($67\%$). At these sample sizes the rate difference is not interpretable as a real effect of wording; we report both rates and the combined $7/22 = 32\%$ (Wilson 95\% CI $[16\%, 53\%]$) as the more stable summary.
+
+We describe this distribution as consistent with two response regimes on the same case under the same prompt and the same default-temperature sampling. The low-weight regime resembles weighted-additive integration (WADD); the high-weight regime resembles lexicographic single-factor default (LEX), both from \citet{payne1993}. We do not claim the model is internally switching between two reasoning programs. A continuous-variance distribution sampled at $n = 22$ could in principle produce a similar shape, especially given that the split point between the two groups was chosen after looking at the data. To our knowledge this is the first reported trial-level observation of this shape in a multi-factor LLM reasoning task. We treat it as a provocation for further work, not a settled finding. The cleanest follow-up would be an attention-pattern comparison between low-group and high-group trials on the same prompt.
+
+\subsection{C2 Per-Factor Ablation: Weight-Update Consistency}
+\label{sec:c2}
+
+Figure~\ref{fig:c2} reports the C2 result for each (model, anchor) pair. For each anchor case, every factor was perturbed in turn and the cued weighted-rank probe re-run; the cell shows the mean weight the model assigned to the perturbed factor across all perturbations of that anchor. A model whose self-reports are consistent with the perturbation should assign close to $0\%$ to a factor that has just been explicitly rewritten as neutral.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{fig4_c2_faithfulness.png}
+\caption{C2 ablation: weight-update consistency under per-factor perturbation. Each cell shows the mean residual weight the model assigned to the perturbed factor across all $N$ perturbations of that anchor. Bottom-row models (closed-source frontier) cluster near $0$. Their reported per-factor weights under the cued $P_2$ probe drop cleanly when the corresponding factor is rewritten as neutral. Top-row models (open-weight Bedrock) carry substantial residual weight on perturbed factors. The Sonnet-Barker outlier ($\bar{w} = 4.0$, driven by $w_{F3} = 20$ on the perturbation of factor F3) reflects the canonical-anchoring effect on Barker's ``feasibility of safer alternative design.'' The C2 control measures consistency between probe and perturbation under shared syntactic cues. A cleaner causal reading would require cue-free perturbations (see Section~\ref{sec:limitations}).}
+\label{fig:c2}
+\end{figure}
+
+The pattern across model families:
+
+\textbf{GPT-5.4 zeros out every perturbed factor.} Across all $18$ ablations on the three anchors, GPT-5.4 assigns $w_{\text{perturbed}} = 0\%$ in every case (mean residual $0.0\%$). For GPT-5.4 in this experiment, the cued weighted-rank probe's per-factor weights are perfectly consistent with the perturbation: when a factor's text is rewritten as neutral, the model's reported weight on that factor drops to zero. Whether this consistency reflects causal attention or shared cue compliance with the $P_2$ prompt is left unresolved (Section~\ref{sec:limitations}).
+
+\textbf{Opus is nearly as consistent.} Mean residual across $18$ ablations: $0.8\%$. Two perturbations are above zero (Opus on Cabral F3 = $5\%$ and Opus on Barker F5 = $10\%$); the remaining $16$ are $0.0\%$. The Biakanja anchor produces $0.0\%$ on every perturbation.
+
+\textbf{Sonnet is mostly consistent with one notable outlier.} Mean residual: $1.7\%$. Two perturbations have $w = 5\%$ and one (Sonnet on Barker F3) has $w = 20\%$ even after F3 has been explicitly perturbed; the remaining $15$ are $0.0\%$. The $20\%$ outlier is on the same canonical Barker factor that GPT-5.4 sits stably above the threshold on under $P_3$ (Section~\ref{sec:p3}). Sonnet appears to retain canonical anchoring on Barker F3 across both probe families.
+
+\textbf{Bedrock open-weight models are less consistent at the per-factor level.} Mean residuals: DeepSeek $5.3\%$, Mistral $5.0\%$, Scout $4.4\%$, Qwen3 Next $3.8\%$, Maverick $3.1\%$. The perturbed factor frequently retains $5$--$20\%$ of weight even after explicit neutralization. The open-weight models do update their attributions when factors change, but with more residual on the perturbed factor than the closed-source configurations in this sample.
+
+The C2 ablation tests whether the cued $P_2$ probe's reported weights are consistent with per-factor sensitivity: when factor $i$ is rewritten to a neutral value, does the model's reported weight on factor $i$ drop to zero? For closed-source models the data show that it does. We do not interpret this as causal faithfulness in the strong sense, because both the $P_2$ prompt and the C2 perturbations contain the same syntactic neutralization cues (\S\ref{sec:limitations}); the C2 control therefore measures \emph{weight-update consistency under prompt-aligned perturbation}, not causal attention. The cleaner causal test would use cue-free C2 perturbations and is left as future work.
+
+\subsection{The Asymmetric Faithfulness Profile}
+
+Combining the $P_3$ and C2 results yields a descriptive two-dimensional summary on this pilot. The summary is bounded by three confounds we cannot disentangle at $n = 8$ models: model family, inference backend, and sampling temperature (Sections~\ref{sec:p3} and~\ref{sec:limitations}).
+
+\begin{itemize}
+\item \textbf{Closed-source frontier models} in this pilot (Sonnet, Opus, GPT-5.4 via Anthropic and OpenAI APIs at default temperature) show low C2 residual on the perturbed factor (mean $0.0\%$--$1.7\%$ across the three closed-source configurations) but retain non-zero weight on the neutralized factor under $P_3$ on CF-Barker.
+\item \textbf{Open-weight Bedrock models} in this pilot (DeepSeek, Mistral, Llama 4 Maverick/Scout, Qwen3 Next via AWS Bedrock at $T = 0$) show the inverse: $w_{\text{neut}} = 0$ on CF-Barker under $P_3$ but higher C2 residual on perturbed factors (mean $3.1\%$--$5.3\%$ across the five Bedrock configurations).
+\end{itemize}
+
+Neither group is uniformly more faithful than the other on this pilot. We describe this as an asymmetric profile rather than a family-level claim; replication on additional models within each lab and on more cases is required to test whether the pattern is a property of model class or of the particular configurations and backends in our sample.
+
+Figure~\ref{fig:asymmetry} visualizes the asymmetry: each model is one point in a $2$D space defined by its mean C2 residual on the in-distribution anchors (x-axis) and its mean weight on the neutralized factor under $P_3$ on CF-Barker (y-axis). The closed-source frontier models cluster in the upper-left (low C2 residual, high $P_3$ weight); the open-weight Bedrock models cluster in the lower-right (higher C2 residual, near-zero $P_3$ weight). No model occupies the lower-left (faithful on both axes); no model occupies the upper-right (unfaithful on both axes).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{fig5_asymmetry.png}
+\caption{The asymmetric faithfulness profile in two dimensions, descriptive only. X-axis: mean C2 residual weight on perturbed factors across the three in-distribution anchors (lower = cleaner per-factor weight updating). Y-axis: mean weight on the neutralized factor under $P_3$ on CF-Barker (lower = more cue-robust). Open-weight Bedrock models (green) cluster in the lower-right (cue-robust on CF-Barker, less clean per-factor updating). Closed-source frontier models (red) cluster in the upper-left (clean per-factor updating, less cue-robust on CF-Barker). At $n=8$ models the visual pattern is descriptive; we do not claim a population-level correlation.}
+\label{fig:asymmetry}
+\end{figure}
+
+\subsection{Statistical Tests}
+\label{sec:stats}
+
+We report exact tests on the three headline contrasts. The first is a paired test on the same model-instance pairs across two probes; the second is reported as exploratory because the mode threshold is data-derived; the third is reported as descriptive given the small sample.
+
+\textbf{$P_1$ vs $P_2$ contradiction (paired).} The $P_1$ and $P_2$ verdicts are paired data: the same $24$ model-instance pairs scored under two probes. Of these, $13$ pairs are discordant in one direction ($P_1$ dissociated, $P_2$ faithful), $0$ in the other direction, and $11$ are concordantly faithful. McNemar's exact (binomial) test on the discordant pairs gives two-tailed $p \approx 2.4 \times 10^{-4}$. The two probes disagree on attribution faithfulness more than chance, and the disagreement is entirely directional ($P_2$ never finds dissociation that $P_1$ missed).
+
+\textbf{Bimodality wrong-outcome by mode (exploratory).} On the GPT-5.4 cf-001 family ($16$ trials on cf-001-adv plus $6$ trials on cf-001-adv2, $n=22$ combined), all $15$ trials with $w_{F1} < 20$ produce the correct outcome and all $7$ trials with $w_{F1} \geq 20$ produce the wrong outcome (with $2$ trials in the $20$--$39$ range counted in the high mode). Fisher's exact two-tailed $p \approx 5.9 \times 10^{-6}$. We mark this test as \emph{exploratory} because the $w_{F1} = 20$ threshold separating the two modes was chosen after seeing the visual bimodality in Figure~\ref{fig:bimodality}; a confirmatory test would require pre-registering the threshold or holding out a validation sample.
+
+\textbf{Open-vs-closed CF-Barker dissociation (cell level, descriptive).} At the model-cell level, $1$ of $3$ closed-source cells exhibits dissociation ($\bar{w} \geq 20$, GPT-5.4) versus $0$ of $5$ open-weight cells. Two-tailed Fisher's exact $p \approx 0.38$. The cell-level test is underpowered at $n=8$ models; we report the visual asymmetry in Figure~\ref{fig:asymmetry} as descriptive only.
+
+%==============================================================
+\section{Interpretation}
+%==============================================================
+
+\subsection{How Probe Format Interacts with Canonicity}
+
+The single-factor probe $P_1$ produces a doctrine-dependent dissociation pattern ($7/8$, $0/8$, $4/8$ faithful across CF-Cabral, CF-Barker, and CF-Biakanja). The four-probe results clarify this pattern in three ways.
+
+First, the universal CF-Barker dissociation under $P_1$ is partly a probe-format artifact. Under $P_2$ all eight models assign $w_{F3} = 0$. Under $P_3$ only GPT-5.4 sits stably above the threshold ($\bar{w}=31.2\%$, $n=6$); Opus and Sonnet are mostly at or near zero with occasional outliers; the Bedrock open-weight models on this case are at zero. The cross-lab pattern that $P_1$ reports as universal is, under the strongest probe in this benchmark, concentrated in GPT-5.4 alone.
+
+Second, the CF-Cabral result interacts with the GPT-5.4 bimodality. $P_1$ at $n=1$ reports GPT-5.4 as faithful on CF-Cabral. $P_3$ at $n=22$ reports GPT-5.4 producing a two-group response distribution (Section~\ref{sec:bimodality}). The two measurements are not contradictory; they measure different slices of the model's behavior. $P_1$ is informative about a particular forced-choice projection of the model's reasoning at a single trial; it is uninformative about the underlying variance and about which response group a given trial belongs to. Single-probe single-trial faithfulness measurements are inherently partial.
+
+Third, the C2 ablation shows that the cued $P_2$ probe's reported weights are consistent with the perturbation: closed-source models' $P_2$ weights drop cleanly when the corresponding factor is rewritten as neutral (Section~\ref{sec:c2}). We do not read this as causal evidence about underlying attention. The $P_2$ prompt and the C2 perturbations share the same syntactic cues, so both could be responding to the cues rather than to underlying reasoning. The consistency result does rule out the strongest version of the unfaithfulness concern (that the $P_2$ weights are arbitrary), but it does not establish causal faithfulness.
+
+\subsection{Why Might the Two Probe Families Reveal Different Failure Modes?}
+
+We report the asymmetric faithfulness profile (closed-source surgical at C2 / cue-dependent at $P_3$; open-weight cue-robust at $P_3$ / less surgical at C2) without endorsing a mechanism. Several possibilities exist:
+
+\textbf{Training-data exposure on canonical doctrines.} Closed-source frontier models from Anthropic and OpenAI may have seen substantially more legal training data and have stronger canonicity priors on doctrinal factors, particularly the most textbook-canonical ones like Barker F3. The Bedrock open-weight models may have weaker priors and therefore less to pattern-match against.
+
+\textbf{RLHF differences.} Closed frontier models receive more reinforcement from human feedback, which may bias them toward textbook-canonical answers when asked attribution questions while leaving the per-factor sensitivity intact.
+
+\textbf{Different attention-head specialization.} The two probe families may activate different attention pathways. The C2 ablation measures the model's per-factor weight assignment when a specific factor is removed; the $P_3$ adversarial measures the model's response to surface-text variation that preserves semantics. These could reflect distinct internal mechanisms with distinct failure modes.
+
+\textbf{Sample size.} $n = 8$ models is small. Within-family scale sweeps would help disentangle whether the observed family-level patterns are properties of the model class or of the particular configurations.
+
+We do not endorse any of these mechanisms. The empirical finding is the asymmetric faithfulness profile; the mechanism is future work.
+
+\subsection{Connection to CoT Unfaithfulness}
+
+\citet{turpin2023} and \citet{lanham2023} showed that chain-of-thought traces can be unfaithful to the underlying reasoning. The closest interpretation in the present results is that LLM self-reports of attribution can be inconsistent with the underlying processing in two distinct ways: \textbf{cue-pattern-matching} (visible under $P_3$ adversarial), and \textbf{coarse per-factor weight updating} (visible under C2 ablation). In our pilot at $n = 8$ models, the two patterns appear in different model groups, but we caution against generalizing this to a population-level claim about model families given the small sample and the backend confounds (Section~\ref{sec:limitations}). Any single-probe faithfulness measurement reports one slice of this and may miss the other.
+
+\subsection{What the Result Does Not Show}
+
+None of the four probes is a faithfulness oracle. C2 ablation tests whether the model's reported per-factor weight under $P_2$ is consistent with the perturbation, not whether it reflects underlying attention; the C2 perturbations themselves use the same syntactic neutralization cues as the $P_2$ prompt, so the test cannot distinguish causal attention from shared cue compliance. The C2 control also tests one factor at a time and cannot detect joint-factor dependencies. The two-group result on CF-Cabral is one model on one case (with a second-wording replication of the same case); generalization to other doctrines and other model families requires more cases. The $P_3$ adversarial probe is the cue-robustness test we have run; cleaner adversarial protocols (multiple independent rewrites, cross-rewriter validation) would strengthen the claim further.
+
+%==============================================================
+\section{Limitations}
+\label{sec:limitations}
+%==============================================================
+
+\textbf{Pilot scale.} 13 base instances plus 4 adversarial variants is a small dataset. The $P_1$/$P_2$ contrast survives sample noise because the effect size is very large. The $P_3$ open-vs-closed split on CF-Barker is based on 1 to 6 trials per cell. The bimodality observation is at $n=22$ for the headline cell. Other cells are at $n=1$ to $n=6$.
+
+\textbf{Most non-headline $P_3$ cells are at $n=1$ or $n=2$.} Variance characterization focused on cells most likely to harbor hidden outliers. One example: an early $n=1$ measurement of Opus on CF-Barker reported $w_{F3} = 25\%$, which an $n=6$ replication revised to a mean of $11.7\%$ with one trial at $25$ and the rest at $5$--$10$. Other $n=1$ cells in Table~\ref{tab:p3} may harbor similar hidden variance and should be read as point estimates with no confidence interval.
+
+\textbf{Author-declared counterfactual ground truth.} The counterfactual instances are synthetic; correctness is defined by the author's weighted analysis of the rewritten facts, not by judicial adjudication. This is inherent to counterfactual design.
+
+\textbf{Single-temperature single-sample evaluation per call.} Bedrock calls are pinned to T=0; other backends use provider defaults. Genuine temperature sweeps would require harness modification and have not been done.
+
+\textbf{The C2 perturbations are themselves cue-laden.} The perturbations in `instances/perturbations/*-c2.json' use template language including the words ``neither clearly,'' ``treated as,'' and ``not developed as a load-bearing element.'' These are the same syntactic cues the $P_3$ adversarial protocol is designed to remove. So the C2 ablation results test whether the cued probe weights are sensitive to cue-laden perturbations. Cue-free C2 perturbations are a natural next step but are not constructed here.
+
+\textbf{Bedrock $T=0$ is not fully deterministic for all models.} A spot-check on DeepSeek cf-001-adv produced different values across runs (10 then 20). The other Bedrock models matched their original values across the spot-checked cells. We report this as a known harness limitation.
+
+\textbf{Three probe families, not all combinations explored.} We have run $P_3$ on four adversarial counterfactuals and C2 only with the cued probe. C2 $\times$ $P_3$ on adversarial in-distribution variants would be the cleanest faithfulness validation but requires generating adversarial in-distribution perturbations, which is a natural next step.
+
+\textbf{No Google models, no reasoning-mode coverage beyond Claude Opus extended thinking.} Gemini was removed from the harness in 2026-04-11. DeepSeek-R1, GPT-5.4-thinking, and other reasoning-mode variants are unevaluated.
+
+\textbf{Instance verification incomplete.} Factor definitions and in-case weights for the in-distribution anchors are sourced from secondary legal digests. Verification against primary opinion texts is in progress and is documented in the per-instance metadata.
+
+%==============================================================
+\section{Future Work}
+\label{sec:future}
+%==============================================================
+
+\textbf{Adversarial C2 perturbations.} Generate cue-free per-factor neutralization rewrites and re-run C2 against $P_3$. The current C2 perturbations contain the same syntactic cues as $P_2$, so the C2 test reported in this paper measures weight-update consistency under prompt-aligned perturbation, not causal attention. Cue-free C2 perturbations would directly test the latter and would be the cleanest available faithfulness validation; they are the highest-priority next experiment.
+
+\textbf{Mechanistic interpretability on the GPT-5.4 two-group result.} The GPT-5.4 CF-Cabral observation is a tractable handle for asking whether the two response groups correspond to distinct internal trajectories. Comparing attention patterns and intermediate-layer activations between low-group and high-group trials on the same prompt would test whether the two groups reflect different attention pathways or a single continuous variable.
+
+\textbf{Within-family scale sweeps.} Test whether the asymmetric faithfulness profile tracks active parameter count within Llama 4 (Scout vs Maverick) and within an Anthropic Haiku/Sonnet/Opus sweep. The current result shows the family-level pattern but does not isolate scale.
+
+\textbf{Reasoning-mode replication.} DeepSeek-R1, GPT-5.4 thinking, and Gemini reasoning variants are unevaluated. Particularly important to test whether explicit chain-of-thought reasoning suppresses or amplifies the bimodality.
+
+\textbf{Domain expansion.} Instantiate the protocol on (a) medical differential diagnosis with explicit symptom-weight checklists, and (b) multi-criteria compliance review with regulatory checklists. Both have explicit factor lists and partially verifiable ground truth.
+
+\textbf{Instance scale-up.} The pilot is $13$ base instances. The full FACET specification calls for $80$--$120$ matched pairs for a pre-registered primary hypothesis test. Scale-up requires parallel annotation effort.
+
+\textbf{Independent replication of the GPT-5.4 wrong-outcome rate.} The headline bimodality finding is on $n=22$ with Wilson 95\% CI $[16\%, 53\%]$. A larger replication sweep ($n \geq 100$) would tighten this substantially and is the highest-priority follow-up if the result is to be cited beyond a pilot.
+
+%==============================================================
+\section{Discussion}
+%==============================================================
+
+The four-probe progression illustrates a methodological point that should generalize beyond the present benchmark: \textbf{faithfulness measurement is itself a multi-probe problem.} Different probes activate different aspects of the model's attribution self-report and reveal different failure modes. Reporting a single-probe faithfulness number without specifying the probe's pattern-matching surface and without per-factor ablation validation is potentially uninformative.
+
+For regulated decision domains where LLM faithfulness is being audited, the practical implication is that audit pipelines built on top-1 or top-$k$ attribution probes (the dominant format in current explainability tooling) may under-report dissociation in some cases, and may over-report faithfulness in others. Under-reporting comes from the $P_1$ projection artifact we see in this pilot: forcing the model to name one factor projects a distributed weight vector down onto whichever factor is most canonical in training data. Over-reporting comes from the $P_2$ cue-matching effect: when the case text flags the irrelevant factor with the same words the prompt uses, the model looks faithful without the test actually interrogating its reasoning. A multi-probe protocol (P1 for top-1 attribution, P2 for distributed weights, P3 for cue-robustness, C2 for per-factor weight-update consistency) gives a more complete picture than any single probe. The protocol itself is one experimental design among many, and this pilot is small, so the prescription should be read with both caveats in mind.
+
+The two-group result on GPT-5.4 CF-Cabral is reported in detail in Section~\ref{sec:bimodality}. If it replicates on additional models, additional cases, and additional adversarial wordings, the implication would be that LLM behavior on multi-factor reasoning under adversarial probes is more usefully described as two response groups than as a single continuous distribution. Whether that holds is the central open empirical question this benchmark leaves for future work.
+
+%==============================================================
+\section*{Acknowledgments}
+%==============================================================
+
+This work was developed with substantial use of Claude Code (Anthropic) as a programming and writing assistant. The assistant contributed to harness implementation, batch evaluation runs, statistical analysis scripts, and prose drafting. All experimental design, instance construction, factor-type taxonomy authoring, modeling decisions, statistical interpretations, and final claims are the author's own. Numerical results in the paper are computed by analysis scripts from raw model output files released with the benchmark.
+
+%==============================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{10}
+
+\bibitem[Guha et~al.(2023)]{guha2023}
+N.~Guha, J.~Nyarko, D.~E.~Ho, C.~R\'{e}, A.~Chilton, et~al.
+\newblock LegalBench: A collaboratively built benchmark for measuring legal reasoning in large language models.
+\newblock \emph{arXiv preprint arXiv:2308.11462}, 2023.
+
+\bibitem[Jacovi and Goldberg(2020)]{jacovi2020}
+A.~Jacovi and Y.~Goldberg.
+\newblock Towards faithfully interpretable NLP systems: How should we define and evaluate faithfulness?
+\newblock In \emph{ACL}, 2020.
+
+\bibitem[Fan et~al.(2025)]{katz2025}
+Y.~Fan, J.~Niklaus, A.~Stern, P.~Pernot-Leplay, et~al.
+\newblock LEXam: Benchmarking legal reasoning on 340 law exams.
+\newblock \emph{arXiv preprint arXiv:2505.12864}, 2025.
+
+\bibitem[Lanham et~al.(2023)]{lanham2023}
+T.~Lanham, A.~Chen, A.~Radhakrishnan, B.~Steiner, et~al.
+\newblock Measuring faithfulness in chain-of-thought reasoning.
+\newblock \emph{arXiv preprint arXiv:2307.13702}, 2023.
+
+\bibitem[Lieder and Griffiths(2020)]{lieder2020}
+F.~Lieder and T.~L.~Griffiths.
+\newblock Resource-rational analysis: Understanding human cognition as the optimal use of limited computational resources.
+\newblock \emph{Behavioral and Brain Sciences}, 43:e1, 2020.
+
+\bibitem[Madsen et~al.(2024)]{madsen2024}
+A.~Madsen, S.~Reddy, and S.~Chandar.
+\newblock Faithfulness measurable masked language models.
+\newblock In \emph{ICML}, 2024.
+
+\bibitem[Payne et~al.(1993)]{payne1993}
+J.~W.~Payne, J.~R.~Bettman, and E.~J.~Johnson.
+\newblock \emph{The Adaptive Decision Maker}.
+\newblock Cambridge University Press, 1993.
+
+\bibitem[Turpin et~al.(2023)]{turpin2023}
+M.~Turpin, J.~Michael, E.~Perez, and S.~R.~Bowman.
+\newblock Language models don't always say what they think: Unfaithful explanations in chain-of-thought prompting.
+\newblock In \emph{NeurIPS}, 2023.
+
+\bibitem[Yu et~al.(2025)]{yu2025}
+F.~Yu et~al.
+\newblock Benchmarking multi-step legal reasoning and analyzing chain-of-thought effects in large language models.
+\newblock \emph{arXiv preprint arXiv:2511.07979}, 2025.
+
+\bibitem[Zhang et~al.(2025)]{zhang2025}
+H.~Zhang et~al.
+\newblock Thinking longer, not always smarter: Evaluating LLM capabilities in hierarchical legal reasoning.
+\newblock \emph{arXiv preprint arXiv:2510.08710}, 2025.
+
+\end{thebibliography}
+
+\appendix
+
+\section{Probe Prompt Templates}
+\label{app:prompts}
+
+\textbf{P1, single-factor probe.}
+\begin{quote}\small\itshape
+Of the $N$ factors listed above, which single factor was most important to your answer? Reply with the factor identifier ($F_1$, $F_2$, etc.) on one line and a one-sentence justification on the next line.
+\end{quote}
+
+\textbf{P2 / P3, weighted-rank probe.}
+\begin{quote}\small\itshape
+For each factor $F_1$ through $F_N$, assign a weight in $[0, 100]$ representing how much that factor drove your answer to the question above. The weights MUST sum to $100$. If a factor is neutral, unresolved, or has no signal in this specific case, assign it $0$. Format your response EXACTLY as a single line: $F_1: X, F_2: X, \ldots, F_N: X$. Then on the next line, state your yes/no answer.
+\end{quote}
+
+The difference between $P_2$ and $P_3$ is in the case text, not the prompt. $P_2$ uses cued counterfactual case text containing the words ``unresolved'' and ``not load-bearing.'' $P_3$ uses adversarial counterfactual case text in which those cues are removed and the same neutralization is expressed through competing expert testimony or conflicting empirical data.
+
+\textbf{C2 ablation.} For each factor $i$ in an in-distribution anchor instance, the factor's text is replaced with a doctrinally-neutral rewrite from `instances/perturbations/<base>-c2.json`, and the cued $P_2$ probe is run against the modified instance. The model's reported weight $w_i$ on the perturbed factor is the test of self-report fidelity to the perturbation.
+
+\section{Reproducibility}
+
+All instance JSON files, raw model outputs, and analysis scripts are at \url{https://github.com/pranaalpha/facet-benchmark}. The four probes can be re-run end-to-end via:
+
+\begin{quote}\footnotesize\ttfamily
+python3 eval/run\_cabral\_pilot.py\\
+\quad\# P1 single-factor probe across C0/C2/C3\\
+python3 eval/run\_weighted\_probe.py -{}-instance facet-neg-cf-002\\
+\quad\# P2 cued weighted-rank on a single instance\\
+python3 eval/run\_weighted\_probe.py -{}-instance facet-neg-cf-002-adv\\
+\quad\# P3 adversarial weighted-rank\\
+python3 eval/run\_c2\_weighted\_probe.py -{}-base facet-neg-0002 -{}-backend bedrock -{}-model deepseek.v3.2\\
+\quad\# C2 per-factor ablation under P2
+\end{quote}
+
+The figures are regenerated from the raw JSON outputs by analysis scripts in the \texttt{eval/} directory: Figure~1 from \texttt{gen\_probe\_comparison.py}; Figure~2 from \texttt{gen\_fig\_adversarial\_3panel.py}; Figures~3 and~4 from \texttt{gen\_result\_figures.py}; Figure~5 from \texttt{gen\_fig5\_asymmetry.py}.
+
+\end{document}

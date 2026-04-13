@@ -93,17 +93,17 @@ def draw_panel(ax, data_binary, cell_text_fn, title, faithful_strs, faithful_col
             text, color = cell_text_fn(i, j)
             ax.text(j, i, text, ha="center", va="center",
                     fontsize=12, fontweight="bold", color=color)
-    # Doctrine labels below cells (two lines: name + neutralized)
+    # Doctrine labels below cells (two lines: name + neutralized, both readable)
     for j, (name, neut) in enumerate(zip(doctrines_short, neut_labels)):
-        ax.text(j, 8.05, name, ha="center", va="top",
-                fontsize=10.5, fontweight="bold", color="#1a1a1a")
-        ax.text(j, 8.50, f"({neut})", ha="center", va="top",
-                fontsize=8.5, color="#666", style="italic")
-    # Faithful row
+        ax.text(j, 7.95, name, ha="center", va="top",
+                fontsize=10, fontweight="bold", color="#1a1a1a")
+        ax.text(j, 8.75, neut, ha="center", va="top",
+                fontsize=9, color="#444")
+    # Faithful row (well below the doctrine labels)
     for j, (s, c) in enumerate(zip(faithful_strs, faithful_colors)):
-        ax.text(j, 9.15, f"faithful: {s}", ha="center", va="top",
+        ax.text(j, 9.90, f"faithful: {s}", ha="center", va="top",
                 fontsize=10, fontweight="bold", color=c)
-    ax.set_ylim(9.7, -0.6)
+    ax.set_ylim(10.7, -0.6)
     ax.tick_params(axis="y", length=0)
     for spine in ax.spines.values():
         spine.set_visible(False)

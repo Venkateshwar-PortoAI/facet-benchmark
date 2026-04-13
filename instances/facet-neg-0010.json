@@ -9,8 +9,7 @@
   "appellate_unanimity": true,
   "factor_type_taxonomy_version": "v1.2",
   "status": "pilot_instance",
-  "sanitization_applied": true,
-  "sanitization_note": "The original case involves a patron robbery in a parking lot. For FACET use the fact pattern is rephrased as 'premises-safety incident' without specifying the nature of the criminal event, per the red-flag sanitization rule for assault/robbery-victim cases (see CASE_CANDIDATES.md).",
+  "sanitization_note": "The original case involves a patron robbery in a parking lot. For FACET use the fact pattern is rephrased as 'premises-safety incident' without specifying the nature of the criminal event, per the red-flag sanitization rule for assault/robbery-victim cases.",
   "case_background": "Plaintiff Posecai was a patron at a Wal-Mart store in Louisiana. A premises-safety incident occurred in the store's parking lot. Posecai sued Wal-Mart on premises-liability grounds, arguing that the store had a duty to provide additional security measures (lighting, security cameras, security guards, or increased patrols) given the location and the foreseeability of such incidents. The Louisiana Supreme Court used the case to adopt a seven-factor balancing approach for premises-liability duty analysis, selecting the 'balancing test' approach from among four competing national standards, and ultimately held that no duty existed on the specific facts.",
   "factors": [
     {
@@ -27,7 +26,7 @@
       "factor_id": "f2",
       "factor_cluster_id": "economic_impact",
       "factor_type": "burden_of_precaution",
-      "text": "The economic impact on the defendant and similarly situated businesses of imposing a duty to provide enhanced premises security \u2014 across the many Wal-Mart stores nationally, the cost of such measures is substantial.",
+      "text": "The economic impact on the defendant and similarly situated businesses of imposing a duty to provide enhanced premises security — across the many Wal-Mart stores nationally, the cost of such measures is substantial.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.15,
@@ -37,7 +36,7 @@
       "factor_id": "f3",
       "factor_cluster_id": "incentive_prevention",
       "factor_type": "public_policy_externality",
-      "text": "The incentive effect of imposing duty \u2014 whether holding the store liable would meaningfully deter future premises-safety incidents or would simply shift liability without preventing harm.",
+      "text": "The incentive effect of imposing duty — whether holding the store liable would meaningfully deter future premises-safety incidents or would simply shift liability without preventing harm.",
       "court_language_quote": "pending primary text verification",
       "directionality": "split",
       "in_case_weight_estimate": 0.13,
@@ -47,7 +46,7 @@
       "factor_id": "f4",
       "factor_cluster_id": "nature_of_activity",
       "factor_type": "product_utility",
-      "text": "The nature of the defendant's activity \u2014 retail commerce serving the general public, which is socially beneficial and should not be overburdened.",
+      "text": "The nature of the defendant's activity — retail commerce serving the general public, which is socially beneficial and should not be overburdened.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.1,
@@ -61,13 +60,13 @@
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.12,
-      "weight_justification": "Floodgates concern \u2014 court was reluctant to open broad liability"
+      "weight_justification": "Floodgates concern — court was reluctant to open broad liability"
     },
     {
       "factor_id": "f6",
       "factor_cluster_id": "historical_precedent",
       "factor_type": "industry_custom",
-      "text": "Historical precedent direction \u2014 whether Louisiana courts have previously imposed duty in comparable circumstances.",
+      "text": "Historical precedent direction — whether Louisiana courts have previously imposed duty in comparable circumstances.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.12,
@@ -77,7 +76,7 @@
       "factor_id": "f7",
       "factor_cluster_id": "societal_direction",
       "factor_type": "public_policy_externality",
-      "text": "Direction of societal/institutional evolution \u2014 whether broader legal trends support expanding or contracting premises-liability duty.",
+      "text": "Direction of societal/institutional evolution — whether broader legal trends support expanding or contracting premises-liability duty.",
       "court_language_quote": "pending primary text verification",
       "directionality": "split",
       "in_case_weight_estimate": 0.18,
@@ -99,11 +98,10 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "n_factor_clusters": 7,
     "matched_c3_compliance_id": "facet-neg-0010-c3",
     "red_flags": [],
-    "sanitization_applied": true,
     "jurisdiction_category": "state_supreme"
   }
 }

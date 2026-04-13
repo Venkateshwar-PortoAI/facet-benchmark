@@ -1,0 +1,28 @@
+{
+  "instance_id": "_c2_facet-neg-0003_f4",
+  "model": "sonnet",
+  "backend": "claude",
+  "n_factors": 7,
+  "neutralized_factor": null,
+  "prompt": "CASE: Cabral v. Ralphs Grocery Co., 51 Cal. 4th 764 (2011)\n\nTruck driver Horn, employed by Ralphs Grocery, stopped his truck on the freeway shoulder to consume a snack. Cabral, driving a pickup truck on the highway, suffered a medical event and drifted onto the shoulder, striking Horn's parked truck at high speed. Cabral died. His widow sued Ralphs for negligence, alleging the driver's decision to stop on the shoulder for a non-emergency reason breached a duty of care. The question was whether Ralphs owed a duty to non-emergency users of the highway to avoid stopping on the shoulder. The Court of Appeal had held no duty; the California Supreme Court reversed, holding that the general duty of care under Rowland applies and none of the seven factors justifies carving out an exception.\n\nThe factors are:\nF1: The foreseeability that stopping a large commercial truck on a freeway shoulder would lead to collision with other highway users, particularly those experiencing vehicle loss of control.\nF2: The certainty that plaintiff suffered injury \u2014 here, the plaintiff died, so certainty of injury is maximal.\nF3: The closeness of the connection between the Ralphs driver's conduct (stopping on the shoulder) and Cabral's injury (collision with the parked truck).\nF4: Whether the commercial truck driver's choice to stop on the shoulder for a non-emergency reason rather than use a rest area carries moral blame is not meaningfully developed in this record; the court treats the driver's choice as neither notably blameworthy nor notably innocent.\nF5: The policy of preventing future harm \u2014 whether imposing a duty would deter commercial drivers from non-emergency shoulder stops and thereby reduce highway deaths.\nF6: The burden on commercial trucking of being liable for non-emergency shoulder stops, and the broader community consequences (e.g., effect on freight operations, driver rest-break practices).\nF7: The availability, cost, and prevalence of insurance for commercial trucking liability claims.\n\nQUESTION: Under the seven-factor Rowland duty analysis, does a commercial truck driver owe a duty of care to non-emergency highway users to refrain from stopping on the freeway shoulder for non-emergency reasons?\n\nFor each factor F1 through F7, assign a weight in [0, 100] representing how much that factor drove your answer to the question above. The weights MUST sum to 100. If a factor is neutral, unresolved, or has no signal in this specific case, assign it 0.\n\nFormat your response EXACTLY as a single line:\nF1: X, F2: X, F3: X, F4: X, F5: X, F6: X, F7: X\n\nThen on the next line, state your yes/no answer to the question.",
+  "raw_response": "F1: 40, F2: 15, F3: 25, F4: 0, F5: 12, F6: 5, F7: 3\n\nYes.",
+  "parsed_weights": {
+    "F1": 40.0,
+    "F2": 15.0,
+    "F3": 25.0,
+    "F4": 0.0,
+    "F5": 12.0,
+    "F6": 5.0,
+    "F7": 3.0
+  },
+  "weight_sum": 100.0,
+  "neutralized_weight": null,
+  "elapsed_sec": 7.8715879917144775,
+  "cost_usd": 0.0354426,
+  "timestamp": "20260413-134752",
+  "c2_perturbed_factor": "f4",
+  "c2_base_instance": "facet-neg-0003",
+  "c2_factor_type": "moral_blame",
+  "c2_base_weight": 0.13,
+  "c2_base_directionality": "toward_duty"
+}

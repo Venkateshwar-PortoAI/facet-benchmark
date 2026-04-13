@@ -8,7 +8,7 @@
   "factor_type_taxonomy_version": "v1.2",
   "status": "draft_pending_primary_text_verification",
   "construction_date": "2026-04-11",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "case_background": "Plaintiff Davis, a railway car inspector, was struck by a moving locomotive while inspecting coupled cars. He alleged that the railroad failed to implement standard blue-flag protocols (a well-known industry-wide warning system where a blue flag or light placed on or near a stationary train signals that workers are on or under the equipment and no movement may occur). The railroad argued that Davis himself failed to place the blue flag. Judge Posner applied the Hand formula, weighing the burden on the railroad of enforcing blue-flag protocols against the probability and gravity of worker injury from unannounced train movement, and discussing plaintiff conduct, industry custom, and alternative precautions. The Seventh Circuit reversed and remanded on comparative-negligence grounds.",
   "compliance_requirements": [
     {
@@ -66,8 +66,8 @@
     "rationale": "Auto-generated C3; review each requirement individually before eval."
   },
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based compliance rephrasings.",
+    "Generated via eval/gen_c2_c3.py — template-based compliance rephrasings.",
     "Human annotator review recommended.",
-    "The round-2 review literal-application instruction in the eval harness (SPEC.md \u00a76.4 v0.5) should produce cleaner C3 counts regardless of template tightness."
+    "The round-2 review literal-application instruction in the eval harnessshould produce cleaner C3 counts regardless of template tightness."
   ]
 }

@@ -17,7 +17,7 @@
       "factor_cluster_id": "burden_of_precaution",
       "factor_type": "burden_of_precaution",
       "hand_component": "B",
-      "text": "The burden on Consolidated Rail of enforcing blue-flag protocols \u2014 training costs, supervisory oversight, the operational cost of ensuring every inspection is preceded by a properly-placed blue flag.",
+      "text": "The burden on Consolidated Rail of enforcing blue-flag protocols — training costs, supervisory oversight, the operational cost of ensuring every inspection is preceded by a properly-placed blue flag.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.16,
@@ -39,7 +39,7 @@
       "factor_cluster_id": "gravity_of_loss",
       "factor_type": "gravity_of_loss",
       "hand_component": "L",
-      "text": "The gravity of injury to a worker struck or crushed by a coupling locomotive \u2014 catastrophic injury, likely death.",
+      "text": "The gravity of injury to a worker struck or crushed by a coupling locomotive — catastrophic injury, likely death.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_liability",
       "in_case_weight_estimate": 0.2,
@@ -69,7 +69,7 @@
       "factor_id": "f6",
       "factor_cluster_id": "alternative_precautions",
       "factor_type": "alternative_precautions",
-      "text": "Alternative precautions beyond blue-flag enforcement \u2014 radio check-in, yardmaster communication, derail devices, physical lockouts on coupling equipment.",
+      "text": "Alternative precautions beyond blue-flag enforcement — radio check-in, yardmaster communication, derail devices, physical lockouts on coupling equipment.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_liability",
       "in_case_weight_estimate": 0.15,
@@ -91,14 +91,10 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "n_factor_clusters": 6,
     "matched_c3_compliance_id": "facet-neg-0007-c3",
     "red_flags": [],
     "jurisdiction_category": "federal_appellate"
-  },
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification of 788 F.2d 1260",
-    "Weight elicitation from opinion"
-  ]
+  }
 }

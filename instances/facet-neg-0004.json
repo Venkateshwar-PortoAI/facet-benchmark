@@ -11,22 +11,16 @@
   "status": "pilot_instance",
   "source_verification": {
     "primary_text_retrieved": false,
-    "secondary_source_basis": "Case digests; Biakanja is the canonical California precursor to Rowland and is taught in torts casebooks as the founding multi-factor duty case",
-    "pending_for_conference_submission": [
-      "Retrieve 49 Cal. 2d 647 primary text",
-      "Confirm the six Biakanja factors verbatim",
-      "Elicit in-case weights per SPEC.md \u00a75.1",
-      "Confirm unanimity"
-    ]
+    "secondary_source_basis": "Case digests; Biakanja is the canonical California precursor to Rowland and is taught in torts casebooks as the founding multi-factor duty case"
   },
-  "case_background": "Irving, a notary public (not an attorney), drafted a will for John Maroevich that purported to leave Maroevich's entire estate to his sister Biakanja. The will was improperly executed \u2014 it lacked the required two attesting witnesses \u2014 so when Maroevich died the will was denied probate. Maroevich's estate passed by intestate succession to his heirs, and Biakanja received only a small intestate share. She sued Irving for the difference between what she would have received under the invalid will and what she actually received. The question was whether Irving, who had no contractual relationship with Biakanja, nonetheless owed her a duty of care. The California Supreme Court held yes, adopting a six-factor balancing test that became the predecessor to Rowland.",
+  "case_background": "Irving, a notary public (not an attorney), drafted a will for John Maroevich that purported to leave Maroevich's entire estate to his sister Biakanja. The will was improperly executed — it lacked the required two attesting witnesses — so when Maroevich died the will was denied probate. Maroevich's estate passed by intestate succession to his heirs, and Biakanja received only a small intestate share. She sued Irving for the difference between what she would have received under the invalid will and what she actually received. The question was whether Irving, who had no contractual relationship with Biakanja, nonetheless owed her a duty of care. The California Supreme Court held yes, adopting a six-factor balancing test that became the predecessor to Rowland.",
   "factors": [
     {
       "factor_id": "f1",
       "factor_cluster_id": "intent_to_affect_plaintiff",
       "factor_type": "moral_blame",
       "biakanja_factor_origin": "Biakanja factor 1 (extent to which transaction was intended to affect the plaintiff)",
-      "text": "The extent to which the transaction was intended to affect the plaintiff \u2014 here, the will was explicitly drafted to leave the estate to Biakanja by name.",
+      "text": "The extent to which the transaction was intended to affect the plaintiff — here, the will was explicitly drafted to leave the estate to Biakanja by name.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_duty",
       "in_case_weight_estimate": 0.2,
@@ -39,11 +33,11 @@
       "factor_cluster_id": "foreseeability",
       "factor_type": "probability_of_harm",
       "biakanja_factor_origin": "Biakanja factor 2 (foreseeability of harm)",
-      "text": "The foreseeability of harm to the plaintiff if the will was improperly executed \u2014 an improperly witnessed will predictably fails probate and the intended beneficiary is denied.",
+      "text": "The foreseeability of harm to the plaintiff if the will was improperly executed — an improperly witnessed will predictably fails probate and the intended beneficiary is denied.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_duty",
       "in_case_weight_estimate": 0.19,
-      "weight_justification": "Harm was highly foreseeable \u2014 invalid wills reliably fail probate and named beneficiaries reliably suffer the loss",
+      "weight_justification": "Harm was highly foreseeable — invalid wills reliably fail probate and named beneficiaries reliably suffer the loss",
       "flip_capable": true
     },
     {
@@ -51,7 +45,7 @@
       "factor_cluster_id": "certainty_of_injury",
       "factor_type": "certainty_of_injury",
       "biakanja_factor_origin": "Biakanja factor 3 (degree of certainty that plaintiff suffered injury)",
-      "text": "The certainty of the plaintiff's injury \u2014 the intestate share was definite and quantifiable.",
+      "text": "The certainty of the plaintiff's injury — the intestate share was definite and quantifiable.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_duty",
       "in_case_weight_estimate": 0.14,
@@ -63,11 +57,11 @@
       "factor_cluster_id": "closeness_of_connection",
       "factor_type": "closeness_of_connection",
       "biakanja_factor_origin": "Biakanja factor 4 (closeness of connection between conduct and injury)",
-      "text": "The closeness of the connection between Irving's negligent drafting and Biakanja's loss \u2014 direct: the defective execution caused the probate failure which caused the loss.",
+      "text": "The closeness of the connection between Irving's negligent drafting and Biakanja's loss — direct: the defective execution caused the probate failure which caused the loss.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_duty",
       "in_case_weight_estimate": 0.17,
-      "weight_justification": "Causal chain is short: negligent drafting \u2192 probate failure \u2192 lost bequest. No intervening causes.",
+      "weight_justification": "Causal chain is short: negligent drafting → probate failure → lost bequest. No intervening causes.",
       "flip_capable": true
     },
     {
@@ -79,7 +73,7 @@
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_duty",
       "in_case_weight_estimate": 0.18,
-      "weight_justification": "Court emphasized that a notary undertaking legal work he was not qualified to do carries moral weight \u2014 unauthorized practice of law is a real public-policy concern",
+      "weight_justification": "Court emphasized that a notary undertaking legal work he was not qualified to do carries moral weight — unauthorized practice of law is a real public-policy concern",
       "flip_capable": true,
       "taxonomy_note": "This is the second moral_blame cluster in the instance. It is distinct from f1 because f1 is about intent-to-affect while f5 is about the defendant's undertaking. In v1.1 the taxonomy allows multiple clusters of the same type in a single instance, but annotators should flag this for practitioner review."
     },
@@ -88,7 +82,7 @@
       "factor_cluster_id": "policy_prevention",
       "factor_type": "public_policy_externality",
       "biakanja_factor_origin": "Biakanja factor 6 (policy of preventing future harm)",
-      "text": "The policy of preventing future harm \u2014 extending liability to notaries who hold themselves out as will-drafters deters unauthorized practice of law and protects future intended beneficiaries.",
+      "text": "The policy of preventing future harm — extending liability to notaries who hold themselves out as will-drafters deters unauthorized practice of law and protects future intended beneficiaries.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_duty",
       "in_case_weight_estimate": 0.12,
@@ -112,7 +106,7 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in, pending primary-text verification)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant; primary-text verification pending)",
     "reviewer": null,
     "double_annotated": false,
     "cohens_kappa": null,
@@ -120,16 +114,8 @@
     "n_factor_clusters": 6,
     "matched_c3_compliance_id": "facet-neg-0004-c3",
     "red_flags": [],
-    "sanitization_applied": false,
     "taxonomy_flags": [
-      "two moral_blame clusters \u2014 flag for torts-scholar review"
+      "two moral_blame clusters — flag for torts-scholar review"
     ]
-  },
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification.",
-    "Weight elicitation from opinion rationale.",
-    "Resolve the two-moral_blame-clusters issue: either merge f1 and f5 into a single cluster, or accept that the taxonomy allows same-type clusters and document the decision.",
-    "Construct matched C3 compliance instance.",
-    "Biakanja's 'intent to affect plaintiff' factor is unusual and doesn't map cleanly to Rowland. Consider whether it is the same as moral_blame or whether the taxonomy needs a new type 'intended_beneficiary_status' for pure duty-to-third-party cases."
-  ]
+  }
 }

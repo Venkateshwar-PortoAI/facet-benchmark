@@ -2,9 +2,9 @@
   "base_instance_id": "facet-neg-0009",
   "base_case": "Cepeda v. Cumberland Engineering Co., 76 N.J. 152 (1978)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md \u00a76.3 v0.4",
+  "protocol_version": "",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
   "perturbations": [
@@ -14,7 +14,7 @@
       "perturbed_factor_type": "product_utility",
       "base_weight": 0.13,
       "base_directionality": "against_liability",
-      "original_text": "The usefulness and desirability of the pelletizing machine to industrial users \u2014 essential equipment for plastic processing, with substantial commercial utility.",
+      "original_text": "The usefulness and desirability of the pelletizing machine to industrial users — essential equipment for plastic processing, with substantial commercial utility.",
       "neutral_rewrite": "Whether this consideration (product utility) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f1 (product_utility). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -36,7 +36,7 @@
       "perturbed_factor_type": "gravity_of_loss",
       "base_weight": 0.18,
       "base_directionality": "toward_liability",
-      "original_text": "The probable seriousness of injury from the pelletizing machine's intake rollers \u2014 finger amputation, hand injury, permanent disability.",
+      "original_text": "The probable seriousness of injury from the pelletizing machine's intake rollers — finger amputation, hand injury, permanent disability.",
       "neutral_rewrite": "Whether this consideration (gravity of loss) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f3 (gravity_of_loss). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -47,7 +47,7 @@
       "perturbed_factor_type": "alternative_precautions",
       "base_weight": 0.19,
       "base_directionality": "toward_liability",
-      "original_text": "The availability of a safer alternative design \u2014 specifically an interlock guard that physically prevents hand insertion into the intake, or a presence-detection sensor that stops the rollers when a hand approaches.",
+      "original_text": "The availability of a safer alternative design — specifically an interlock guard that physically prevents hand insertion into the intake, or a presence-detection sensor that stops the rollers when a hand approaches.",
       "neutral_rewrite": "Whether this consideration (alternative precautions) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f4 (alternative_precautions). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -58,7 +58,7 @@
       "perturbed_factor_type": "burden_of_precaution",
       "base_weight": 0.13,
       "base_directionality": "split",
-      "original_text": "The cost and feasibility of incorporating an interlock guard into the pelletizing machine design \u2014 manufacturing cost, impact on throughput, maintenance burden.",
+      "original_text": "The cost and feasibility of incorporating an interlock guard into the pelletizing machine design — manufacturing cost, impact on throughput, maintenance burden.",
       "neutral_rewrite": "Whether this consideration (burden of precaution) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f5 (burden_of_precaution). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -69,7 +69,7 @@
       "perturbed_factor_type": "user_awareness",
       "base_weight": 0.1,
       "base_directionality": "against_liability",
-      "original_text": "Factory worker's anticipated awareness of the point-of-operation hazard \u2014 whether the risk is obvious to an ordinary operator or concealed by the machine's design.",
+      "original_text": "Factory worker's anticipated awareness of the point-of-operation hazard — whether the risk is obvious to an ordinary operator or concealed by the machine's design.",
       "neutral_rewrite": "Whether this consideration (user awareness) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f6 (user_awareness). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -88,8 +88,8 @@
   ],
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based neutral rewrites.",
+    "Generated via eval/gen_c2_c3.py — template-based neutral rewrites.",
     "Human annotator review recommended before final dataset admission.",
-    "Reconstruction-check disqualification (SPEC.md \u00a76.3 v0.4) applies at eval time."
+    "Reconstruction-check disqualificationapplies at eval time."
   ]
 }

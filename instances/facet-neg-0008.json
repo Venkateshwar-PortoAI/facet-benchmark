@@ -10,14 +10,14 @@
   "appellate_split": "majority with Kennard dissent",
   "factor_type_taxonomy_version": "v1.2",
   "status": "pilot_instance",
-  "case_background": "Plaintiff Parsons was injured when his horse was spooked by the normal operation of a garbage-collection truck owned by Crown Disposal Co. The truck was operating within its expected commercial function \u2014 collecting trash on a residential street during daytime hours \u2014 and Parsons was horseback-riding on the same street. The horse bolted at the sound and motion of the truck, throwing Parsons. Parsons sued Crown on negligence grounds, alleging the driver owed a duty of care to adjust normal truck operations for fright-prone animals in the area. The California Supreme Court applied the seven Rowland factors and held that no duty existed \u2014 imposing a duty on ordinary commercial vehicle operation to accommodate fright-prone animals would be an unwarranted extension.",
+  "case_background": "Plaintiff Parsons was injured when his horse was spooked by the normal operation of a garbage-collection truck owned by Crown Disposal Co. The truck was operating within its expected commercial function — collecting trash on a residential street during daytime hours — and Parsons was horseback-riding on the same street. The horse bolted at the sound and motion of the truck, throwing Parsons. Parsons sued Crown on negligence grounds, alleging the driver owed a duty of care to adjust normal truck operations for fright-prone animals in the area. The California Supreme Court applied the seven Rowland factors and held that no duty existed — imposing a duty on ordinary commercial vehicle operation to accommodate fright-prone animals would be an unwarranted extension.",
   "factors": [
     {
       "factor_id": "f1",
       "factor_cluster_id": "foreseeability",
       "factor_type": "probability_of_harm",
       "rowland_factor_origin": "Rowland factor 1 (foreseeability of harm)",
-      "text": "The foreseeability that a garbage truck's normal operation on a residential street could startle a horse and injure its rider \u2014 how predictable is this harm given the vehicle's ordinary use?",
+      "text": "The foreseeability that a garbage truck's normal operation on a residential street could startle a horse and injure its rider — how predictable is this harm given the vehicle's ordinary use?",
       "court_language_quote": "pending primary text verification",
       "directionality": "mixed",
       "in_case_weight_estimate": 0.19,
@@ -28,7 +28,7 @@
       "factor_cluster_id": "certainty_of_injury",
       "factor_type": "certainty_of_injury",
       "rowland_factor_origin": "Rowland factor 2",
-      "text": "The certainty that plaintiff suffered injury \u2014 here, the fall from a bolting horse produced documented physical injury.",
+      "text": "The certainty that plaintiff suffered injury — here, the fall from a bolting horse produced documented physical injury.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_duty",
       "in_case_weight_estimate": 0.08,
@@ -41,7 +41,7 @@
       "factor_type": "scope_of_risk",
       "sub_label": "rowland_closeness",
       "rowland_factor_origin": "Rowland factor 3 (closeness of connection)",
-      "text": "The closeness of the connection between the garbage truck's operation and the plaintiff's injury \u2014 mediated by the horse's fright reaction as an intervening biological response.",
+      "text": "The closeness of the connection between the garbage truck's operation and the plaintiff's injury — mediated by the horse's fright reaction as an intervening biological response.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_duty",
       "in_case_weight_estimate": 0.17,
@@ -52,7 +52,7 @@
       "factor_cluster_id": "moral_blame",
       "factor_type": "moral_blame",
       "rowland_factor_origin": "Rowland factor 4",
-      "text": "The moral blame attached to operating a garbage truck in its ordinary commercial function on a public residential street \u2014 operating equipment for its intended purpose in its intended setting.",
+      "text": "The moral blame attached to operating a garbage truck in its ordinary commercial function on a public residential street — operating equipment for its intended purpose in its intended setting.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_duty",
       "in_case_weight_estimate": 0.16,
@@ -63,18 +63,18 @@
       "factor_cluster_id": "policy_prevention",
       "factor_type": "public_policy_externality",
       "rowland_factor_origin": "Rowland factor 5 (policy of preventing future harm)",
-      "text": "The policy consequences of imposing a duty \u2014 whether requiring commercial vehicle operators to adjust normal operations for animal fright would meaningfully reduce future harm or would instead impose unworkable restrictions on ordinary commerce.",
+      "text": "The policy consequences of imposing a duty — whether requiring commercial vehicle operators to adjust normal operations for animal fright would meaningfully reduce future harm or would instead impose unworkable restrictions on ordinary commerce.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_duty",
       "in_case_weight_estimate": 0.18,
-      "weight_justification": "Load-bearing policy factor \u2014 court emphasized the chilling effect on ordinary commercial activity"
+      "weight_justification": "Load-bearing policy factor — court emphasized the chilling effect on ordinary commercial activity"
     },
     {
       "factor_id": "f6",
       "factor_cluster_id": "burden_and_consequences",
       "factor_type": "burden_of_precaution",
       "rowland_factor_origin": "Rowland factor 6 (burden to defendant + community consequences)",
-      "text": "The burden on commercial vehicle operators and the broader community of requiring operational adjustments whenever fright-prone animals might be present \u2014 scope of such adjustments across all commercial vehicles in all residential areas.",
+      "text": "The burden on commercial vehicle operators and the broader community of requiring operational adjustments whenever fright-prone animals might be present — scope of such adjustments across all commercial vehicles in all residential areas.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_duty",
       "in_case_weight_estimate": 0.15,
@@ -114,14 +114,10 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "n_factor_clusters": 7,
     "matched_c3_compliance_id": "facet-neg-0008-c3",
     "red_flags": [],
     "jurisdiction_category": "state_supreme"
-  },
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification of 15 Cal. 4th 456",
-    "Weight elicitation from opinion"
-  ]
+  }
 }

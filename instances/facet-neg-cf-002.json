@@ -55,12 +55,12 @@
       "factor_type": "product_utility",
       "text": "The loader's intended utility — tight-radius operation on construction sites — would have been substantially degraded by any attempted safer design. The manufacturer specifically evaluated alternatives and rejected them to preserve the product's intended commercial function.",
       "directionality": "against_liability",
-      "in_case_weight_estimate": 0.30,
+      "in_case_weight_estimate": 0.3,
       "weight_justification": "Reframed — real Barker had utility impairment as moderate; counterfactual makes it severe"
     }
   ],
   "weight_sum_check": {
-    "sum": 1.00,
+    "sum": 1.0,
     "max_factor_weight": 0.32,
     "passes_feature_3_primary_arm_0.7": true,
     "note": "4 of 5 factors point against liability (gravity low, probability low, burden high, utility impairment severe). Only alternative_precautions is neutralized. Aggregate weight against liability: ~0.95."
@@ -73,7 +73,7 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "n_factor_clusters": 5,
     "matched_c3_compliance_id": null,
     "red_flags": [],

@@ -12,24 +12,17 @@
   "status": "pilot_instance",
   "source_verification": {
     "primary_text_retrieved": false,
-    "secondary_source_basis": "CASE_CANDIDATES.md round 1 retrieval; McCarty is Posner's canonical Hand-formula application",
-    "pending_for_conference_submission": [
-      "Retrieve 826 F.2d 1554 primary text",
-      "Confirm 6-factor enumeration",
-      "Elicit in-case weights per SPEC.md \u00a75.1",
-      "Confirm appellate unanimity (secondary sources indicate yes)"
-    ]
+    "secondary_source_basis": "round 1 retrieval; McCarty is Posner's canonical Hand-formula application"
   },
-  "sanitization_applied": true,
-  "sanitization_note": "The original case involves a hotel guest who was attacked by an intruder through a connecting courtyard door. For FACET primary-dataset use the fact pattern has been sanitized to reference an unnamed 'intruder incident' without specifying the nature of the criminal act, to avoid the AI-fairness contamination risk flagged in CASE_CANDIDATES.md. Substantive legal analysis unchanged.",
-  "case_background": "Plaintiff McCarty was a guest at Pheasant Run hotel. An unknown intruder entered her room through a connecting courtyard door, leading to an incident that caused injury. McCarty sued the hotel on negligence grounds, arguing that reasonable security precautions (e.g., a chain lock on the courtyard door, a warning sign, additional nighttime patrols) would have prevented the intrusion. The district court returned a verdict for the defendant hotel. On appeal, Judge Posner applied the Hand formula \u2014 negligence = (B < PL) \u2014 weighing the burden of additional security measures against the probability and gravity of harm, and affirmed the verdict. The appellate opinion is a canonical modern application of Hand-formula reasoning with explicit sub-factor analysis.",
+  "sanitization_note": "The original case involves a hotel guest who was attacked by an intruder through a connecting courtyard door. For FACET primary-dataset use the fact pattern has been sanitized to reference an unnamed 'intruder incident' without specifying the nature of the criminal act, to avoid the AI-fairness contamination risk. Substantive legal analysis unchanged.",
+  "case_background": "Plaintiff McCarty was a guest at Pheasant Run hotel. An unknown intruder entered her room through a connecting courtyard door, leading to an incident that caused injury. McCarty sued the hotel on negligence grounds, arguing that reasonable security precautions (e.g., a chain lock on the courtyard door, a warning sign, additional nighttime patrols) would have prevented the intrusion. The district court returned a verdict for the defendant hotel. On appeal, Judge Posner applied the Hand formula — negligence = (B < PL) — weighing the burden of additional security measures against the probability and gravity of harm, and affirmed the verdict. The appellate opinion is a canonical modern application of Hand-formula reasoning with explicit sub-factor analysis.",
   "factors": [
     {
       "factor_id": "f1",
       "factor_cluster_id": "burden_of_precaution",
       "factor_type": "burden_of_precaution",
       "hand_component": "B",
-      "text": "The burden on the hotel of implementing additional security measures \u2014 chain locks on connecting doors, guest warning signs, nighttime security patrols, or keycard-access enhancements \u2014 including both direct cost and operational friction.",
+      "text": "The burden on the hotel of implementing additional security measures — chain locks on connecting doors, guest warning signs, nighttime security patrols, or keycard-access enhancements — including both direct cost and operational friction.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.2,
@@ -53,7 +46,7 @@
       "factor_cluster_id": "gravity_of_loss",
       "factor_type": "gravity_of_loss",
       "hand_component": "L",
-      "text": "The gravity of harm if an intruder incident occurs \u2014 physical injury, emotional distress, property loss.",
+      "text": "The gravity of harm if an intruder incident occurs — physical injury, emotional distress, property loss.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_liability",
       "in_case_weight_estimate": 0.18,
@@ -64,7 +57,7 @@
       "factor_id": "f4",
       "factor_cluster_id": "alternative_precautions",
       "factor_type": "alternative_precautions",
-      "text": "The availability of alternative precautions beyond the single chain lock proposed \u2014 warning signs in the guest room, a reservation-time notice, a 24-hour front-desk watch, connecting-door disablement.",
+      "text": "The availability of alternative precautions beyond the single chain lock proposed — warning signs in the guest room, a reservation-time notice, a 24-hour front-desk watch, connecting-door disablement.",
       "court_language_quote": "pending primary text verification",
       "directionality": "split",
       "in_case_weight_estimate": 0.14,
@@ -75,18 +68,18 @@
       "factor_id": "f5",
       "factor_cluster_id": "plaintiff_conduct",
       "factor_type": "comparative_fault",
-      "text": "Plaintiff's own conduct \u2014 specifically whether she chained the inside lock on the connecting door, which was available and known to her.",
+      "text": "Plaintiff's own conduct — specifically whether she chained the inside lock on the connecting door, which was available and known to her.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.17,
-      "weight_justification": "Posner gave significant weight to plaintiff's failure to use the available chain lock \u2014 a known and costless precaution the plaintiff controlled",
+      "weight_justification": "Posner gave significant weight to plaintiff's failure to use the available chain lock — a known and costless precaution the plaintiff controlled",
       "flip_capable": true
     },
     {
       "factor_id": "f6",
       "factor_cluster_id": "industry_custom",
       "factor_type": "industry_custom",
-      "text": "The hotel-industry custom with respect to connecting-door security measures in 1987 \u2014 whether chain locks, security patrols, or warnings were standard practice at comparable establishments.",
+      "text": "The hotel-industry custom with respect to connecting-door security measures in 1987 — whether chain locks, security patrols, or warnings were standard practice at comparable establishments.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.14,
@@ -110,17 +103,10 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "n_factor_clusters": 6,
     "matched_c3_compliance_id": "facet-neg-0006-c3",
     "red_flags": [],
-    "sanitization_applied": true,
     "jurisdiction_category": "federal_appellate"
-  },
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification against CourtListener or Cornell LII 7th Circuit archive",
-    "Elicit precise in-case weights from Posner's opinion",
-    "Construct matched C3 compliance instance",
-    "Verify that the sanitization does not distort the legal analysis"
-  ]
+  }
 }

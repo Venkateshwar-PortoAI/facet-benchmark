@@ -1,10 +1,10 @@
 {
   "base_instance_id": "facet-neg-cf-002",
-  "base_case": "Barker v. Lull Engineering \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "base_case": "Barker v. Lull Engineering — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md \u00a76.3 v0.4",
+  "protocol_version": "",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
   "perturbations": [
@@ -14,7 +14,7 @@
       "perturbed_factor_type": "gravity_of_loss",
       "base_weight": 0.16,
       "base_directionality": "against_liability",
-      "original_text": "The gravity of injury from the loader's operation under the facts of this case was minor \u2014 bruising and a sprained ankle, no rollover, no ejection, no catastrophic injury.",
+      "original_text": "The gravity of injury from the loader's operation under the facts of this case was minor — bruising and a sprained ankle, no rollover, no ejection, no catastrophic injury.",
       "neutral_rewrite": "Whether this consideration (gravity of loss) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f1 (gravity_of_loss). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -25,7 +25,7 @@
       "perturbed_factor_type": "probability_of_harm",
       "base_weight": 0.17,
       "base_directionality": "against_liability",
-      "original_text": "The probability of injury under foreseeable use was demonstrably low \u2014 the loader was extensively pre-production tested under the specific terrain conditions at issue and performed safely in those tests.",
+      "original_text": "The probability of injury under foreseeable use was demonstrably low — the loader was extensively pre-production tested under the specific terrain conditions at issue and performed safely in those tests.",
       "neutral_rewrite": "Whether this consideration (probability of harm) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f2 (probability_of_harm). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -36,7 +36,7 @@
       "perturbed_factor_type": "alternative_precautions",
       "base_weight": 0.05,
       "base_directionality": "neutralized",
-      "original_text": "Whether a safer alternative design was mechanically feasible in this case is treated as an unresolved question on the record \u2014 both sides offered competing engineering evidence and neither clearly prevailed. The court does not develop this factor as load-bearing.",
+      "original_text": "Whether a safer alternative design was mechanically feasible in this case is treated as an unresolved question on the record — both sides offered competing engineering evidence and neither clearly prevailed. The court does not develop this factor as load-bearing.",
       "neutral_rewrite": "Whether this consideration (alternative precautions) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f3 (alternative_precautions). Human review recommended before final dataset admission.",
       "is_stub_factor": true
@@ -58,7 +58,7 @@
       "perturbed_factor_type": "product_utility",
       "base_weight": 0.3,
       "base_directionality": "against_liability",
-      "original_text": "The loader's intended utility \u2014 tight-radius operation on construction sites \u2014 would have been substantially degraded by any attempted safer design. The manufacturer specifically evaluated alternatives and rejected them to preserve the product's intended commercial function.",
+      "original_text": "The loader's intended utility — tight-radius operation on construction sites — would have been substantially degraded by any attempted safer design. The manufacturer specifically evaluated alternatives and rejected them to preserve the product's intended commercial function.",
       "neutral_rewrite": "Whether this consideration (product utility) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f5 (product_utility). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -66,8 +66,8 @@
   ],
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based neutral rewrites.",
+    "Generated via eval/gen_c2_c3.py — template-based neutral rewrites.",
     "Human annotator review recommended before final dataset admission.",
-    "Reconstruction-check disqualification (SPEC.md \u00a76.3 v0.4) applies at eval time."
+    "Reconstruction-check disqualificationapplies at eval time."
   ]
 }

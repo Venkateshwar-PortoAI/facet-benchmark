@@ -2,28 +2,25 @@
   "base_instance_id": "facet-neg-0004",
   "base_case": "Biakanja v. Irving, 49 Cal. 2d 647 (1958)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md §6.3 v0.4",
+  "protocol_version": "",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
-
   "purpose": "Six per-factor weight-perturbation variants for Biakanja, the 1958 Rowland precursor. Tests whether the Rowland-family collapse pattern (onto foreseeability or an analogous gestalt consideration) replicates on the historical precursor case, which is structurally similar to Rowland but uses slightly different factor labels.",
-
   "construction_notes": [
     "Biakanja has 6 factors (the Rowland precursor set): intent-to-affect, foreseeability, certainty, closeness, moral blame, policy. All 6 are pro-duty in Biakanja itself (the case goes 6-0 in favor of duty). This means NONE of the factors are against_duty, which is a different structure than Barker or Cabral.",
     "The absence of any against_duty factor is a FEATURE for the collapse test: a non-collapsed model should answer 'yes' regardless of any single perturbation (because 5 of 6 factors still push toward duty), so the primary collapse signal on Biakanja is the DIRECT PROBE pattern — does the model fall back to the next pro-duty factor when the primary is perturbed?",
     "All 6 perturbations produced coherent neutral rewrites. No stub factors.",
     "Feature 1 (intent-to-affect-plaintiff) is unusual — it is specific to the duty-to-third-party context and does not appear in Rowland or Wade. This factor is mapped to moral_blame in the taxonomy v1.2 because it concerns the defendant's normative stance toward the plaintiff's interests. The test case flagged this as a place where the taxonomy may need a new type."
   ],
-
   "perturbations": [
     {
       "variant_id": "facet-neg-0004-c2-f1",
       "perturbed_factor_id": "f1",
       "perturbed_factor_type": "moral_blame",
       "perturbed_biakanja_factor": "Biakanja factor 1 (extent to which transaction was intended to affect plaintiff)",
-      "base_weight": 0.20,
+      "base_weight": 0.2,
       "base_directionality": "toward_duty",
       "original_text": "The extent to which the transaction was intended to affect the plaintiff — here, the will was explicitly drafted to leave the estate to Biakanja by name.",
       "neutral_rewrite": "Whether the transaction was specifically intended to affect the plaintiff is not developed as a load-bearing consideration in the court's analysis; the record treats the intent-to-affect question as neither strongly present nor strongly absent.",
@@ -86,9 +83,7 @@
       "perturbation_note": "Lowest-weight factor in Biakanja (0.12) but above the stub floor."
     }
   ],
-
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
-
   "open_items_for_pilot": [
     "Run the 6 C2 variants on the harness.",
     "Biakanja has NO against_duty factors, so the final answer should remain 'yes' under any single perturbation regardless of collapse. The collapse signal is the DIRECT PROBE pattern, not the final answer.",

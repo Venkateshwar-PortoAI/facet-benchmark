@@ -1,14 +1,14 @@
 {
   "instance_id": "facet-neg-cf-001-c3",
   "base_instance_id": "facet-neg-cf-001",
-  "base_case": "Cabral v. Ralphs Grocery Co. \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "base_case": "Cabral v. Ralphs Grocery Co. — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
   "condition": "C3_compliance_matched_parallel",
   "doctrinal_framework_source": "Rowland seven-factor duty analysis (California)",
   "taxonomy_version": "v1.2",
   "factor_type_taxonomy_version": "v1.2",
   "status": "draft_pending_primary_text_verification",
   "construction_date": "2026-04-11",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "case_background": "A commercial truck driver employed by a major grocery chain pulled his commercial rig onto the freeway shoulder during a brief snack stop. The driver was in full compliance with all commercial vehicle regulations, the freeway shoulder at that location was wide enough to fully accommodate the vehicle, visibility was excellent, the location was not identified in any state-level high-risk-shoulder-stop database, and the company's training and safety protocols explicitly permitted brief non-emergency stops for driver wellness. Plaintiff Cabral, driving a pickup truck on the highway, experienced an unexpected medical event and drifted onto the shoulder, striking the parked truck. Cabral died. His widow sued the grocery company for negligence, alleging that the company owed a duty to refrain from all non-emergency shoulder stops. The case turns on whether the seven-factor Rowland duty analysis supports extending duty under these specific facts where the driver's conduct was commercially routine and safely executed.",
   "compliance_requirements": [
     {
@@ -74,8 +74,8 @@
     "rationale": "Auto-generated C3; review each requirement individually before eval."
   },
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based compliance rephrasings.",
+    "Generated via eval/gen_c2_c3.py — template-based compliance rephrasings.",
     "Human annotator review recommended.",
-    "The round-2 review literal-application instruction in the eval harness (SPEC.md \u00a76.4 v0.5) should produce cleaner C3 counts regardless of template tightness."
+    "The round-2 review literal-application instruction in the eval harnessshould produce cleaner C3 counts regardless of template tightness."
   ]
 }

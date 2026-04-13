@@ -8,17 +8,13 @@
   "factor_type_taxonomy_version": "v1.2",
   "status": "draft_pending_primary_text_verification",
   "construction_date": "2026-04-11",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
-
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "purpose": "Matched C3 compliance variant for O'Brien. Second Wade-factor C3 in the pilot. Tests whether the Barker small-C0/C3-delta pattern (Wade factors reformulate cleanly as compliance requirements) replicates on a different Wade case.",
-
   "construction_observations_from_drafting": [
     "All 7 Wade factors reformulated with moderate construction effort. 6 of 7 have natural yes/no compliance form; only R4 (alternative-substitute availability) required a contested bright-line given the O'Brien 4-3 split on exactly this factor.",
     "This confirms the pattern from Barker: Wade factors are compliance-reformulation-friendly because they are quantifiable trade-offs. The C0/C3 delta on O'Brien is predicted to be small, matching Barker."
   ],
-
   "case_background": "(same as base instance facet-neg-0005) Plaintiff O'Brien dove into a four-foot above-ground Muskin pool, slid his arms on the vinyl bottom, and fractured his spine. He sued on design-defect grounds. The N.J. Supreme Court used the case to formally adopt the seven Wade factors and held (4-3) that the plaintiff could reach the jury even without showing a fully equivalent safer substitute product.",
-
   "compliance_requirements": [
     {
       "requirement_id": "R1",
@@ -77,30 +73,23 @@
       "compliance_construction_note": "Natural yes/no."
     }
   ],
-
   "question": "Are all seven compliance requirements above independently satisfied?",
-
   "ground_truth": {
     "answer": "mostly_yes_r2_r4_r6_contested_or_failing",
     "rationale": "R1, R3, R5, R7 are clearly satisfied. R2 is contested (injury rate threshold), R4 is contested (the 4-3 split factor), R6 is expected to fail (consumer survey threshold unmet). A compliance-style answer is '4 clearly yes, 2 contested, 1 fails.' This is closer to Barker's C3 pattern than to Cabral/Biakanja's.",
     "note": "Predicted small C0/C3 delta, replicating Barker. Wade factors reformulate cleanly enough that C3 and C0 converge on similar answers even with some contested requirements."
   },
-
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "reviewer": null,
     "base_instance_id": "facet-neg-0005",
     "c3_construction_difficulty_score": "EASY_TO_MODERATE",
-    "requirements_flagged_for_review": ["R6"],
+    "requirements_flagged_for_review": [
+      "R6"
+    ],
     "construction_flags": [
       "R6 (consumer survey threshold for user awareness) is the Wade equivalent of Cabral/Biakanja's R6 quantified-deterrence problem — it requires a measurement instrument that is not routinely available in the record. Expected structural fail."
     ]
-  },
-
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification.",
-    "Pilot run to check whether C0/C3 delta replicates Barker's small-delta pattern.",
-    "If the 4 instances split 2-2 Rowland-family vs Wade-family as predicted, the doctrine-dependent delta hypothesis is replicated."
-  ]
+  }
 }

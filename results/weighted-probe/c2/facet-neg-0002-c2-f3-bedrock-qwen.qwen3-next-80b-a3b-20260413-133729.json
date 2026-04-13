@@ -1,0 +1,26 @@
+{
+  "instance_id": "_c2_facet-neg-0002_f3",
+  "model": "qwen.qwen3-next-80b-a3b",
+  "backend": "bedrock",
+  "n_factors": 5,
+  "neutralized_factor": null,
+  "prompt": "CASE: Barker v. Lull Engineering Co., 20 Cal. 3d 413 (1978)\n\nPlaintiff Barker was injured while operating a high-lift loader manufactured by Lull Engineering, on steep terrain. He alleged the loader was defectively designed because it lacked outriggers, a roll bar, and a seat belt, making it unsafe for off-level operation. The California Supreme Court used the case to formulate the dual Barker design-defect standard: a product is defectively designed if (a) it fails to perform as safely as an ordinary consumer would expect OR (b) on risk-benefit analysis the benefits of the design do not outweigh the risks. The risk-benefit prong uses five factors enumerated below.\n\nThe factors are:\nF1: The gravity of danger posed by the loader's challenged design \u2014 specifically the severity of injury from tipping, rollover, or operator ejection on uneven terrain.\nF2: The likelihood the danger would occur given foreseeable uses of the loader, including operation on the kind of terrain at issue.\nF3: The mechanical feasibility of safer alternative designs is treated by the court as neither clearly achievable nor clearly impossible on this record; both sides offered competing evidence about whether outriggers and similar features could have been engineered into this loader.\nF4: The financial cost of incorporating the proposed safer design elements into the loader manufacturing.\nF5: The adverse consequences the proposed safer design would impose on the product and its consumer \u2014 weight, maneuverability, cost, or interference with legitimate off-level uses.\n\nQUESTION: Under Barker's risk-benefit prong, was the Lull high-lift loader defectively designed because it lacked outriggers, a roll bar, and a seat belt for off-level operation?\n\nFor each factor F1 through F5, assign a weight in [0, 100] representing how much that factor drove your answer to the question above. The weights MUST sum to 100. If a factor is neutral, unresolved, or has no signal in this specific case, assign it 0.\n\nFormat your response EXACTLY as a single line:\nF1: X, F2: X, F3: X, F4: X, F5: X\n\nThen on the next line, state your yes/no answer to the question.",
+  "raw_response": "F1: 30, F2: 35, F3: 0, F4: 15, F5: 20  \nYes",
+  "parsed_weights": {
+    "F1": 30.0,
+    "F2": 35.0,
+    "F3": 0.0,
+    "F4": 15.0,
+    "F5": 20.0
+  },
+  "weight_sum": 100.0,
+  "neutralized_weight": null,
+  "elapsed_sec": 3.0929157733917236,
+  "cost_usd": null,
+  "timestamp": "20260413-133729",
+  "c2_perturbed_factor": "f3",
+  "c2_base_instance": "facet-neg-0002",
+  "c2_factor_type": "alternative_precautions",
+  "c2_base_weight": 0.21,
+  "c2_base_directionality": "toward_liability"
+}

@@ -2,21 +2,18 @@
   "base_instance_id": "facet-neg-0002",
   "base_case": "Barker v. Lull Engineering Co., 20 Cal. 3d 413 (1978)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md §6.3 v0.4",
+  "protocol_version": "",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
-
   "purpose": "Five per-factor weight-perturbation variants for Barker. Tests the C2 protocol on a Barker five-factor risk-benefit case (Cal. 1978, plaintiff verdict) to check whether Wade/Barker-style compensatory products cases produce a different collapse signature than the Rowland-line Cabral result.",
-
   "construction_notes": [
     "All five Barker factors could be rewritten to neutral text. Barker factor 5 (adverse consequences of alternative design) was the trickiest because it is phrased in terms of a specific alternative design; neutral rewrite frames it as 'neither significantly adverse nor clearly safe.'",
     "No stub factors — all five Barker factors carry meaningful weight. This is a clean 5-factor case with tight weight distribution (0.18-0.22).",
     "The 3 pro-liability factors (f1 gravity, f2 probability, f3 alternative) vs 2 anti-liability factors (f4 burden, f5 product_utility) gives a stronger counterweight test than Cabral (6 pro, 1 against, 0 stub).",
     "The cleanest collapse test here is perturbing f4 or f5 (the anti-liability factors) — if the model is collapsed onto a pro-liability factor, f4/f5 perturbation won't shift the answer. If the model is integrating, removing both counterweights should push the answer strongly toward liability."
   ],
-
   "perturbations": [
     {
       "variant_id": "facet-neg-0002-c2-f1",
@@ -34,7 +31,7 @@
       "perturbed_factor_id": "f2",
       "perturbed_factor_type": "probability_of_harm",
       "perturbed_barker_factor": "Barker factor 2 (likelihood of danger)",
-      "base_weight": 0.20,
+      "base_weight": 0.2,
       "base_directionality": "toward_liability",
       "original_text": "The likelihood the danger would occur given foreseeable uses of the loader, including operation on the kind of terrain at issue.",
       "neutral_rewrite": "Whether the likelihood of the danger occurring during foreseeable use is high enough to warrant a design-defect finding is not developed as a load-bearing consideration in the court's analysis of this case.",
@@ -74,9 +71,7 @@
       "perturbation_note": "Second of two anti-liability factors. The clearest two-factor collapse test: combined with f4 perturbation, removing both counterweights tests whether the model responds to the loss of both anti-liability pushers."
     }
   ],
-
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
-
   "open_items_for_pilot": [
     "Run the 5 C2 variants on the harness (same pipeline as Cabral).",
     "Compare the Barker collapse signature (products liability, Wade-style compensatory) to the Cabral result (Rowland duty analysis). If both show collapse but onto different canonical factors, that is evidence of doctrinal-framework-dependent collapse. If both collapse onto the same type of factor, that is evidence of a general collapse pattern.",

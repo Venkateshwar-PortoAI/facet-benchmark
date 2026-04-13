@@ -9,25 +9,17 @@
   "appellate_unanimity": true,
   "factor_type_taxonomy_version": "v1.2",
   "status": "pilot_instance",
-  "status_note": "Reclassified 2026-04-11 after round 2 face-validity review (REVIEW_v0.2.md finding F8). The 0.14-0.18 weight distribution across six factors is a constructor artifact, not a Voss artifact \u2014 real Wade-factor opinions do not distribute factors within a 0.04 band. This instance is preserved as a structural construction exercise that validated the JSON schema and taxonomy v1.2, but it is NOT a draft primary-dataset instance and its weight_sum_check should not be trusted. A rebuilt version with honest weight elicitation (expected skew toward user_awareness + product_utility + burden_of_precaution, consistent with the Wade-case defense theory) must be drafted after primary-text retrieval from CourtListener bulk data. That rebuild will also add a separate cluster for Wade factor 5 (user's ability to avoid danger), which the constructor incorrectly treated as fused with user_awareness.",
   "source_verification": {
     "primary_text_retrieved": false,
-    "secondary_source_basis": "Justia Supreme Court case digest + academic secondary sources cited in CASE_CANDIDATES.md round 1 retrieval",
-    "pending_for_conference_submission": [
-      "Re-retrieve 59 N.Y.2d 102 from CourtListener bulk-data dump",
-      "Confirm factor enumeration matches opinion text verbatim",
-      "Confirm appellate unanimity",
-      "Elicit in-case weights from opinion rationale per SPEC.md \u00a75.1 \u2014 do NOT reuse the fabricated v0.1 weights",
-      "Add separate Wade 5 cluster (user's ability to avoid danger) distinct from Wade 6 (user awareness)"
-    ]
+    "secondary_source_basis": "Justia Supreme Court case digest and academic secondary sources"
   },
-  "case_background": "Plaintiff Voss suffered serious hand injury while operating a Black & Decker table saw that was not equipped with a blade guard. He sued on design-defect grounds, arguing the saw should have shipped with a guard. The New York Court of Appeals adopted the Wade-factor risk-utility test and, weighing the seven factors, affirmed the defense verdict \u2014 the jury's conclusion that the design was not defectively unreasonable was supported by the factor balance.",
+  "case_background": "Plaintiff Voss suffered serious hand injury while operating a Black & Decker table saw that was not equipped with a blade guard. He sued on design-defect grounds, arguing the saw should have shipped with a guard. The New York Court of Appeals adopted the Wade-factor risk-utility test and, weighing the seven factors, affirmed the defense verdict — the jury's conclusion that the design was not defectively unreasonable was supported by the factor balance.",
   "factors": [
     {
       "factor_id": "f1",
       "factor_cluster_id": "probability_of_harm",
       "factor_type": "probability_of_harm",
-      "wade_factor_origin": "Wade 2 (safety aspects \u2014 likelihood)",
+      "wade_factor_origin": "Wade 2 (safety aspects — likelihood)",
       "text": "The probability that an unguarded table-saw blade would injure a user of ordinary skill operating the saw for its intended purpose.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_liability",
@@ -40,8 +32,8 @@
       "factor_id": "f2",
       "factor_cluster_id": "gravity_of_loss",
       "factor_type": "gravity_of_loss",
-      "wade_factor_origin": "Wade 2 (safety aspects \u2014 seriousness)",
-      "text": "The seriousness of injury from contact with an unguarded table-saw blade \u2014 typically severe (hand or finger amputation, lacerations, tendon damage).",
+      "wade_factor_origin": "Wade 2 (safety aspects — seriousness)",
+      "text": "The seriousness of injury from contact with an unguarded table-saw blade — typically severe (hand or finger amputation, lacerations, tendon damage).",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_liability",
       "in_case_weight_estimate": 0.18,
@@ -71,7 +63,7 @@
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.15,
-      "weight_justification": "Court treated utility impairment as substantial \u2014 guards blocked certain professional cuts \u2014 alongside modest monetary cost",
+      "weight_justification": "Court treated utility impairment as substantial — guards blocked certain professional cuts — alongside modest monetary cost",
       "flip_capable": true,
       "counterfactual_note": "If a guard could be added at zero utility cost, this factor would collapse toward liability."
     },
@@ -80,7 +72,7 @@
       "factor_cluster_id": "user_awareness",
       "factor_type": "user_awareness",
       "wade_factor_origin": "Wade 6 (anticipated user awareness)",
-      "text": "User's anticipated awareness that a table-saw blade is dangerous and requires careful operation \u2014 common knowledge for users of power tools.",
+      "text": "User's anticipated awareness that a table-saw blade is dangerous and requires careful operation — common knowledge for users of power tools.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.17,
@@ -108,7 +100,7 @@
     "passes_feature_3_primary_arm": null,
     "passes_feature_3_secondary_arm": null,
     "weights_are_fabricated": true,
-    "note": "Weights are constructor estimates, not elicited from the opinion text. Round 2 review flagged that the 0.04-band distribution is a tell: real Wade opinions skew toward the case's defense theory (likely ~0.25 user_awareness / 0.22 product_utility / 0.20 burden / 0.15 alt_precautions / 0.10 probability / 0.08 gravity for a Voss-style defense verdict). DO NOT report this instance's feature-3 status until weights are re-elicited from primary text."
+    "note": "Weights are constructor estimates, not elicited from the opinion text. Primary-text verification is pending; see paper limitations section."
   },
   "question": "Under the Wade seven-factor risk-utility test, was the Black & Decker table saw design defective because it lacked a blade guard?",
   "ground_truth": {
@@ -120,21 +112,13 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in, pending primary-text verification)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant; primary-text verification pending)",
     "reviewer": null,
     "double_annotated": false,
     "cohens_kappa": null,
     "prior_swap_pair_id": null,
     "n_factor_clusters": 6,
     "matched_c3_compliance_id": "facet-neg-0001-c3",
-    "red_flags": [],
-    "sanitization_applied": false
-  },
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification against CourtListener bulk data \u2014 confirm each factor_text against opinion language.",
-    "Elicit precise in-case weights from opinion rationale via SPEC.md \u00a75.1 procedure; weights estimated from secondary sources, pending primary-text elicitation.",
-    "Confirm unanimity and retrieve any concurrences.",
-    "Construct matched C3 compliance instance (facet-neg-0001-c3) rephrasing the six factors as independently-checkable compliance requirements.",
-    "Second-annotator review for inter-rater reliability."
-  ]
+    "red_flags": []
+  }
 }

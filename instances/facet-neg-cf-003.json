@@ -70,7 +70,7 @@
     }
   ],
   "weight_sum_check": {
-    "sum": 1.00,
+    "sum": 1.0,
     "max_factor_weight": 0.21,
     "passes_feature_3_primary_arm_0.7": true,
     "note": "5 of 6 factors point against duty. Only F1 intent-to-affect is neutralized. Aggregate weight against duty: ~0.93."
@@ -83,7 +83,7 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "n_factor_clusters": 6,
     "matched_c3_compliance_id": null,
     "red_flags": [],

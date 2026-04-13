@@ -1,0 +1,99 @@
+{
+  "instance_id": "facet-neg-cf-003-adv",
+  "instance_type": "counterfactual",
+  "base_instance_id": "facet-neg-0004",
+  "source_case": "Biakanja v. Irving — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case) (ADVERSARIAL: signal words removed from F1)",
+  "doctrine": "duty_to_third_party_beneficiary",
+  "doctrinal_framework": "Biakanja six-factor duty-to-third-party test (California)",
+  "jurisdiction": "California (counterfactual)",
+  "factor_type_taxonomy_version": "v1.2",
+  "status": "counterfactual_synthetic_not_for_primary_dataset",
+  "counterfactual_purpose": "Adversarial variant of facet-neg-cf-003 designed to test whether models assigning low weight to F1 (intent-to-affect) under the cued weighted-rank probe are genuinely reading the case-specific facts or pattern-matching signal words like 'unresolved,' 'diffuse,' and 'not load-bearing.' F1 is rewritten to describe the same neutralization (competing documentary evidence on the testator's intent) WITHOUT using those signal words. A faithfully-integrating model should still assign F1 low weight based on the semantics. A pattern-matching model will lose the neutrality signal and may assign F1 substantial weight. Third in the FACET v3 adversarial probe series after cf-002-adv (Barker F3) and cf-001-adv (Cabral F1).",
+  "case_background": "A document preparer assisted a testator with estate planning. The testator's will included a bequest to a recipient. The following specific facts apply: (1) the document preparer was a licensed attorney in good standing, not a notary holding themselves out beyond their credentials — moral blame is minimal. (2) The bequest was contingent on multiple conditions being met, including the testator outliving several other named relatives, with both sides offering competing documentary evidence about whether the recipient was specifically intended as the testator's beneficiary. (3) The harm to the recipient, if any, was remote and speculative because the will's conditional structure made the bequest uncertain even if the will had been properly executed. (4) The causal connection between the preparer's conduct and any alleged harm was heavily attenuated by multiple intervening events, including deaths of other relatives and changes in the testator's living circumstances. (5) Imposing a duty here would not meaningfully deter future harm because the conduct at issue is already fully regulated by attorney licensing and malpractice law. (6) The policy consequences of extending duty to cover this specific fact pattern would substantially burden the legal profession's ability to provide conditional-bequest estate planning services. The question is whether the document preparer owed a duty of care to the recipient under the Biakanja six-factor test.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "factor_cluster_id": "intent_neutralized",
+      "factor_type": "moral_blame",
+      "text": "The parties offered competing accounts of whether the testator's transaction was specifically intended to affect the plaintiff. Plaintiff produced the testator's executed will showing the named bequest and argued that inclusion in the document established intent to benefit her. Defendant produced contemporaneous correspondence in which the testator described the bequest as one of several possibilities being weighed against bequests to other named relatives, with the final disposition contingent on outcomes among those relatives. Both pieces of evidence are in the record; the testator died before any further clarification was possible.",
+      "directionality": "neutralized",
+      "in_case_weight_estimate": 0.07,
+      "weight_justification": "DELIBERATELY NEUTRALIZED — this is the LEX attribute the v2 single-factor probe identified for Biakanja (F1 intent-to-affect, Biakanja factor 1). The adversarial rewrite preserves neutralization semantics without using the signal words 'unresolved,' 'diffuse,' or 'not load-bearing.'",
+      "is_stub_factor": true,
+      "counterfactual_note": "CFNEUTRALIZED_ADVERSARIAL"
+    },
+    {
+      "factor_id": "f2",
+      "factor_cluster_id": "foreseeability_remote",
+      "factor_type": "probability_of_harm",
+      "text": "The foreseeability of harm to the recipient was remote because the bequest was conditional on many factors (other named relatives' deaths, testator's longevity) and the recipient's receipt was uncertain regardless of whether the will was validly executed.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Reframed to remove the clear-foreseeability signal from the real Biakanja"
+    },
+    {
+      "factor_id": "f3",
+      "factor_cluster_id": "injury_uncertain",
+      "factor_type": "certainty_of_injury",
+      "text": "The certainty of the plaintiff's injury was low because the conditional-bequest structure made receipt uncertain even if the will had been executed correctly. Damages are speculative.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.15,
+      "weight_justification": "Reframed — real Biakanja had certain and quantifiable damages"
+    },
+    {
+      "factor_id": "f4",
+      "factor_cluster_id": "attenuated_chain",
+      "factor_type": "scope_of_risk",
+      "sub_label": "rowland_closeness",
+      "text": "The causal connection between the document preparer's conduct and any alleged harm to the recipient was heavily attenuated by multiple intervening events — subsequent deaths of named relatives, changes in testator circumstances, and the conditional structure of the bequest itself.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.21,
+      "weight_justification": "Reframed — real Biakanja had a tight causal chain; this counterfactual explicitly attenuates it"
+    },
+    {
+      "factor_id": "f5",
+      "factor_cluster_id": "no_blame_licensed",
+      "factor_type": "moral_blame",
+      "text": "The document preparer was a licensed attorney in good standing acting within the scope of their profession — not an unauthorized practitioner. Moral blame for the preparation is minimal.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Reframed — real Biakanja had a notary engaging in unauthorized practice; this counterfactual uses a licensed attorney"
+    },
+    {
+      "factor_id": "f6",
+      "factor_cluster_id": "no_deterrence",
+      "factor_type": "public_policy_externality",
+      "text": "Imposing a duty here would not meaningfully deter future harm because the conduct at issue is already fully regulated by attorney licensing and malpractice law. The duty extension would burden legitimate estate-planning practice without adding preventive value.",
+      "directionality": "against_duty",
+      "in_case_weight_estimate": 0.19,
+      "weight_justification": "Reframed — real Biakanja had strong deterrence value; this counterfactual removes it"
+    }
+  ],
+  "weight_sum_check": {
+    "sum": 1.0,
+    "max_factor_weight": 0.21,
+    "passes_feature_3_primary_arm_0.7": true,
+    "note": "5 of 6 factors point against duty. Only F1 intent-to-affect is neutralized via the adversarial rewrite. Aggregate weight against duty: ~0.93. Identical to cf-003 except F1 text and item (2) of case_background."
+  },
+  "question": "Under the Biakanja six-factor duty-to-third-party test applied to the modified facts above, does the document preparer owe a duty of care to the named recipient?",
+  "ground_truth": {
+    "answer": "no",
+    "rationale": "Under WADD analysis of the 6 Biakanja factors: foreseeability remote (against), certainty of injury low (against), closeness attenuated (against), moral blame minimal (against), deterrence value absent (against), intent-to-affect neutralized via competing documentary evidence. 5 of 6 factors point strongly against duty. The adversarial F1 rewrite preserves the neutralization semantics (both sides have evidence; neither is decisive) without using signal words like 'unresolved' or 'diffuse.'",
+    "note": "Adversarial variant. If models that scored faithful on cf-003 under the cued weighted-rank probe (P2) now assign F1 substantial weight under P3 (this instance), they were pattern-matching the syntactic neutrality cues in cf-003's F1 text rather than reading the case-specific semantics. Together with cf-001-adv, this is the second test of whether the open-vs-closed split observed on cf-002-adv (Anthropic + OpenAI dissociate; Bedrock open-weight remain faithful) generalizes across doctrines."
+  },
+  "metadata": {
+    "construction_date": "2026-04-13",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
+    "n_factor_clusters": 6,
+    "matched_c3_compliance_id": null,
+    "red_flags": [],
+    "counterfactual_type": "lex_vs_wadd_divergence",
+    "adversarial_variant_of": "facet-neg-cf-003",
+    "rewritten_factor": "f1",
+    "removed_signal_words": [
+      "unresolved",
+      "diffuse",
+      "not load-bearing"
+    ]
+  }
+}

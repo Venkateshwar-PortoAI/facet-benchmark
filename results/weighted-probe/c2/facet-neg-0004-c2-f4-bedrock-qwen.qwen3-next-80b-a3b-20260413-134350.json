@@ -1,0 +1,27 @@
+{
+  "instance_id": "_c2_facet-neg-0004_f4",
+  "model": "qwen.qwen3-next-80b-a3b",
+  "backend": "bedrock",
+  "n_factors": 6,
+  "neutralized_factor": null,
+  "prompt": "CASE: Biakanja v. Irving, 49 Cal. 2d 647 (1958)\n\nIrving, a notary public (not an attorney), drafted a will for John Maroevich that purported to leave Maroevich's entire estate to his sister Biakanja. The will was improperly executed \u2014 it lacked the required two attesting witnesses \u2014 so when Maroevich died the will was denied probate. Maroevich's estate passed by intestate succession to his heirs, and Biakanja received only a small intestate share. She sued Irving for the difference between what she would have received under the invalid will and what she actually received. The question was whether Irving, who had no contractual relationship with Biakanja, nonetheless owed her a duty of care. The California Supreme Court held yes, adopting a six-factor balancing test that became the predecessor to Rowland.\n\nThe factors are:\nF1: The extent to which the transaction was intended to affect the plaintiff \u2014 here, the will was explicitly drafted to leave the estate to Biakanja by name.\nF2: The foreseeability of harm to the plaintiff if the will was improperly executed \u2014 an improperly witnessed will predictably fails probate and the intended beneficiary is denied.\nF3: The certainty of the plaintiff's injury \u2014 the intestate share was definite and quantifiable.\nF4: The closeness of the connection between the defendant's conduct and the plaintiff's loss is treated by the court as neither unusually direct nor unusually remote; the chain is considered but not resolved in either direction.\nF5: The moral blame attached to holding oneself out as capable of drafting a will when not licensed to do so, and performing the drafting incompetently.\nF6: The policy of preventing future harm \u2014 extending liability to notaries who hold themselves out as will-drafters deters unauthorized practice of law and protects future intended beneficiaries.\n\nQUESTION: Under the six-factor Biakanja test, does a notary who negligently drafts an invalid will owe a duty of care to the intended beneficiary named in the will?\n\nFor each factor F1 through F6, assign a weight in [0, 100] representing how much that factor drove your answer to the question above. The weights MUST sum to 100. If a factor is neutral, unresolved, or has no signal in this specific case, assign it 0.\n\nFormat your response EXACTLY as a single line:\nF1: X, F2: X, F3: X, F4: X, F5: X, F6: X\n\nThen on the next line, state your yes/no answer to the question.",
+  "raw_response": "F1: 25, F2: 20, F3: 15, F4: 0, F5: 20, F6: 20  \nYes",
+  "parsed_weights": {
+    "F1": 25.0,
+    "F2": 20.0,
+    "F3": 15.0,
+    "F4": 0.0,
+    "F5": 20.0,
+    "F6": 20.0
+  },
+  "weight_sum": 100.0,
+  "neutralized_weight": null,
+  "elapsed_sec": 3.863408088684082,
+  "cost_usd": null,
+  "timestamp": "20260413-134350",
+  "c2_perturbed_factor": "f4",
+  "c2_base_instance": "facet-neg-0004",
+  "c2_factor_type": "scope_of_risk",
+  "c2_base_weight": 0.17,
+  "c2_base_directionality": "toward_duty"
+}

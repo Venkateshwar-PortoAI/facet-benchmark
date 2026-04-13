@@ -1,17 +1,31 @@
+# ============================================================================
+# FACET .gitignore — public repo. Keep internal working docs OUT.
+# ============================================================================
 
-# Build artifacts
-PAPER_ARXIV_v1.html
-eval/md_to_pdf.py
-facet-arxiv-submission.zip
-latex/main.pdf
-latex/main.aux
-latex/main.log
-latex_arXiv/
+# OS / editor junk
+.DS_Store
+__pycache__/
+*.pyc
+.vscode/
+.idea/
 
-# Internal working docs (not for public repo)
+# ----------------------------------------------------------------------------
+# Internal working docs (NOT for public repo)
+# ----------------------------------------------------------------------------
+CLAUDE.md
+STATUS.md
+MANUAL_READ_CHECKLIST.md
+VC_COVER_NOTE.md
+PRIOR_ART.md
+CASE_CANDIDATES.md
+PHENOMENON.md
+SPEC.md
+
+# Older draft material
 PAPER_DRAFT_v0.1.md
 PAPER_DRAFT_v0.2.md
 PAPER_ARXIV_v1.md
+PAPER_ARXIV_v1.html
 REVIEW_v0.1.md
 REVIEW_v0.2.md
 PREREGISTRATION_WORKFLOW.md
@@ -21,23 +35,34 @@ results/FINDINGS_extended_thinking_addendum.md
 results/FINDINGS_pilot_v0.1.md
 results/FINDINGS_pilot_v0.2.md
 results/FINDINGS_pilot_v0.5.md
+results/FINDINGS_pilot_v0.6.md
 results/*-dry-run-*.json
 
-# Internal process docs (not for public repo)
-PRIOR_ART.md
-CASE_CANDIDATES.md
-PHENOMENON.md
-SPEC.md
-results/FINDINGS_pilot_v0.6.md
-
-# Duplicate figures (originals in figures/)
-latex/fig1_heatmap.png
-latex/fig2_embedding_strength.png
-latex/fig3_protocol.png
-latex/main.tex
-latex/
-
-# Paper artifacts (not part of benchmark)
+# Earlier paper PDFs (only v3 is the citable version)
 PAPER_ARXIV_v1.pdf
-figures/
+PAPER_ARXIV_v2.pdf
+
+# ----------------------------------------------------------------------------
+# LaTeX build artifacts and older sources
+# ----------------------------------------------------------------------------
+# Ignore everything under latex/ by default, then re-allow the v3 source.
+latex/*
+!latex/main_v3.tex
+facet-arxiv-submission.zip
+
+# ----------------------------------------------------------------------------
+# Figures — ship only the five that appear in the paper / README
+# ----------------------------------------------------------------------------
+figures/*
+!figures/fig1_probe_comparison.png
+!figures/fig2_adversarial_3panel.png
+!figures/fig3_bimodality.png
+!figures/fig4_c2_faithfulness.png
+!figures/fig5_asymmetry.png
+
+# ----------------------------------------------------------------------------
+# Eval scripts — older / internal development tooling
+# ----------------------------------------------------------------------------
 eval/gen_figures.py
+eval/analyze_v3_final.py
+eval/md_to_pdf.py

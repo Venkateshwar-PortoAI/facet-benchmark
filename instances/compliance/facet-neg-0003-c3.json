@@ -8,20 +8,15 @@
   "factor_type_taxonomy_version": "v1.2",
   "status": "draft_pending_primary_text_verification",
   "construction_date": "2026-04-11",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
-
-  "purpose": "Matched C3 compliance variant of Cabral for the compliance-vs-integration distinction (SPEC.md §6.4). The base C0 instance asks the model to *weigh and trade off* seven factors to reach a duty conclusion. This C3 variant presents the same seven substantive considerations as *seven independently-checkable yes/no requirements* with no trade-off structure. The question is whether each requirement is independently satisfied, not whether they aggregate into a duty finding.",
-
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
+  "purpose": "Matched C3 compliance variant of Cabral for the compliance-vs-integration distinction. The base C0 instance asks the model to *weigh and trade off* seven factors to reach a duty conclusion. This C3 variant presents the same seven substantive considerations as *seven independently-checkable yes/no requirements* with no trade-off structure. The question is whether each requirement is independently satisfied, not whether they aggregate into a duty finding.",
   "compliance_framing_note": "A compliance test and an integration test can produce different failure patterns even on substantively identical content. Compliance failure looks like 'model misses one or more yes/no checks because it doesn't attend to that requirement'. Integration failure (collapse) looks like 'model attends to all factors but treats only one as load-bearing'. If C0 and C3 produce the SAME failure pattern on the same model, the compliance-vs-integration distinction is empirically empty and FACET's framing is vulnerable to the reviewer attack that the benchmark is just measuring multi-constraint satisfaction in disguise. If they produce DIFFERENT failure patterns, the distinction is real and measurable.",
-
   "construction_observations_from_drafting": [
     "Rephrasing Rowland factors as independent yes/no compliance requirements is HARDER than rephrasing Wade factors the same way. Wade factors (product utility, user awareness, alternative precautions) are naturally checkable — does the alternative design exist, yes or no. Rowland factors (moral blame, policy of preventing harm, burden to community) are fundamentally balancing considerations and do not have natural yes/no framings.",
     "This is itself useful signal: if the C3 compliance rephrasing required gymnastics to produce, then the Rowland factors may be inherently non-compliance-testable, which is a point in favor of FACET's claim that balancing-test reasoning is a different cognitive task than compliance checking.",
     "I noted this construction difficulty explicitly in each requirement below. Several requirements (R4 moral blame, R5 policy, R6 burden) had to be rephrased as 'does the record show X above a threshold' rather than 'is X satisfied,' which may blur the compliance/integration line. Torts-scholar review should flag whether the blurred cases make C3 effectively indistinguishable from C0."
   ],
-
   "case_background": "(same as base instance facet-neg-0003) Truck driver Horn stopped on the freeway shoulder for a non-emergency reason; Cabral suffered a medical event, drifted onto the shoulder, struck Horn's parked truck, and died. Widow sued Ralphs for negligence. Question: did Ralphs owe a duty of care?",
-
   "compliance_requirements": [
     {
       "requirement_id": "R1",
@@ -80,34 +75,27 @@
       "compliance_construction_note": "Natural yes/no. This is the easiest factor to convert to compliance form and it maps cleanly because insurance-availability IS a yes/no question in real regulatory regimes."
     }
   ],
-
   "question": "Are all seven compliance requirements above independently satisfied?",
-
   "ground_truth": {
     "answer": "no",
     "rationale": "R5 (quantified deterrence estimate) fails reliably because California courts do not quantify deterrence this way. R4 (regulatory violation) is contested and could go either way. R1, R2, R3, R6, R7 are satisfied. A compliance-style answer is therefore 'five of seven satisfied; R4 contested; R5 fails' which is distinct from the base C0 answer of 'duty exists under Rowland balancing.'",
     "note": "The C3 ground truth is NOT 'duty exists / does not exist' — it is a compliance checklist result. This is by design. A model that produces 'duty exists' on C3 is applying integration reasoning where compliance reasoning was asked for, which is itself evidence that the compliance-vs-integration distinction is not well-separated in the model's representation."
   },
-
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "reviewer": null,
     "base_instance_id": "facet-neg-0003",
     "c3_construction_difficulty_score": "MODERATE_TO_HARD",
-    "requirements_flagged_for_review": ["R4", "R5", "R6"],
+    "requirements_flagged_for_review": [
+      "R4",
+      "R5",
+      "R6"
+    ],
     "construction_flags": [
       "3 of 7 requirements (R4, R5, R6) required converting balancing considerations into bright-line thresholds — this is expected for Rowland-line cases but may produce C0/C3 failure-pattern similarity if the model treats bright-line thresholds as their own form of integration task.",
       "R5 is particularly suspect: it will reliably fail on nearly every real case because courts don't quantify deterrence, which means the C3 compliance signal on R5 is a constant-negative and contributes no variance to the C3-vs-C0 comparison.",
       "C3 construction for Wade-factor products cases (e.g., Voss) is expected to be significantly easier than for Rowland-line cases because Wade factors already have more yes/no structure (does the alternative exist, is the utility preserved). The 0003 C3 is the hardest case in the pilot."
     ]
-  },
-
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification of the base Cabral instance (blocks this C3 variant).",
-    "Torts-scholar review of R4, R5, R6 to confirm whether these compliance reformulations are defensible or whether they have silently re-introduced balancing structure.",
-    "Pilot run of C0 vs C3 on 2-3 frontier models to check whether failure patterns differ. If R5 always fails and the C0-C3 delta is driven entirely by R5, the distinction is an artifact and C3 must be redesigned.",
-    "Consider whether to drop R5 (quantified deterrence) entirely and accept N=6 compliance requirements vs N=7 integration factors. This asymmetry is ugly but may be more honest than a load-bearing-failing R5.",
-    "Test whether a Wade-factor compliance variant (for facet-neg-0001 Voss or facet-neg-0002 Barker) is meaningfully easier to construct, which would confirm the Rowland/Wade construction-difficulty asymmetry observed during drafting."
-  ]
+  }
 }

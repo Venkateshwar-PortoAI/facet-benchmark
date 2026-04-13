@@ -2,20 +2,17 @@
   "base_instance_id": "facet-neg-0005",
   "base_case": "O'Brien v. Muskin Corp., 94 N.J. 169 (1983)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md §6.3 v0.4",
+  "protocol_version": "",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
-
   "purpose": "Seven per-factor weight-perturbation variants for O'Brien, the N.J. 1983 Wade-factor adoption case. Second Wade-factor instance in the pilot (first was Barker). Tests whether the Wade/Barker small-C0/C3-delta and F3-alternative-precautions collapse pattern replicates on a different Wade case.",
-
   "construction_notes": [
-    "O'Brien is a 4-3 split case, which means ground-truth unanimity is absent. It is retained in the pilot as a non-primary case per SPEC.md §5 constraint 8. The split specifically turned on factor 3 (availability of safer substitute), which is the predicted collapse factor for Wade cases. This makes O'Brien a natural stress-test of whether the model sides with the majority or the dissent when the dispositive factor is perturbed.",
+    "O'Brien is a 4-3 split case, which means ground-truth unanimity is absent. It is retained in the pilot as a non-primary caseconstraint 8. The split specifically turned on factor 3 (availability of safer substitute), which is the predicted collapse factor for Wade cases. This makes O'Brien a natural stress-test of whether the model sides with the majority or the dissent when the dispositive factor is perturbed.",
     "All 7 Wade factors present — this is a full-Wade case unlike Barker which used Barker's 5-factor variant.",
     "Two anti-liability factors (f1 product_utility, f6 user_awareness) — more counterweight than Barker's one-factor-at-f4 plus f5. O'Brien is therefore a better test of the 'perturb the counterweight' measurement."
   ],
-
   "perturbations": [
     {
       "variant_id": "facet-neg-0005-c2-f1",
@@ -88,16 +85,14 @@
       "perturbed_factor_id": "f7",
       "perturbed_factor_type": "burden_shifting",
       "perturbed_wade_factor": "Wade 7 (feasibility of spreading loss)",
-      "base_weight": 0.10,
+      "base_weight": 0.1,
       "base_directionality": "toward_liability",
       "original_text": "The feasibility of spreading the loss by raising the product's price or by the manufacturer carrying insurance, as compared with placing the loss on the injured user.",
       "neutral_rewrite": "The feasibility of spreading the loss through price or insurance rather than placing it on the injured user is treated by the court as a consideration worth noting but not as a load-bearing element.",
       "perturbation_note": "Lowest-weight factor (0.10). Near-stub. Perturbation is near-no-op."
     }
   ],
-
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
-
   "open_items_for_pilot": [
     "Run the 7 C2 variants.",
     "The key measurement is f4 (alternative_precautions) — this is the 4-3 split factor and the predicted Wade collapse target per the Barker result. If the direct probe shifts dramatically when f4 is perturbed, the doctrine-aware-collapse hypothesis is replicated.",

@@ -1,15 +1,15 @@
 {
   "instance_id": "facet-neg-cf-002-c3",
   "base_instance_id": "facet-neg-cf-002",
-  "base_case": "Barker v. Lull Engineering \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "base_case": "Barker v. Lull Engineering — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
   "condition": "C3_compliance_matched_parallel",
   "doctrinal_framework_source": "Barker five-factor risk-benefit prong (California)",
   "taxonomy_version": "v1.2",
   "factor_type_taxonomy_version": "v1.2",
   "status": "draft_pending_primary_text_verification",
   "construction_date": "2026-04-11",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
-  "case_background": "A manufacturer produced a high-lift industrial loader. Plaintiff was injured while operating the loader on uneven terrain. Plaintiff sued on design-defect grounds, but the following specific facts apply: (1) no safer alternative design was mechanically feasible at the time of manufacture \u2014 outriggers, roll bars, and seat belts were known concepts but could not be integrated with the loader's core function of tight-radius operation on construction sites; the engineering constraints made alternatives materially unworkable. (2) The loader was extensively tested under the specific terrain conditions at issue and performed safely in those tests, so the probability of injury under foreseeable use was demonstrably low. (3) The injury sustained was minor \u2014 bruising and sprained ankle \u2014 not a catastrophic rollover or amputation. (4) The loader's utility would have been substantially degraded by any attempted safer design; the manufacturer specifically rejected alternatives in favor of preserving the loader's intended commercial function. (5) The cost of any attempted alternative design would have increased the loader's price by more than 40%, which would have made it unaffordable for the contractors who needed it. The question is whether the loader was defectively designed under Barker's five-factor risk-benefit test, given this specific factual record.",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
+  "case_background": "A manufacturer produced a high-lift industrial loader. Plaintiff was injured while operating the loader on uneven terrain. Plaintiff sued on design-defect grounds, but the following specific facts apply: (1) no safer alternative design was mechanically feasible at the time of manufacture — outriggers, roll bars, and seat belts were known concepts but could not be integrated with the loader's core function of tight-radius operation on construction sites; the engineering constraints made alternatives materially unworkable. (2) The loader was extensively tested under the specific terrain conditions at issue and performed safely in those tests, so the probability of injury under foreseeable use was demonstrably low. (3) The injury sustained was minor — bruising and sprained ankle — not a catastrophic rollover or amputation. (4) The loader's utility would have been substantially degraded by any attempted safer design; the manufacturer specifically rejected alternatives in favor of preserving the loader's intended commercial function. (5) The cost of any attempted alternative design would have increased the loader's price by more than 40%, which would have made it unaffordable for the contractors who needed it. The question is whether the loader was defectively designed under Barker's five-factor risk-benefit test, given this specific factual record.",
   "compliance_requirements": [
     {
       "requirement_id": "R1",
@@ -58,8 +58,8 @@
     "rationale": "Auto-generated C3; review each requirement individually before eval."
   },
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based compliance rephrasings.",
+    "Generated via eval/gen_c2_c3.py — template-based compliance rephrasings.",
     "Human annotator review recommended.",
-    "The round-2 review literal-application instruction in the eval harness (SPEC.md \u00a76.4 v0.5) should produce cleaner C3 counts regardless of template tightness."
+    "The round-2 review literal-application instruction in the eval harnessshould produce cleaner C3 counts regardless of template tightness."
   ]
 }

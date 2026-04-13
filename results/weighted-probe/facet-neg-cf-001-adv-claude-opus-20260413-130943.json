@@ -1,0 +1,23 @@
+{
+  "instance_id": "facet-neg-cf-001-adv",
+  "model": "opus",
+  "backend": "claude",
+  "n_factors": 7,
+  "neutralized_factor": "F1",
+  "prompt": "CASE: Cabral v. Ralphs Grocery Co. \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case) (ADVERSARIAL: signal words removed from F1)\n\nA commercial truck driver employed by a major grocery chain pulled his commercial rig onto the freeway shoulder during a brief snack stop. The driver was in full compliance with all commercial vehicle regulations, the freeway shoulder at that location was wide enough to fully accommodate the vehicle, visibility was excellent, the location was not identified in any state-level high-risk-shoulder-stop database, and the company's training and safety protocols explicitly permitted brief non-emergency stops for driver wellness. Plaintiff Cabral, driving a pickup truck on the highway, experienced an unexpected medical event and drifted onto the shoulder, striking the parked truck. Cabral died. His widow sued the grocery company for negligence, alleging that the company owed a duty to refrain from all non-emergency shoulder stops. The case turns on whether the seven-factor Rowland duty analysis supports extending duty under these specific facts where the driver's conduct was commercially routine and safely executed.\n\nThe factors are:\nF1: The parties offered competing characterizations of the foreseeability of a shoulder collision at this location. Plaintiff's traffic-engineering expert testified that any commercial vehicle stopping on a freeway shoulder creates a foreseeable risk of secondary collision, citing general highway-safety\nF2: The causal chain between the truck's presence and Cabral's death is heavily mediated by Cabral's own medical event. Absent the medical event, no collision would have occurred. The 'certainty of injury from the defendant's conduct' is low because the conduct alone, without the intervening medical cau\nF3: The causal connection between the driver's brief compliant stop and the plaintiff's death is substantially attenuated by the intervening medical event, the distance of plaintiff's drift, the clear visibility conditions, and the fact that comparable roadside conditions exist at countless other locati\nF4: The driver's conduct carries no moral blame. The stop was permitted by company policy, consistent with industry commercial-driver wellness guidelines, executed in compliance with traffic regulations, and motivated by reasonable safety considerations (driver fatigue management). A morally-blameworthy\nF5: Imposing a duty here would not meaningfully prevent future harm. The underlying cause of the incident was the plaintiff's medical event, not the driver's conduct. Prohibiting commercial driver wellness stops would not prevent similar outcomes from unexpected medical events among other highway users,\nF6: Imposing a duty to refrain from all non-emergency shoulder stops would be substantially burdensome on commercial trucking operations industry-wide. It would conflict with Federal Motor Carrier Safety Administration driver-wellness guidelines, increase fatigue-related incidents, and impose operationa\nF7: Commercial liability insurance is available, but this factor carries near-zero weight in the analysis because the underlying duty question does not turn on loss-spreading.\n\nQUESTION: Under the seven-factor Rowland duty analysis applied to the modified facts described above, does the commercial grocery chain owe a duty of care to Cabral?\n\nFor each factor F1 through F7, assign a weight in [0, 100] representing how much that factor drove your answer to the question above. The weights MUST sum to 100. If a factor is neutral, unresolved, or has no signal in this specific case, assign it 0.\n\nFormat your response EXACTLY as a single line:\nF1: X, F2: X, F3: X, F4: X, F5: X, F6: X, F7: X\n\nThen on the next line, state your yes/no answer to the question.",
+  "raw_response": "F1: 10, F2: 15, F3: 20, F4: 15, F5: 15, F6: 25, F7: 0\nNo",
+  "parsed_weights": {
+    "F1": 10.0,
+    "F2": 15.0,
+    "F3": 20.0,
+    "F4": 15.0,
+    "F5": 15.0,
+    "F6": 25.0,
+    "F7": 0.0
+  },
+  "weight_sum": 100.0,
+  "neutralized_weight": 10.0,
+  "elapsed_sec": 9.741177797317505,
+  "cost_usd": 0.08563325,
+  "timestamp": "20260413-130943"
+}

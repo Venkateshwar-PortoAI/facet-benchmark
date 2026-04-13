@@ -1,189 +1,151 @@
-# FACET — Factor Accessibility, Coverage, and Evidence Test
+# FACET
 
 **Measuring Attribution Faithfulness in Multi-Factor LLM Reasoning**
 
-Venkateshwar Reddy Jambula — Pranaalpha Labs
+[![Verify paper numbers](https://github.com/pranaalpha/facet-benchmark/actions/workflows/verify-paper.yml/badge.svg)](https://github.com/pranaalpha/facet-benchmark/actions/workflows/verify-paper.yml)
+
+Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pdf)  ·  [Cover note](VC_COVER_NOTE.md)
 
 ---
 
-## What is FACET?
+## The finding in one figure
 
-When LLMs are deployed in domains that require weighing 5–10 different factors simultaneously — medical diagnosis, regulatory compliance, legal balancing tests — do they actually integrate all the factors, or do they collapse onto whichever one is most canonical in their training data?
+![Probe format determines apparent attribution faithfulness](figures/fig1_probe_comparison.png)
 
-FACET tests this with two probes applied to the same models and cases:
+On the same 8 frontier models and the same 3 counterfactual legal cases, two probes give contradictory answers:
 
-1. **Single-factor probe** — "which single factor is most important?"
-2. **Weighted-rank probe** — "assign percentage weights to all N factors, summing to 100"
+- **Single-factor probe** ("which one factor is most important?"): **0 of 8 models** are faithful on CF-Barker.
+- **Weighted-rank probe** ("assign percentage weights to all N factors"): **8 of 8 models** are faithful on the same case.
 
-The two probes give contradictory answers. The single-factor probe shows apparent lexicographic collapse. The weighted-rank probe shows distributed, WADD-consistent weights. **This contradiction is the finding.** Single-factor probes systematically misrepresent LLM multi-factor reasoning.
+The reasoning was WADD-consistent the whole time. The single-factor probe was compressing it to look lexicographic. **The probe format, not the model, drives the apparent failure.**
 
-## Key Results
+This matters because forced-choice attribution probes (top-1, top-k) are the dominant format in current LLM explainability tooling. If FACET generalizes, those probes are systematically under-reporting distributed reasoning.
 
-**Evaluated:** 9 frontier model configurations from 6 labs on 10 real legal balancing cases + 3 counterfactual variants.
+---
 
-### The contradiction at a glance
-
-| Metric | Single-factor probe | Weighted-rank probe |
-|---|---|---|
-| CF-Cabral faithful models | 7/8 | **8/8** |
-| CF-Barker faithful models | **0/8** | **8/8** |
-| CF-Biakanja faithful models | 4/8 | **8/8** |
-| In-dist: any model with ≥50% weight on one factor | n/a | **0/8** |
-
-Under the single-factor probe, no model shifts its attribution on CF-Barker when the canonical factor is neutralized. Under the weighted-rank probe, every model correctly assigns ≤10% weight to the neutralized factor. The **reasoning was always WADD**; the single-factor probe was compressing it to look LEX.
-
-## Repository Structure
-
-```
-facet-benchmark/
-├── README.md                 # This file
-├── LICENSE                   # MIT (code)
-├── LICENSE-DATA              # CC BY 4.0 (data)
-├── factor_type_taxonomy.md   # Factor type definitions (dataset schema)
-├── eval/
-│   ├── run_cabral_pilot.py       # Single-factor probe harness (5 backends)
-│   ├── run_weighted_probe.py     # Weighted-rank probe harness (3 backends)
-│   ├── batch_weighted_probe.sh   # Batch runner for counterfactual sweep
-│   ├── batch_weighted_probe_indist.sh  # Batch runner for in-distribution sweep
-│   ├── analyze_pilot.py          # Reproduces single-factor matrix
-│   ├── analyze_weighted_probe.py # Reproduces weighted-rank matrix
-│   ├── gen_c2_c3.py              # Generates C2 and C3 variants
-│   └── requirements.txt
-├── instances/                # Benchmark dataset
-│   ├── facet-neg-00NN.json   #   10 real in-distribution cases
-│   ├── facet-neg-cf-00N.json #   3 counterfactual variants
-│   ├── perturbations/        #   C2 weight-perturbation variants
-│   └── compliance/           #   C3 compliance-matched variants
-└── results/
-    ├── facet-neg-*-real-*.json    # Raw single-factor probe outputs
-    └── weighted-probe/            # Raw weighted-rank probe outputs
-```
-
-## Reproducing the Results
+## Reproduce in 60 seconds
 
 ```bash
+git clone https://github.com/pranaalpha/facet-benchmark && cd facet-benchmark
 pip install -r eval/requirements.txt
 
-# Reproduce the single-factor probe matrix (Table 1 & 2 in paper)
+# Regenerate Table 2 and Table 3 from the raw JSON outputs in results/
 python3 eval/analyze_pilot.py
-
-# Reproduce the weighted-rank probe matrix (Table 4 & 5 in paper)
 python3 eval/analyze_weighted_probe.py
+
+# Mechanically verify every numeric claim in the paper against the raw data
+python3 eval/verify_paper_numbers.py
 ```
 
-Both scripts read the raw JSON result files in `results/` and print the tables exactly as they appear in the paper.
+The last command re-derives every number in the paper from `results/*.json` and prints `PASS`/`FAIL` for each. Current state: **80/80 PASS**. This runs automatically on every push via the CI badge above.
 
-## Running New Models
+---
 
-### Single-factor probe
+## What's in the repo
 
-```bash
-python3 eval/run_cabral_pilot.py  # runs the full C0/C2/C3 protocol
-# Environment variables control backend and model:
-FACET_BACKEND=claude FACET_MODEL=opus python3 eval/run_cabral_pilot.py
-FACET_BACKEND=bedrock FACET_MODEL=deepseek.v3.2 python3 eval/run_cabral_pilot.py
-```
+| Path | What |
+|---|---|
+| [`PAPER_ARXIV_v3.pdf`](PAPER_ARXIV_v3.pdf) | The paper (14 pages) |
+| [`instances/`](instances/) | 10 in-distribution legal cases + 3 counterfactual variants + adversarial rewrites + C2 perturbations |
+| [`results/weighted-probe/`](results/weighted-probe/) | Raw JSON outputs from all probe runs (~350 files) |
+| [`eval/`](eval/) | Probe harnesses + analysis scripts + numeric verifier |
+| [`figures/`](figures/) | Generated from raw JSON by scripts in `eval/` |
+| [`factor_type_taxonomy.md`](factor_type_taxonomy.md) | 17-type doctrinal taxonomy |
+| [`SPEC.md`](SPEC.md) | Full methodology blueprint (pilot implements a subset) |
 
-### Weighted-rank probe
+---
 
-```bash
-# Single run
-python3 eval/run_weighted_probe.py --instance facet-neg-cf-002 --backend claude --model opus
-python3 eval/run_weighted_probe.py --instance facet-neg-cf-002 --backend bedrock --model deepseek.v3.2
-python3 eval/run_weighted_probe.py --instance facet-neg-cf-002 --backend codex --model gpt-5.4
+## The four probes
 
-# Full batch across all 8 models × 3 counterfactuals
-bash eval/batch_weighted_probe.sh
+1. **P1 (single-factor):** "Which one factor is most important?" Top-1 attribution.
+2. **P2 (cued weighted-rank):** "Assign percentages to all N factors summing to 100." Distributed attribution with the factor list given.
+3. **P3 (adversarial weighted-rank):** Same as P2, but on adversarially-rewritten counterfactuals where the neutralization uses no syntactic cue words.
+4. **C2 (per-factor ablation):** Rewrite one factor at a time as neutral; measure whether the model's weight on that factor drops.
 
-# Full batch across all 8 models × 3 in-distribution anchors
-bash eval/batch_weighted_probe_indist.sh
+Each probe catches a different failure mode. The paper shows the profile is asymmetric across model families.
 
-# Dry-run (prints the prompt without calling the API)
-python3 eval/run_weighted_probe.py --instance facet-neg-cf-002 --model opus --dry-run
-```
+---
 
-## Backends
+## Models evaluated
 
-| Backend | How it works | Models supported |
+| Model | Provider | Parameters (reported) |
 |---|---|---|
-| **claude** | Anthropic Claude CLI (`claude`) | Claude Sonnet, Opus, extended thinking |
-| **codex** | OpenAI Codex CLI (`codex`) | GPT-5.4 |
-| **bedrock** | AWS Bedrock Converse API (`aws` CLI) | DeepSeek, Mistral, Llama 4, Qwen3 |
-| **ollama** | Local Ollama server | any local model |
-| **gemini** | Google Gemini CLI (removed from default due to quota limits) | Gemini |
+| Claude Sonnet 4.6 | Anthropic | undisclosed |
+| Claude Opus 4.6 | Anthropic | undisclosed |
+| GPT-5.4 | OpenAI | undisclosed |
+| DeepSeek v3.2 | Bedrock | 671B / 37B active |
+| Mistral Large 3 | Bedrock | 675B / 41B active |
+| Llama 4 Maverick | Bedrock | 400B / 17B active |
+| Llama 4 Scout | Bedrock | 109B / 17B active |
+| Qwen3 Next 80B-A3B | Bedrock | 80B / 3.9B active |
 
-The harness auto-dispatches from the `--backend` flag or the `FACET_BACKEND` environment variable. Single-temperature, single-sample evaluation; tool use disabled.
+Closed-source models are evaluated via vendor APIs at default temperature; open-weight Bedrock models at `T=0`. All harnesses are single-sample, tool-use disabled.
 
-## Instance Schema
+---
 
-Each instance JSON contains:
+## Running new models
 
-- `instance_id` — unique ID
-- `source_case` — citation to the real case
-- `doctrine` — doctrinal framework (e.g., `rowland_duty`)
-- `case_background` — factual narrative
-- `factors[]` — array of factor objects with:
-  - `factor_id` — `f1` through `fN`
-  - `factor_type` — from `factor_type_taxonomy.md`
-  - `text` — the factor statement
-  - `directionality` — which party the factor favors
-  - `in_case_weight_estimate` — author-estimated weight (sum to ~1.0)
-- `question` — the question posed to the model
-- `ground_truth` — the appellate holding
+```bash
+# P1 single-factor probe
+FACET_BACKEND=claude FACET_MODEL=opus python3 eval/run_cabral_pilot.py
 
-Counterfactual instances (`facet-neg-cf-*.json`) additionally mark the neutralized factor with `counterfactual_note: "CFNEUTRALIZED"`.
+# P2 / P3 weighted-rank probe (single instance)
+python3 eval/run_weighted_probe.py --instance facet-neg-cf-002 --backend claude --model opus
 
-See `factor_type_taxonomy.md` for the full factor-type vocabulary.
+# Full batch sweep across all 8 models × 3 counterfactuals
+bash eval/batch_weighted_probe.sh
+```
 
-## Models Evaluated
+Supported backends: `claude` (Anthropic CLI), `codex` (OpenAI CLI), `bedrock` (AWS Converse API), `ollama` (local), `gemini` (optional).
 
-| Model | Parameters | Single-factor probe | Weighted-rank probe |
-|---|---|---|---|
-| Claude Sonnet 4.6 | undisclosed | 1/3 faithful | **3/3 faithful** |
-| Claude Opus 4.6 | undisclosed | 1/3 faithful | **3/3 faithful** |
-| GPT-5.4 | undisclosed | 1/3 faithful | **3/3 faithful** |
-| DeepSeek v3.2 | 671B / 37B active | 2/3 faithful | **3/3 faithful** |
-| Mistral Large 3 | 675B / 41B active | 2/3 faithful | **3/3 faithful** |
-| Llama 4 Maverick | 400B / 17B active | 1/3 faithful | **3/3 faithful** |
-| Llama 4 Scout | 109B / 17B active | 2/3 faithful | **3/3 faithful** |
-| Qwen3 Next 80B-A3B | 80B / 3.9B active | 1/3 faithful | **3/3 faithful** |
+---
 
-Claude Opus 4.6 with extended thinking was included in the single-factor probe arm (identical behavior to default); omitted from the weighted-rank arm for the same reason.
+## Key numbers
 
-## Status and Limitations
+| Metric | Value |
+|---|---|
+| Frontier model configurations evaluated | 8 |
+| Labs represented | 6 |
+| In-distribution legal cases | 10 |
+| Counterfactual variants | 3 (+ 4 adversarial rewrites) |
+| Total C2 ablation trials | 144 |
+| Raw JSON output files | 350+ |
+| Numeric claims mechanically verified | 80/80 |
+| P1 vs P2 McNemar's exact *p* | 2.4×10⁻⁴ |
+| GPT-5.4 CF-Cabral family n | 22 |
+| GPT-5.4 wrong-outcome rate | 7/22, 95% Wilson CI [16%, 53%] |
 
-This is a **pilot study**. Key limitations:
+---
 
-- 13 instances (10 + 3 counterfactual) is pilot scale; expansion to 20–40 is in progress
-- Counterfactual ground truth is author-declared (synthetic cases cannot be adjudicated)
-- Counterfactuals have overwhelming directional signal; decision-boundary variants are future work
-- The weighted-rank probe could itself be gamed by a model that learned "assign 0 to neutral-sounding factors"; adversarial probe variants are future work
-- Factor definitions and weights are sourced from secondary legal digests; primary-text verification is ongoing
-- California-only instances; cross-jurisdictional replication is future work
+## Status
 
-See the paper §6 for the full limitations list.
+This is a **pilot study**. Known limitations (paper §6):
 
-## Paper
+- 13 base instances is pilot scale; the four-probe protocol and harness scale to larger instance sets with no design changes
+- Counterfactual ground truth is author-declared (synthetic cases cannot be appellate-adjudicated)
+- California tort cases only; cross-jurisdictional replication is future work
+- C2 perturbations use the same syntactic cue words that the P3 adversarial probe is designed to remove; cue-free C2 variants are future work
+- DeepSeek at Bedrock `T=0` is not fully deterministic in practice
 
-Preprint on SSRN (link forthcoming) and on GitHub: [PAPER_ARXIV_v2.pdf](PAPER_ARXIV_v2.pdf)
+---
 
 ## Citation
 
 ```bibtex
 @unpublished{jambula2026facet,
-  title={{FACET}: Measuring Attribution Faithfulness in Multi-Factor {LLM} Reasoning},
-  author={Jambula, Venkateshwar Reddy},
-  year={2026},
-  note={Preprint},
-  url={https://github.com/Venkateshwar-PortoAI/facet-benchmark}
+  title  = {{FACET}: Measuring Attribution Faithfulness in Multi-Factor {LLM} Reasoning},
+  author = {Jambula, Venkateshwar Reddy},
+  year   = {2026},
+  note   = {Preprint},
+  url    = {https://github.com/pranaalpha/facet-benchmark}
 }
 ```
 
 ## License
 
-- **Code** (`eval/`): MIT License — see [LICENSE](LICENSE)
+- **Code** (`eval/`): MIT — see [LICENSE](LICENSE)
 - **Data** (`instances/`, `results/`): CC BY 4.0 — see [LICENSE-DATA](LICENSE-DATA)
 
 ## Contact
 
-Venkateshwar Reddy Jambula — venkateshwar.jambula@pranaalpha.com
+Venkateshwar Reddy Jambula  ·  venkateshwar.jambula@pranaalpha.com

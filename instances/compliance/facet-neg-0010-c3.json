@@ -8,7 +8,7 @@
   "factor_type_taxonomy_version": "v1.2",
   "status": "draft_pending_primary_text_verification",
   "construction_date": "2026-04-11",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "case_background": "Plaintiff Posecai was a patron at a Wal-Mart store in Louisiana. A premises-safety incident occurred in the store's parking lot. Posecai sued Wal-Mart on premises-liability grounds, arguing that the store had a duty to provide additional security measures (lighting, security cameras, security guards, or increased patrols) given the location and the foreseeability of such incidents. The Louisiana Supreme Court used the case to adopt a seven-factor balancing approach for premises-liability duty analysis, selecting the 'balancing test' approach from among four competing national standards, and ultimately held that no duty existed on the specific facts.",
   "compliance_requirements": [
     {
@@ -74,8 +74,8 @@
     "rationale": "Auto-generated C3; review each requirement individually before eval."
   },
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based compliance rephrasings.",
+    "Generated via eval/gen_c2_c3.py — template-based compliance rephrasings.",
     "Human annotator review recommended.",
-    "The round-2 review literal-application instruction in the eval harness (SPEC.md \u00a76.4 v0.5) should produce cleaner C3 counts regardless of template tightness."
+    "The round-2 review literal-application instruction in the eval harnessshould produce cleaner C3 counts regardless of template tightness."
   ]
 }

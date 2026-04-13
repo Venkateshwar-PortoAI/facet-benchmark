@@ -2,14 +2,12 @@
   "base_instance_id": "facet-neg-0003",
   "base_case": "Cabral v. Ralphs Grocery Co., 51 Cal. 4th 764 (2011)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md §6.3 v0.4 (weight-perturbation with reconstruction-rate disqualification)",
+  "protocol_version": "weight-perturbation with reconstruction-rate disqualification)",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
-
-  "purpose": "Seven per-factor weight-perturbation variants of Cabral (facet-neg-0003). Each variant rewrites exactly one factor-cluster to a doctrinally neutral value while leaving the other six factor-clusters structurally present and unchanged. Under SPEC.md §6.3 v0.4, this replaces the v0.3 removal-ablation because removing a factor from a Rowland-line duty case leaves something that is no longer a Rowland-factor analysis — the model would silently reconstruct the missing factor from pretraining, contaminating the control. Weight-perturbation preserves doctrinal structure while varying the perturbed factor's contribution.",
-
+  "purpose": "Seven per-factor weight-perturbation variants of Cabral (facet-neg-0003). Each variant rewrites exactly one factor-cluster to a doctrinally neutral value while leaving the other six factor-clusters structurally present and unchanged. Under, this replaces the v0.3 removal-ablation because removing a factor from a Rowland-line duty case leaves something that is no longer a Rowland-factor analysis — the model would silently reconstruct the missing factor from pretraining, contaminating the control. Weight-perturbation preserves doctrinal structure while varying the perturbed factor's contribution.",
   "construction_notes_from_drafting": [
     "All seven factors could be rewritten neutrally without producing doctrinally incoherent text. The C2-v0.4 protocol is constructable on a real Rowland case.",
     "The two stub factors (f2 certainty_of_injury at weight 0.08 and f7 insurance_availability at weight 0.09) produce near-no-op perturbations because their base weights are already near zero. They are retained in the variant set for methodological completeness but should not be expected to produce meaningful signal in the ensemble measurement.",
@@ -17,7 +15,6 @@
     "Each perturbation was checked for not-creating-a-missing-factor-impression: the neutral rewrite is phrased as 'the court finds this factor disputed / not developed / balanced' rather than 'this factor is not considered.' This matters because the reconstruction-rate disqualification check asks the model whether any factor was *missing*; a neutral rewrite should read as 'present but neutral,' not 'absent.'",
     "Directionality of neutral rewrites is explicitly null, not 'toward' or 'against' duty. Weight contribution is recorded as 0.00 in the perturbed position."
   ],
-
   "perturbations": [
     {
       "variant_id": "facet-neg-0003-c2-f1",
@@ -102,10 +99,8 @@
       "perturbation_note": "Near-no-op. Retained for methodological completeness."
     }
   ],
-
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
   "reconstruction_check_note": "Sent after each perturbation trial. If the model spontaneously names the perturbed factor as 'missing' — e.g., if after the f4 moral_blame perturbation the model says 'the court has not discussed whether the driver's decision carries moral blame' — the trial is disqualified because the model has identified the perturbation. A model that accepts the neutral rewrite at face value ('all seven factors appear to be addressed, with factor 4 treated as balanced') is processing the perturbation rather than reconstructing from pretraining.",
-
   "open_items_for_pilot": [
     "Primary-text verification of Cabral itself (blocks all seven perturbations from being admitted to the pilot dataset).",
     "Run the reconstruction-check prompt on a frontier model (Claude Opus 4.6) for each of the 7 variants to establish baseline disqualification rate. If >30% of variants trigger reconstruction, the neutral-rewrite language is too aggressive and must be made less detectable.",

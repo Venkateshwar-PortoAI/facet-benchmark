@@ -16,7 +16,7 @@
     "Facts are synthetic — no actual appellate case has these facts in this combination. The instance is clearly labeled as counterfactual_synthetic.",
     "Ground truth is defined by the weighted-factor analysis: with foreseeability neutralized and 6 factors pointing against duty, the correct WADD answer is NO duty.",
     "A LEX-collapsed model that defaults to 'foreseeability is the threshold' reasoning cannot compute this — it needs to actually sum across the other factors.",
-    "This instance is NOT admitted to the primary dataset under SPEC.md §5 constraint 7 (synthetic hypotheticals excluded). It is a separate counterfactual arm of the benchmark, marked explicitly.",
+    "This instance is NOT admitted to the primary dataset underconstraint 7 (synthetic hypotheticals excluded). It is a separate counterfactual arm of the benchmark, marked explicitly.",
     "If v1 results show that models answer 'yes' on this counterfactual despite the 6-factor weight toward 'no', that is direct evidence of LEX-locked reasoning that produces wrong answers when the canonical factor is removed."
   ],
   "case_background": "A commercial truck driver employed by a major grocery chain pulled his commercial rig onto the freeway shoulder during a brief snack stop. The driver was in full compliance with all commercial vehicle regulations, the freeway shoulder at that location was wide enough to fully accommodate the vehicle, visibility was excellent, the location was not identified in any state-level high-risk-shoulder-stop database, and the company's training and safety protocols explicitly permitted brief non-emergency stops for driver wellness. Plaintiff Cabral, driving a pickup truck on the highway, experienced an unexpected medical event and drifted onto the shoulder, striking the parked truck. Cabral died. His widow sued the grocery company for negligence, alleging that the company owed a duty to refrain from all non-emergency shoulder stops. The case turns on whether the seven-factor Rowland duty analysis supports extending duty under these specific facts where the driver's conduct was commercially routine and safely executed.",
@@ -97,7 +97,7 @@
     }
   ],
   "weight_sum_check": {
-    "sum": 1.00,
+    "sum": 1.0,
     "max_factor_weight": 0.18,
     "passes_feature_3_primary_arm_0.7": true,
     "note": "6 of 7 factors point against duty (f2-f6 + policy/burden dominance); only foreseeability (f1) is neutralized. Aggregate weight against duty: ~0.84."
@@ -110,7 +110,7 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
     "n_factor_clusters": 7,
     "matched_c3_compliance_id": null,
     "red_flags": [],

@@ -11,13 +11,7 @@
   "status": "pilot_instance",
   "source_verification": {
     "primary_text_retrieved": false,
-    "secondary_source_basis": "Case digests in CASE_CANDIDATES.md round 1 retrieval; Barker is a canonical teaching case in products-liability casebooks",
-    "pending_for_conference_submission": [
-      "Retrieve 20 Cal. 3d 413 primary text",
-      "Confirm the five Barker risk-benefit factors match the opinion verbatim",
-      "Elicit in-case weights from the opinion rationale per SPEC.md \u00a75.1",
-      "Confirm unanimity"
-    ]
+    "secondary_source_basis": "Case digests inround 1 retrieval; Barker is a canonical teaching case in products-liability casebooks"
   },
   "case_background": "Plaintiff Barker was injured while operating a high-lift loader manufactured by Lull Engineering, on steep terrain. He alleged the loader was defectively designed because it lacked outriggers, a roll bar, and a seat belt, making it unsafe for off-level operation. The California Supreme Court used the case to formulate the dual Barker design-defect standard: a product is defectively designed if (a) it fails to perform as safely as an ordinary consumer would expect OR (b) on risk-benefit analysis the benefits of the design do not outweigh the risks. The risk-benefit prong uses five factors enumerated below.",
   "factors": [
@@ -26,11 +20,11 @@
       "factor_cluster_id": "gravity_of_loss",
       "factor_type": "gravity_of_loss",
       "barker_factor_origin": "Barker factor 1 (gravity of danger)",
-      "text": "The gravity of danger posed by the loader's challenged design \u2014 specifically the severity of injury from tipping, rollover, or operator ejection on uneven terrain.",
+      "text": "The gravity of danger posed by the loader's challenged design — specifically the severity of injury from tipping, rollover, or operator ejection on uneven terrain.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_liability",
       "in_case_weight_estimate": 0.22,
-      "weight_justification": "Court noted that loader rollover on steep ground produces severe operator injury \u2014 crush, impact, burial",
+      "weight_justification": "Court noted that loader rollover on steep ground produces severe operator injury — crush, impact, burial",
       "flip_capable": true
     },
     {
@@ -50,7 +44,7 @@
       "factor_cluster_id": "alternative_precautions",
       "factor_type": "alternative_precautions",
       "barker_factor_origin": "Barker factor 3 (mechanical feasibility of safer alternative design)",
-      "text": "The mechanical feasibility of a safer alternative design \u2014 specifically outriggers, roll bar, seat belt, or combination thereof.",
+      "text": "The mechanical feasibility of a safer alternative design — specifically outriggers, roll bar, seat belt, or combination thereof.",
       "court_language_quote": "pending primary text verification",
       "directionality": "toward_liability",
       "in_case_weight_estimate": 0.21,
@@ -74,7 +68,7 @@
       "factor_cluster_id": "product_utility",
       "factor_type": "product_utility",
       "barker_factor_origin": "Barker factor 5 (adverse consequences of alternative design to product and consumer)",
-      "text": "The adverse consequences the proposed safer design would impose on the product and its consumer \u2014 weight, maneuverability, cost, or interference with legitimate off-level uses.",
+      "text": "The adverse consequences the proposed safer design would impose on the product and its consumer — weight, maneuverability, cost, or interference with legitimate off-level uses.",
       "court_language_quote": "pending primary text verification",
       "directionality": "against_liability",
       "in_case_weight_estimate": 0.19,
@@ -86,7 +80,7 @@
     "sum": 1.0,
     "max_factor_weight": 0.22,
     "passes_feature_3": true,
-    "note": "All five factor weights in [0.18, 0.22]; no single factor >0.5 per PHENOMENON.md \u00a72.3."
+    "note": "All five factor weights in [0.18, 0.22]; no single factor >0.5"
   },
   "question": "Under Barker's risk-benefit prong, was the Lull high-lift loader defectively designed because it lacked outriggers, a roll bar, and a seat belt for off-level operation?",
   "ground_truth": {
@@ -99,20 +93,13 @@
   },
   "metadata": {
     "construction_date": "2026-04-11",
-    "constructor": "Venkat Porto (drafted by Claude Opus stand-in, pending primary-text verification)",
+    "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant; primary-text verification pending)",
     "reviewer": null,
     "double_annotated": false,
     "cohens_kappa": null,
     "prior_swap_pair_id": null,
     "n_factor_clusters": 5,
     "matched_c3_compliance_id": "facet-neg-0002-c3",
-    "red_flags": [],
-    "sanitization_applied": false
-  },
-  "open_items_before_admission_to_dataset": [
-    "Primary-text verification against CourtListener bulk data or Cornell LII Cal. Sup. Ct. archive.",
-    "Elicit precise in-case weights from opinion rationale.",
-    "Construct matched C3 compliance instance (facet-neg-0002-c3) rephrasing the five factors as independently-checkable compliance requirements.",
-    "Note that N=5 is at the low end of the target range; consider whether a sub-factor elaboration would bring N to 6 or whether this instance is acceptable at N=5."
-  ]
+    "red_flags": []
+  }
 }

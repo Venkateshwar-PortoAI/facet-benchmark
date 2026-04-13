@@ -1,10 +1,10 @@
 {
   "base_instance_id": "facet-neg-cf-003",
-  "base_case": "Biakanja v. Irving \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "base_case": "Biakanja v. Irving — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md \u00a76.3 v0.4",
+  "protocol_version": "",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
   "perturbations": [
@@ -47,7 +47,7 @@
       "perturbed_factor_type": "scope_of_risk",
       "base_weight": 0.21,
       "base_directionality": "against_duty",
-      "original_text": "The causal connection between the document preparer's conduct and any alleged harm to the recipient was heavily attenuated by multiple intervening events \u2014 subsequent deaths of named relatives, changes in testator circumstances, and the conditional structure of the bequest itself.",
+      "original_text": "The causal connection between the document preparer's conduct and any alleged harm to the recipient was heavily attenuated by multiple intervening events — subsequent deaths of named relatives, changes in testator circumstances, and the conditional structure of the bequest itself.",
       "neutral_rewrite": "Whether this consideration (scope of risk) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f4 (scope_of_risk). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -58,7 +58,7 @@
       "perturbed_factor_type": "moral_blame",
       "base_weight": 0.19,
       "base_directionality": "against_duty",
-      "original_text": "The document preparer was a licensed attorney in good standing acting within the scope of their profession \u2014 not an unauthorized practitioner. Moral blame for the preparation is minimal.",
+      "original_text": "The document preparer was a licensed attorney in good standing acting within the scope of their profession — not an unauthorized practitioner. Moral blame for the preparation is minimal.",
       "neutral_rewrite": "Whether this consideration (moral blame) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f5 (moral_blame). Human review recommended before final dataset admission.",
       "is_stub_factor": false
@@ -77,8 +77,8 @@
   ],
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based neutral rewrites.",
+    "Generated via eval/gen_c2_c3.py — template-based neutral rewrites.",
     "Human annotator review recommended before final dataset admission.",
-    "Reconstruction-check disqualification (SPEC.md \u00a76.3 v0.4) applies at eval time."
+    "Reconstruction-check disqualificationapplies at eval time."
   ]
 }

@@ -1,10 +1,10 @@
 {
   "base_instance_id": "facet-neg-cf-001",
-  "base_case": "Cabral v. Ralphs Grocery Co. \u2014 SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
+  "base_case": "Cabral v. Ralphs Grocery Co. — SYNTHETIC COUNTERFACTUAL VARIANT (not a real decided case)",
   "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-  "protocol_version": "SPEC.md \u00a76.3 v0.4",
+  "protocol_version": "",
   "taxonomy_version": "v1.2",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
   "construction_date": "2026-04-11",
   "status": "draft_pending_primary_text_verification",
   "perturbations": [
@@ -14,7 +14,7 @@
       "perturbed_factor_type": "probability_of_harm",
       "base_weight": 0.05,
       "base_directionality": "neutralized",
-      "original_text": "Whether the foreseeability of collision on a clear, fully-paved, high-visibility shoulder location is sufficient to support a general duty of care is treated here as an unresolved question on the record \u2014 neither clearly foreseeable nor clearly unforeseeable. The location was not in any prior-incident database, the visibility was excellent, and no prior similar collision has been documented at or near this milepost.",
+      "original_text": "Whether the foreseeability of collision on a clear, fully-paved, high-visibility shoulder location is sufficient to support a general duty of care is treated here as an unresolved question on the record — neither clearly foreseeable nor clearly unforeseeable. The location was not in any prior-incident database, the visibility was excellent, and no prior similar collision has been documented at or near this milepost.",
       "neutral_rewrite": "Whether this consideration (probability of harm) supports or opposes the outcome is treated by the court as neither clearly established nor clearly refuted on this record; the factor is present but is not developed as a load-bearing element of the analysis.",
       "perturbation_note": "Auto-generated template rewrite for factor f1 (probability_of_harm). Human review recommended before final dataset admission.",
       "is_stub_factor": true
@@ -88,8 +88,8 @@
   ],
   "reconstruction_check_prompt": "Does the case description above omit any factor you believe a court would typically weigh in this analysis? If yes, name the omitted factor and explain what weight you would assign it. If no, say so.",
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based neutral rewrites.",
+    "Generated via eval/gen_c2_c3.py — template-based neutral rewrites.",
     "Human annotator review recommended before final dataset admission.",
-    "Reconstruction-check disqualification (SPEC.md \u00a76.3 v0.4) applies at eval time."
+    "Reconstruction-check disqualificationapplies at eval time."
   ]
 }

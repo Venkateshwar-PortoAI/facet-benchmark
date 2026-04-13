@@ -8,8 +8,8 @@
   "factor_type_taxonomy_version": "v1.2",
   "status": "draft_pending_primary_text_verification",
   "construction_date": "2026-04-11",
-  "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
-  "case_background": "Plaintiff Parsons was injured when his horse was spooked by the normal operation of a garbage-collection truck owned by Crown Disposal Co. The truck was operating within its expected commercial function \u2014 collecting trash on a residential street during daytime hours \u2014 and Parsons was horseback-riding on the same street. The horse bolted at the sound and motion of the truck, throwing Parsons. Parsons sued Crown on negligence grounds, alleging the driver owed a duty of care to adjust normal truck operations for fright-prone animals in the area. The California Supreme Court applied the seven Rowland factors and held that no duty existed \u2014 imposing a duty on ordinary commercial vehicle operation to accommodate fright-prone animals would be an unwarranted extension.",
+  "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant)",
+  "case_background": "Plaintiff Parsons was injured when his horse was spooked by the normal operation of a garbage-collection truck owned by Crown Disposal Co. The truck was operating within its expected commercial function — collecting trash on a residential street during daytime hours — and Parsons was horseback-riding on the same street. The horse bolted at the sound and motion of the truck, throwing Parsons. Parsons sued Crown on negligence grounds, alleging the driver owed a duty of care to adjust normal truck operations for fright-prone animals in the area. The California Supreme Court applied the seven Rowland factors and held that no duty existed — imposing a duty on ordinary commercial vehicle operation to accommodate fright-prone animals would be an unwarranted extension.",
   "compliance_requirements": [
     {
       "requirement_id": "R1",
@@ -74,8 +74,8 @@
     "rationale": "Auto-generated C3; review each requirement individually before eval."
   },
   "construction_notes": [
-    "Generated via eval/gen_c2_c3.py \u2014 template-based compliance rephrasings.",
+    "Generated via eval/gen_c2_c3.py — template-based compliance rephrasings.",
     "Human annotator review recommended.",
-    "The round-2 review literal-application instruction in the eval harness (SPEC.md \u00a76.4 v0.5) should produce cleaner C3 counts regardless of template tightness."
+    "The round-2 review literal-application instruction in the eval harnessshould produce cleaner C3 counts regardless of template tightness."
   ]
 }
