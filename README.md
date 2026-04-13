@@ -2,9 +2,10 @@
 
 **Measuring Attribution Faithfulness in Multi-Factor LLM Reasoning**
 
+[![DOI](https://zenodo.org/badge/1208742147.svg)](https://doi.org/10.5281/zenodo.19557436)
 [![Verify paper numbers](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml/badge.svg)](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml)
 
-Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pdf)
+Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pdf)  ·  [Zenodo archive](https://doi.org/10.5281/zenodo.19557436)
 
 ---
 
@@ -146,12 +147,14 @@ This is a **pilot study**. Known limitations (paper §6):
 ## Citation
 
 ```bibtex
-@unpublished{jambula2026facet,
-  title  = {{FACET}: Measuring Attribution Faithfulness in Multi-Factor {LLM} Reasoning},
-  author = {Jambula, Venkateshwar Reddy},
-  year   = {2026},
-  note   = {Preprint},
-  url    = {https://github.com/Venkateshwar-PortoAI/facet-benchmark}
+@software{jambula2026facet,
+  title     = {{FACET}: Measuring Attribution Faithfulness in Multi-Factor {LLM} Reasoning},
+  author    = {Jambula, Venkateshwar Reddy},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {v3.0},
+  doi       = {10.5281/zenodo.19557436},
+  url       = {https://doi.org/10.5281/zenodo.19557436}
 }
 ```
 
