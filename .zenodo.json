@@ -1,0 +1,32 @@
+{
+  "title": "FACET: Measuring Attribution Faithfulness in Multi-Factor LLM Reasoning",
+  "description": "FACET is a benchmark for measuring whether large language models actually integrate multiple factors when they reason, or quietly collapse onto whichever one factor is most canonical in their training data. The benchmark instantiates a four-probe protocol (top-1 single-factor, cued weighted-rank, adversarial weighted-rank, and per-factor ablation) on US tort balancing-test cases and reports an asymmetric faithfulness profile across eight frontier models from six labs. Includes the full harness, raw model outputs, instance dataset, generated figures, the 14-page paper, and a CI-verified mechanical numeric verification of every quantitative claim in the paper.",
+  "creators": [
+    {
+      "name": "Jambula, Venkateshwar Reddy",
+      "affiliation": "Pranaalpha Labs"
+    }
+  ],
+  "keywords": [
+    "large language models",
+    "attribution faithfulness",
+    "multi-factor reasoning",
+    "explainability",
+    "benchmark",
+    "legal NLP",
+    "LEX vs WADD",
+    "LLM evaluation",
+    "trustworthy machine learning"
+  ],
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Venkateshwar-PortoAI/facet-benchmark",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-preprint"
+    }
+  ]
+}
