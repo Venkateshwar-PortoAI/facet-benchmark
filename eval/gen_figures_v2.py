@@ -138,67 +138,78 @@ plt.close()
 
 
 # =====================================================================
-# Figure 2 — Adversarial validation bar chart
+# Figure 2 — Adversarial validation bar chart (single bar per model)
 # =====================================================================
+# Sort: open-weight (left) → closed frontier (right), each group sorted by value
 models_adv = [
-    "DeepSeek v3.2",
-    "Mistral Large 3",
-    "Qwen3 Next",
+    "DeepSeek\nv3.2",
+    "Mistral\nLarge 3",
+    "Qwen3 Next\n80B-A3B",
     "Llama 4\nMaverick",
     "Llama 4\nScout",
     "Claude\nSonnet 4.6",
     "Claude\nOpus 4.6",
     "GPT-5.4",
 ]
-standard_f3 = [0, 0, 0, 0, 0, 0, 0, 0]
 adversarial_f3 = [0, 0, 0, 0, 0, 10, 25, 30]
 is_closed = [False, False, False, False, False, True, True, True]
 
-fig, ax = plt.subplots(figsize=(10, 5))
+# Color: green for 0, orange for 10-20, red for >20
+colors = []
+for v in adversarial_f3:
+    if v == 0:
+        colors.append("#2ecc71")
+    elif v < 20:
+        colors.append("#f39c12")
+    else:
+        colors.append("#e74c3c")
+
+fig, ax = plt.subplots(figsize=(10, 5.5))
 
 x = np.arange(len(models_adv))
-width = 0.38
+bars = ax.bar(x, adversarial_f3, width=0.65, color=colors,
+              edgecolor="white", linewidth=2)
 
-bars1 = ax.bar(x - width/2, standard_f3, width,
-               label="Standard CF-Barker\n(F3 labeled 'unresolved')",
-               color="#6baed6", edgecolor="white", linewidth=1.5)
-
-# Color adversarial bars by open/closed
-adv_colors = ["#2ecc71" if not c else ("#e74c3c" if v >= 20 else "#f39c12")
-              for c, v in zip(is_closed, adversarial_f3)]
-bars2 = ax.bar(x + width/2, adversarial_f3, width,
-               label="Adversarial CF-Barker\n(signal words removed)",
-               color=adv_colors, edgecolor="white", linewidth=1.5)
-
-# Value labels on top
-for i, (s, a) in enumerate(zip(standard_f3, adversarial_f3)):
-    if s > 0:
-        ax.text(i - width/2, s + 1, f"{s}%", ha="center", va="bottom", fontsize=9)
-    if a > 0:
-        ax.text(i + width/2, a + 1, f"{a}%", ha="center", va="bottom",
-                fontsize=10, fontweight="bold")
+# Value labels on top of every bar (including 0%)
+for i, v in enumerate(adversarial_f3):
+    if v == 0:
+        ax.text(i, 1.5, "0%", ha="center", va="bottom",
+                fontsize=11, fontweight="bold", color="#2ecc71")
     else:
-        ax.text(i + width/2, 1, "0%", ha="center", va="bottom", fontsize=9, color="#2ecc71")
+        ax.text(i, v + 1.2, f"{v}%", ha="center", va="bottom",
+                fontsize=12, fontweight="bold", color="#1a1a1a")
+
+# Reference line at 20% (natural-distribution weight for 5-factor case)
+ax.axhline(y=20, color="#999", linestyle=":", linewidth=1, alpha=0.6, zorder=0)
+ax.text(7.6, 20.5, "20% = uniform\nbaseline (1/5)", fontsize=8,
+        color="#666", style="italic", ha="right")
 
 # Dividing line between open and closed models
-ax.axvline(x=4.5, color="#999", linestyle="--", linewidth=1, alpha=0.7)
-ax.text(2, 36, "Open-weight models\n(semantically robust)", ha="center",
-        fontsize=10, fontstyle="italic", color="#555")
-ax.text(6.5, 36, "Closed frontier models\n(signal-word dependent)", ha="center",
-        fontsize=10, fontstyle="italic", color="#555")
+ax.axvline(x=4.5, color="#666", linestyle="--", linewidth=1.2, alpha=0.7, zorder=0)
+
+# Group labels above bars
+ax.text(2, 38, "OPEN-WEIGHT MODELS", ha="center",
+        fontsize=11, fontweight="bold", color="#2ecc71")
+ax.text(2, 35.5, "(semantically robust)", ha="center",
+        fontsize=9, fontstyle="italic", color="#555")
+ax.text(6.5, 38, "CLOSED FRONTIER MODELS", ha="center",
+        fontsize=11, fontweight="bold", color="#c0392b")
+ax.text(6.5, 35.5, "(signal-word dependent)", ha="center",
+        fontsize=9, fontstyle="italic", color="#555")
 
 ax.set_xticks(x)
-ax.set_xticklabels(models_adv, fontsize=9)
-ax.set_ylabel("Weight assigned to F3 (neutralized factor)", fontsize=11)
+ax.set_xticklabels(models_adv, fontsize=10)
+ax.set_ylabel("Weight assigned to F3 on adversarial CF-Barker\n(F3 is the neutralized factor → target is 0%)",
+              fontsize=10.5)
 ax.set_ylim(0, 42)
 ax.set_yticks([0, 10, 20, 30, 40])
 ax.set_yticklabels(["0%", "10%", "20%", "30%", "40%"])
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
-ax.legend(loc="upper left", fontsize=9, frameon=False)
+ax.tick_params(axis="x", length=0)
 
-ax.set_title("Adversarial Validation: Open-Weight Models Are Semantically Robust,\nClosed Frontier Models Are Partly Signal-Word Dependent",
-             fontweight="bold", fontsize=12, pad=12)
+ax.set_title("Adversarial Validation: Removing Signal Words Splits Open vs Closed Models",
+             fontweight="bold", fontsize=13, pad=18)
 
 plt.tight_layout()
 fig.savefig(OUT / "fig2_adversarial_validation.png", bbox_inches="tight", dpi=300)
