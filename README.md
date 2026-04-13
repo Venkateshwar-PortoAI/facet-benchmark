@@ -68,18 +68,18 @@ Each probe catches a different failure mode. The paper shows the profile is asym
 
 ## Models evaluated
 
-| Model | Provider | Parameters (reported) |
+| Model | Provider | Class |
 |---|---|---|
-| Claude Sonnet 4.6 | Anthropic | undisclosed |
-| Claude Opus 4.6 | Anthropic | undisclosed |
-| GPT-5.4 | OpenAI | undisclosed |
-| DeepSeek v3.2 | Bedrock | 671B / 37B active |
-| Mistral Large 3 | Bedrock | 675B / 41B active |
-| Llama 4 Maverick | Bedrock | 400B / 17B active |
-| Llama 4 Scout | Bedrock | 109B / 17B active |
-| Qwen3 Next 80B-A3B | Bedrock | 80B / 3.9B active |
+| Claude Sonnet 4.6 | Anthropic | Frontier closed-source |
+| Claude Opus 4.6 | Anthropic | Frontier closed-source (flagship) |
+| GPT-5.4 | OpenAI | Frontier closed-source (flagship) |
+| DeepSeek v3.2 | Bedrock | Open-weight MoE · 671B total / 37B active |
+| Mistral Large 3 | Bedrock | Open-weight MoE · 675B total / 41B active |
+| Llama 4 Maverick | Bedrock | Open-weight MoE · 400B total / 17B active |
+| Llama 4 Scout | Bedrock | Open-weight MoE · 109B total / 17B active |
+| Qwen3 Next 80B-A3B | Bedrock | Open-weight MoE · 80B total / 3.9B active |
 
-Closed-source models are evaluated via vendor APIs at default temperature; open-weight Bedrock models at `T=0`. All harnesses are single-sample, tool-use disabled.
+Frontier labs do not publish parameter counts for their deployed models, so we report model class rather than fabricate a number. Closed-source models are evaluated via vendor APIs at default temperature; open-weight Bedrock models at `T=0`. All harnesses are single-sample, tool-use disabled.
 
 ---
 
