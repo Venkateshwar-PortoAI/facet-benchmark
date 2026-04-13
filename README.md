@@ -8,6 +8,20 @@ Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pd
 
 ---
 
+## What this is
+
+FACET is a benchmark for measuring whether large language models actually integrate multiple factors when they reason, or quietly collapse onto whichever one factor is most canonical in their training data.
+
+The problem we're testing: when an LLM is asked to weigh 5 to 10 different considerations and reach a decision — medical differential diagnosis, regulatory compliance review, legal balancing tests — do they actually weigh them all, or do they project the distributed reasoning down onto a single factor and answer as if only one mattered? This is the difference between weighted-additive integration (WADD) and lexicographic shortcutting (LEX) from the multi-attribute decision-making literature (Payne, Bettman and Johnson, 1993).
+
+We instantiate the test on US tort balancing cases — real appellate decisions that explicitly enumerate 5 to 10 factors and have verifiable ground truth. The methodology generalizes to any domain with explicit multi-factor structure. For regulated decision domains where LLMs are being audited for faithfulness (compliance review, medical triage, underwriting), a single-probe attribution test may systematically mis-report the underlying reasoning. This benchmark is a tool for catching that.
+
+## Why it matters for people building with LLMs
+
+Most current LLM explainability tooling uses forced-choice top-1 or top-k attribution probes ("which factor drove this decision?"). The headline result of this pilot is that the probe format itself determines what the model looks like. Under a top-1 probe, zero of eight frontier models look faithful on our counterfactual Barker case. Under a weighted-rank probe on the same models and the same case, all eight do. **The reasoning was distributed the whole time. The single-factor probe was compressing it.** Audit pipelines built on top-1 probes may be under-reporting distributed reasoning and over-reporting lexicographic failure.
+
+---
+
 ## The finding in one figure
 
 ![Probe format determines apparent attribution faithfulness](figures/fig1_probe_comparison.png)
