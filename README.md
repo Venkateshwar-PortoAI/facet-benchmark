@@ -2,7 +2,7 @@
 
 **Measuring Attribution Faithfulness in Multi-Factor LLM Reasoning**
 
-[![Verify paper numbers](https://github.com/pranaalpha/facet-benchmark/actions/workflows/verify-paper.yml/badge.svg)](https://github.com/pranaalpha/facet-benchmark/actions/workflows/verify-paper.yml)
+[![Verify paper numbers](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml/badge.svg)](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml)
 
 Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pdf)  ·  [Cover note](VC_COVER_NOTE.md)
 
@@ -26,7 +26,7 @@ This matters because forced-choice attribution probes (top-1, top-k) are the dom
 ## Reproduce in 60 seconds
 
 ```bash
-git clone https://github.com/pranaalpha/facet-benchmark && cd facet-benchmark
+git clone https://github.com/Venkateshwar-PortoAI/facet-benchmark && cd facet-benchmark
 pip install -r eval/requirements.txt
 
 # Regenerate Table 2 and Table 3 from the raw JSON outputs in results/
@@ -137,7 +137,7 @@ This is a **pilot study**. Known limitations (paper §6):
   author = {Jambula, Venkateshwar Reddy},
   year   = {2026},
   note   = {Preprint},
-  url    = {https://github.com/pranaalpha/facet-benchmark}
+  url    = {https://github.com/Venkateshwar-PortoAI/facet-benchmark}
 }
 ```
 
