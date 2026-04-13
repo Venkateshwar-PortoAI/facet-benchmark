@@ -50,9 +50,12 @@ python3 eval/analyze_weighted_probe.py
 
 # Mechanically verify every numeric claim in the paper against the raw data
 python3 eval/verify_paper_numbers.py
+
+# Mechanically verify every arXiv citation in the paper against the arXiv API
+python3 eval/verify_citations.py
 ```
 
-The last command re-derives every number in the paper from `results/*.json` and prints `PASS`/`FAIL` for each. Current state: **80/80 PASS**. This runs automatically on every push via the CI badge above.
+`verify_paper_numbers.py` re-derives every number in the paper from `results/*.json` and prints `PASS`/`FAIL` for each. Current state: **80/80 PASS**. `verify_citations.py` fetches each cited arXiv paper from the live arXiv API and confirms the title, author, and year in the paper's bibliography match the arXiv record. Current state: **5/5 PASS** on all verifiable entries. Both scripts run in CI on every push via the badge above.
 
 ---
 

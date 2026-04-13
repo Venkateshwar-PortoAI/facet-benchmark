@@ -20,3 +20,6 @@ jobs:
 
       - name: Verify every numeric claim in the paper
         run: python3 eval/verify_paper_numbers.py
+
+      - name: Verify bibliography entries against the arXiv API
+        run: python3 eval/verify_citations.py
