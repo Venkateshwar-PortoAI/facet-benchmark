@@ -255,7 +255,7 @@ Factors that might appear in a negligence case but do NOT get their own taxonomy
 
 - **v1.0 (2026-04-11):** initial taxonomy. 13 types: 3 Hand-formula core + 10 modern-doctrinal.
 - **v1.1 (2026-04-11):** extended after case-candidate retrieval found pure Hand-formula cases are N=3 and the scalable instance pools are Rowland-line duty cases and Wade-factor products-liability cases. Added 4 Rowland-specific types (§2A: certainty_of_injury, moral_blame, insurance_availability, closeness_of_connection) and 2 Wade-specific types (§2B: product_utility, user_awareness). Remaining Wade factors mapped onto existing types via §2B.3. Total: **19 types** (3 Hand core + 10 modern-doctrinal + 4 Rowland + 2 Wade).
-- **v1.2 (2026-04-11):** revised after round 2 face-validity review (`REVIEW_v0.2.md`). Major changes:
+- **v1.2 (2026-04-11):** revised after a second face-validity review. Major changes:
   - **Type merge:** `foreseeability_plaintiff` (§2.1 old), `causal_proximity` (§2.2 old), and `closeness_of_connection` (§2A.4 old) merged into a single `scope_of_risk` type (§2.1 new) with three sub-labels. Round 2 found these were not cleanly separable in modern tort doctrine and annotator disagreement would be systematic.
   - **Doctrine-specific tie-breaking.** v1.1 rule 1 preferred Hand types globally. v1.2 §3 rule 1 picks the preferred-type set from the case's actual doctrinal framework (Hand/Rowland/Wade), eliminating the v1.1 bias toward Hand-formula reading of Rowland-language cases.
   - **Decision-tree annotator workflow (§3.1).** Working vocabulary for any given case is ~10 types from a doctrine-specific subset, not all 17 types scanned per cluster.

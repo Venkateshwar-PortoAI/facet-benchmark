@@ -55,9 +55,9 @@ def build_c2(instance: dict) -> dict:
         "base_instance_id": inst_id,
         "base_case": instance.get("source_case") or instance.get("base_case") or inst_id,
         "perturbation_type": "c2_weight_perturbation_neutral_rewrite",
-        "protocol_version": "SPEC.md §6.3 v0.4",
+        "protocol_version": "FACET v0.4",
         "taxonomy_version": "v1.2",
-        "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+        "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant; auto-generated from base instance)",
         "construction_date": "2026-04-11",
         "status": "draft_pending_primary_text_verification",
         "perturbations": perturbations,
@@ -69,7 +69,7 @@ def build_c2(instance: dict) -> dict:
         "construction_notes": [
             "Generated via eval/gen_c2_c3.py — template-based neutral rewrites.",
             "Human annotator review recommended before final dataset admission.",
-            "Reconstruction-check disqualification (SPEC.md §6.3 v0.4) applies at eval time.",
+            "Reconstruction-check disqualification (FACET v0.4) applies at eval time.",
         ],
     }
 
@@ -109,7 +109,7 @@ def build_c3(instance: dict) -> dict:
         "factor_type_taxonomy_version": "v1.2",
         "status": "draft_pending_primary_text_verification",
         "construction_date": "2026-04-11",
-        "constructor": "Venkat Porto (drafted by Claude Opus stand-in; auto-generated from base instance)",
+        "constructor": "Venkateshwar Reddy Jambula (drafted with Claude Opus as programming and writing assistant; auto-generated from base instance)",
         "case_background": instance.get("case_background", ""),
         "compliance_requirements": reqs,
         "question": f"Are all {len(reqs)} compliance requirements above independently satisfied?",
@@ -120,9 +120,8 @@ def build_c3(instance: dict) -> dict:
         "construction_notes": [
             "Generated via eval/gen_c2_c3.py — template-based compliance rephrasings.",
             "Human annotator review recommended.",
-            "The round-2 review literal-application instruction in the eval harness "
-            "(SPEC.md §6.4 v0.5) should produce cleaner C3 counts regardless of template "
-            "tightness.",
+            "Literal-application instruction in the eval harness (FACET v0.5) "
+            "produces cleaner C3 counts regardless of template tightness.",
         ],
     }
 

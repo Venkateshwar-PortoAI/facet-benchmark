@@ -15,8 +15,8 @@ Grocery, facet-neg-0003) against Claude Sonnet 4.6 via the Claude Code CLI
 Model: claude-sonnet-4-6 (resolved from 'sonnet' alias). Temperature is
 fixed at Claude Code's default; the CLI does not expose a temperature
 flag, so single-temperature single-sample evaluation is the v0.1 limit.
-Ensemble / calibration measurements per SPEC.md §7.2-§7.3 are deferred
-to a future pass that uses the Anthropic Python SDK directly with OAuth.
+Ensemble and calibration measurements are deferred to a future pass that
+uses the Anthropic Python SDK directly with OAuth.
 
 Usage:
   python3 eval/run_cabral_pilot.py [--dry-run]
@@ -500,10 +500,10 @@ def run_pilot(instance_id: str = "facet-neg-0003", dry_run: bool = False) -> dic
         "model_resolved_at_run_time": None,  # filled in from first response
         "harness_version": "eval/run_cabral_pilot.py v0.1",
         "harness_caveat": (
-            "Single-temperature single-sample evaluation — the claude CLI does not "
-            "expose temperature control. Ensemble/calibration measurements per "
-            "SPEC.md §7.2-§7.3 are deferred. The C0/C2/C3 comparison is still "
-            "measurable; temperature-robustness (C8) is not."
+            "Single-temperature single-sample evaluation. The claude CLI does not "
+            "expose temperature control, so ensemble and calibration measurements "
+            "are deferred. The C0/C2/C3 comparison is still measurable; "
+            "temperature-robustness (C8) is not."
         ),
         "run_started": run_started,
         "dry_run": dry_run,
