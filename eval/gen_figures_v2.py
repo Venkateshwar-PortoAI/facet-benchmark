@@ -72,66 +72,71 @@ weighted_rank = np.array([
 
 cmap_binary = ListedColormap(["#e74c3c", "#2ecc71"])
 
-fig, axes = plt.subplots(1, 2, figsize=(13, 5.5), gridspec_kw={"wspace": 0.35})
+fig, axes = plt.subplots(1, 2, figsize=(14, 6.8), gridspec_kw={"wspace": 0.45})
+
+doctrines_short = ["CF-Cabral", "CF-Barker", "CF-Biakanja"]
+neut_labels = ["F1 neut.", "F3 neut.", "F1 neut."]
+faithful_left = ["7/8", "0/8", "4/8"]
+faithful_right = ["8/8", "8/8", "8/8"]
+faithful_left_color = ["#2ecc71", "#e74c3c", "#f39c12"]
+faithful_right_color = ["#2ecc71", "#2ecc71", "#2ecc71"]
+
+def draw_panel(ax, data_binary, cell_text_fn, title, faithful_strs, faithful_colors):
+    ax.imshow(data_binary, cmap=cmap_binary, aspect="auto", vmin=0, vmax=1)
+    ax.set_xticks([])
+    ax.set_yticks(range(8))
+    ax.set_yticklabels(models, fontsize=10)
+    ax.set_title(title, fontweight="bold", pad=12, fontsize=12.5)
+    # Cell content
+    for i in range(8):
+        for j in range(3):
+            text, color = cell_text_fn(i, j)
+            ax.text(j, i, text, ha="center", va="center",
+                    fontsize=12, fontweight="bold", color=color)
+    # Doctrine labels below cells (two lines: name + neutralized)
+    for j, (name, neut) in enumerate(zip(doctrines_short, neut_labels)):
+        ax.text(j, 8.05, name, ha="center", va="top",
+                fontsize=10.5, fontweight="bold", color="#1a1a1a")
+        ax.text(j, 8.50, f"({neut})", ha="center", va="top",
+                fontsize=8.5, color="#666", style="italic")
+    # Faithful row
+    for j, (s, c) in enumerate(zip(faithful_strs, faithful_colors)):
+        ax.text(j, 9.15, f"faithful: {s}", ha="center", va="top",
+                fontsize=10, fontweight="bold", color=c)
+    ax.set_ylim(9.7, -0.6)
+    ax.tick_params(axis="y", length=0)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
 
 # ---- Left: single-factor probe ----
-ax = axes[0]
-ax.imshow(single_factor, cmap=cmap_binary, aspect="auto", vmin=0, vmax=1)
-ax.set_xticks(range(3))
-ax.set_xticklabels(doctrines, ha="center", fontsize=10)
-ax.set_yticks(range(8))
-ax.set_yticklabels(models, fontsize=10)
-ax.set_title("(a) Single-Factor Probe\n\"which one is most important?\"",
-             fontweight="bold", pad=12, fontsize=12)
+def single_cell(i, j):
+    probe = single_probe_labels[i, j]
+    color = "white" if single_factor[i, j] == 0 else "#1a1a1a"
+    return probe, color
 
-for i in range(8):
-    for j in range(3):
-        probe = single_probe_labels[i, j]
-        color = "white" if single_factor[i, j] == 0 else "#1a1a1a"
-        ax.text(j, i, probe, ha="center", va="center",
-                fontsize=12, fontweight="bold", color=color)
-
-# Bottom summary
-for j, score in enumerate(["7/8", "0/8", "4/8"]):
-    color = "#2ecc71" if score != "0/8" else "#e74c3c"
-    ax.text(j, 8.2, f"faithful: {score}", ha="center", va="center",
-            fontsize=10, fontweight="bold", color=color)
+draw_panel(axes[0], single_factor, single_cell,
+           "(a) Single-Factor Probe\n\"which one factor is most important?\"",
+           faithful_left, faithful_left_color)
 
 # ---- Right: weighted-rank probe ----
-ax = axes[1]
-# Green if <=10, red otherwise
 weighted_binary = (weighted_rank <= 10).astype(int)
-ax.imshow(weighted_binary, cmap=cmap_binary, aspect="auto", vmin=0, vmax=1)
-ax.set_xticks(range(3))
-ax.set_xticklabels(doctrines, ha="center", fontsize=10)
-ax.set_yticks(range(8))
-ax.set_yticklabels(models, fontsize=10)
-ax.set_title("(b) Weighted-Rank Probe\n\"assign weights to all N factors\"",
-             fontweight="bold", pad=12, fontsize=12)
+def weighted_cell(i, j):
+    w = weighted_rank[i, j]
+    return f"{int(w)}%", "#1a1a1a"
 
-for i in range(8):
-    for j in range(3):
-        w = weighted_rank[i, j]
-        color = "#1a1a1a"
-        ax.text(j, i, f"{int(w)}%", ha="center", va="center",
-                fontsize=11, fontweight="bold", color=color)
-
-for j in range(3):
-    ax.text(j, 8.2, "faithful: 8/8", ha="center", va="center",
-            fontsize=10, fontweight="bold", color="#2ecc71")
+draw_panel(axes[1], weighted_binary, weighted_cell,
+           "(b) Weighted-Rank Probe\n\"assign weights to all N factors, summing to 100\"",
+           faithful_right, faithful_right_color)
 
 # Shared legend
 legend_patches = [
-    mpatches.Patch(color="#2ecc71", label="Faithful (probe → non-neutralized / weight ≤10%)"),
-    mpatches.Patch(color="#e74c3c", label="Dissociation (probe → neutralized / weight >10%)"),
+    mpatches.Patch(color="#2ecc71", label="Faithful  (non-neutralized factor / weight ≤ 10%)"),
+    mpatches.Patch(color="#e74c3c", label="Dissociation  (neutralized factor / weight > 10%)"),
 ]
 fig.legend(handles=legend_patches, loc="lower center", bbox_to_anchor=(0.5, -0.02),
            ncol=2, fontsize=10, frameon=False)
 
-fig.suptitle("Probe Format Determines Apparent Attribution Faithfulness",
-             fontsize=14, fontweight="bold", y=1.02)
-
-plt.tight_layout()
+plt.tight_layout(rect=[0, 0.04, 1, 1])
 fig.savefig(OUT / "fig1_probe_comparison.png", bbox_inches="tight", dpi=300)
 print(f"Saved: {OUT / 'fig1_probe_comparison.png'}")
 plt.close()
