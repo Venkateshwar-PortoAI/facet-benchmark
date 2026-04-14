@@ -51,7 +51,7 @@ latex/*
 facet-arxiv-submission.zip
 
 # ----------------------------------------------------------------------------
-# Figures — ship only the five that appear in the paper / README
+# Figures — ship only the five paper figures + the README banner
 # ----------------------------------------------------------------------------
 figures/*
 !figures/fig1_probe_comparison.png
@@ -59,6 +59,7 @@ figures/*
 !figures/fig3_bimodality.png
 !figures/fig4_c2_faithfulness.png
 !figures/fig5_asymmetry.png
+!figures/banner.svg
 
 # ----------------------------------------------------------------------------
 # Eval scripts — older / internal development tooling
