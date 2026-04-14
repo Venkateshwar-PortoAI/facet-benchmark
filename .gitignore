@@ -60,6 +60,12 @@ figures/*
 !figures/fig4_c2_faithfulness.png
 !figures/fig5_asymmetry.png
 !figures/banner.svg
+!figures/facet-launch-preview.gif
+
+# ----------------------------------------------------------------------------
+# Remotion launch video — internal-only. The rendered GIF ships in figures/.
+# ----------------------------------------------------------------------------
+video/
 
 # ----------------------------------------------------------------------------
 # Eval scripts — older / internal development tooling

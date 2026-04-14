@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="figures/banner.svg" alt="FACET — same 8 models, same case: P1 single-factor probe finds 0/8 faithful, P2 weighted-rank probe finds 8/8 faithful" width="100%">
+  <img src="figures/banner.svg" alt="FACET — Measuring Attribution Faithfulness in Multi-Factor LLM Reasoning" width="100%">
+</p>
+
+<p align="center">
+  <img src="figures/facet-launch-preview.gif" alt="FACET 30-second explainer — same 8 frontier LLMs and same case, but the single-factor probe finds 0 of 8 faithful while the weighted-rank probe finds 8 of 8" width="540">
 </p>
 
 # FACET
