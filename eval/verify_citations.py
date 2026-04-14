@@ -69,10 +69,18 @@ def first_surname_from_authors(authors: str) -> str:
     return parts[-1].lower()
 
 
+USER_AGENT = (
+    "FACET-benchmark/1.0 "
+    "(https://github.com/Venkateshwar-PortoAI/facet-benchmark; "
+    "mailto:venkateshwar.jambula@pranaalpha.com)"
+)
+
+
 def fetch_arxiv(arxiv_id: str) -> dict:
     """Fetch arXiv metadata for a paper by ID."""
-    url = f"http://export.arxiv.org/api/query?id_list={urllib.parse.quote(arxiv_id)}"
-    with urllib.request.urlopen(url, timeout=15) as resp:
+    url = f"https://export.arxiv.org/api/query?id_list={urllib.parse.quote(arxiv_id)}"
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(req, timeout=15) as resp:
         xml = resp.read().decode("utf-8")
     ns = {"a": "http://www.w3.org/2005/Atom"}
     root = ET.fromstring(xml)
