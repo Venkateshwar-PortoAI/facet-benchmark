@@ -5,15 +5,15 @@
 [![DOI](https://zenodo.org/badge/1208742147.svg)](https://doi.org/10.5281/zenodo.19557436)
 [![Verify paper numbers](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml/badge.svg)](https://github.com/Venkateshwar-PortoAI/facet-benchmark/actions/workflows/verify-paper.yml)
 
-Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](PAPER_ARXIV_v3.pdf)  ·  [Zenodo archive](https://doi.org/10.5281/zenodo.19557436)
+Venkateshwar Reddy Jambula, Pranaalpha Labs  ·  [Paper (PDF)](FACET_paper.pdf)  ·  [Zenodo archive](https://doi.org/10.5281/zenodo.19557436)
 
 ---
 
 ## What this is
 
-FACET is a benchmark for measuring whether large language models actually integrate multiple factors when they reason, or quietly collapse onto whichever one factor is most canonical in their training data.
+FACET is a benchmark you can run against any LLM to measure whether it actually integrates multiple factors when it reasons, or quietly collapses onto whichever one factor is most canonical in its training data.
 
-The problem we're testing: when an LLM is asked to weigh 5 to 10 different considerations and reach a decision — medical differential diagnosis, regulatory compliance review, legal balancing tests — do they actually weigh them all, or do they project the distributed reasoning down onto a single factor and answer as if only one mattered? This is the difference between weighted-additive integration (WADD) and lexicographic shortcutting (LEX) from the multi-attribute decision-making literature (Payne, Bettman and Johnson, 1993).
+The problem we're testing: when an LLM is asked to weigh 5 to 10 different considerations and reach a decision — medical differential diagnosis, regulatory compliance review, legal balancing tests — does it actually weigh them all, or does it project the distributed reasoning down onto a single factor and answer as if only one mattered? This is the difference between weighted-additive integration (WADD) and lexicographic shortcutting (LEX) from the multi-attribute decision-making literature (Payne, Bettman and Johnson, 1993).
 
 We instantiate the test on US tort balancing cases — real appellate decisions that explicitly enumerate 5 to 10 factors and have verifiable ground truth. The methodology generalizes to any domain with explicit multi-factor structure. For regulated decision domains where LLMs are being audited for faithfulness (compliance review, medical triage, underwriting), a single-probe attribution test may systematically mis-report the underlying reasoning. This benchmark is a tool for catching that.
 
@@ -38,38 +38,78 @@ This matters because forced-choice attribution probes (top-1, top-k) are the dom
 
 ---
 
-## Reproduce in 60 seconds
+## Quickstart: test a model with FACET
+
+Install:
 
 ```bash
 git clone https://github.com/Venkateshwar-PortoAI/facet-benchmark && cd facet-benchmark
 pip install -r eval/requirements.txt
-
-# Regenerate Table 2 and Table 3 from the raw JSON outputs in results/
-python3 eval/analyze_pilot.py
-python3 eval/analyze_weighted_probe.py
-
-# Mechanically verify every numeric claim in the paper against the raw data
-python3 eval/verify_paper_numbers.py
-
-# Mechanically verify every arXiv citation in the paper against the arXiv API
-python3 eval/verify_citations.py
 ```
 
-`verify_paper_numbers.py` re-derives every number in the paper from `results/*.json` and prints `PASS`/`FAIL` for each. Current state: **80/80 PASS**. `verify_citations.py` fetches each cited arXiv paper from the live arXiv API and confirms the title, author, and year in the paper's bibliography match the arXiv record. Current state: **5/5 PASS** on all verifiable entries. Both scripts run in CI on every push via the badge above.
+Set credentials for whichever provider you want to test (you only need one):
+
+```bash
+export ANTHROPIC_API_KEY=...      # for Claude models
+export OPENAI_API_KEY=...         # for GPT models
+export AWS_PROFILE=...            # for Bedrock-hosted open-weight models (DeepSeek, Mistral, Llama, Qwen)
+```
+
+Run the weighted-rank probe on one counterfactual case against one model:
+
+```bash
+python3 eval/run_weighted_probe.py \
+  --instance facet-neg-cf-002 \
+  --backend claude \
+  --model opus
+```
+
+Output lands in `results/weighted-probe/<instance>-<model>-<timestamp>.json` — a single JSON record with the model's per-factor weights, the ground-truth weights, and a residual. One run is one API call (typically a few cents). The full 8-model × 3-counterfactual sweep used in the paper cost **~$35 end-to-end**.
+
+To run all four probes (P1 single-factor, P2 cued weighted-rank, P3 adversarial, C2 ablation) across the full instance set on one model:
+
+```bash
+bash eval/batch_weighted_probe.sh
+```
+
+Supported backends: `claude` (Anthropic), `codex` (OpenAI), `bedrock` (AWS — DeepSeek / Mistral / Llama / Qwen), `ollama` (local models), `gemini` (optional).
 
 ---
 
-## What's in the repo
+## Bring your own domain
 
-| Path | What |
-|---|---|
-| [`PAPER_ARXIV_v3.pdf`](PAPER_ARXIV_v3.pdf) | The paper (14 pages) |
-| [`instances/`](instances/) | 10 in-distribution legal cases + 3 counterfactual variants + adversarial rewrites + C2 perturbations |
-| [`results/weighted-probe/`](results/weighted-probe/) | Raw JSON outputs from all probe runs (~350 files) |
-| [`eval/`](eval/) | Probe harnesses + analysis scripts + numeric verifier |
-| [`figures/`](figures/) | Generated from raw JSON by scripts in `eval/` |
-| [`factor_type_taxonomy.md`](factor_type_taxonomy.md) | 17-type doctrinal taxonomy |
-| [`latex/main_v3.tex`](latex/main_v3.tex) | Paper source |
+FACET's harness is domain-agnostic. Tort balancing tests are the first instantiation because they offer explicit factor lists and verifiable appellate ground truth, but the same probes work on any decision problem with $N \geq 5$ factors and a known answer — medical differential diagnosis, compliance review, underwriting, multi-criteria policy decisions, ML-system risk assessments.
+
+To test your own domain, write an instance JSON matching the schema in [`instances/facet-neg-0001.json`](instances/facet-neg-0001.json). Minimum required fields:
+
+```json
+{
+  "instance_id": "your-domain-0001",
+  "doctrine": "your_framework_name",
+  "case_background": "Plain-language description of the situation the model must reason about.",
+  "factors": [
+    {
+      "factor_id": "f1",
+      "text": "Description of the first factor.",
+      "directionality": "toward_outcome_A"
+    }
+    // ... at least 5 factors, ideally with directionality and a per-factor weight estimate
+  ],
+  "question": "The decision question the model must answer.",
+  "ground_truth": {
+    "answer": "A",
+    "rationale": "Why this is the right answer."
+  }
+}
+```
+
+Drop it in `instances/`, then run any probe against it:
+
+```bash
+python3 eval/run_weighted_probe.py --instance your-domain-0001 --backend claude --model opus
+```
+
+The four probes don't care whether the doctrine is tort law or radiology — they only need the factor list and the ground-truth answer. **Caveat:** the paper's analysis scripts (`analyze_*.py`) currently assume the legal corpus and would need light adaptation for cross-domain rollups. The four probe runners themselves are domain-clean.
 
 ---
 
@@ -80,11 +120,11 @@ python3 eval/verify_citations.py
 3. **P3 (adversarial weighted-rank):** Same as P2, but on adversarially-rewritten counterfactuals where the neutralization uses no syntactic cue words.
 4. **C2 (per-factor ablation):** Rewrite one factor at a time as neutral; measure whether the model's weight on that factor drops.
 
-Each probe catches a different failure mode. The paper shows the profile is asymmetric across model families.
+Each probe catches a different failure mode. The paper shows the profile is asymmetric across model families: closed-source frontier models are surgical at C2 but cue-dependent at P3; open-weight Bedrock models are the reverse.
 
 ---
 
-## Models evaluated
+## Models tested in the paper
 
 | Model | Provider |
 |---|---|
@@ -97,24 +137,36 @@ Each probe catches a different failure mode. The paper shows the profile is asym
 | Llama 4 Scout | AWS Bedrock |
 | Qwen3 Next 80B-A3B | AWS Bedrock |
 
-Closed-source models are evaluated via vendor APIs at default temperature; open-weight Bedrock models at `T=0`. All harnesses are single-sample, tool-use disabled.
+Closed-source models are evaluated via vendor APIs at default temperature; open-weight Bedrock models at `T=0`. All harnesses are single-sample, tool-use disabled. Adding a new model is a one-line config change in the relevant backend wrapper under `eval/`.
 
 ---
 
-## Running new models
+## What's in the repo
+
+| Path | What |
+|---|---|
+| [`FACET_paper.pdf`](FACET_paper.pdf) | The paper (14 pages) |
+| [`instances/`](instances/) | 10 in-distribution legal cases + 3 counterfactual variants + adversarial rewrites + C2 perturbations |
+| [`results/weighted-probe/`](results/weighted-probe/) | Raw JSON outputs from all probe runs (~350 files) |
+| [`eval/`](eval/) | Probe harnesses + analysis scripts + numeric verifier |
+| [`figures/`](figures/) | Generated from raw JSON by scripts in `eval/` |
+| [`factor_type_taxonomy.md`](factor_type_taxonomy.md) | 17-type doctrinal taxonomy |
+| [`latex/main_v3.tex`](latex/main_v3.tex) | Paper source |
+
+---
+
+## Reproduce the paper
+
+Every numeric claim in the paper is mechanically verifiable from the raw data in `results/`:
 
 ```bash
-# P1 single-factor probe
-FACET_BACKEND=claude FACET_MODEL=opus python3 eval/run_cabral_pilot.py
-
-# P2 / P3 weighted-rank probe (single instance)
-python3 eval/run_weighted_probe.py --instance facet-neg-cf-002 --backend claude --model opus
-
-# Full batch sweep across all 8 models × 3 counterfactuals
-bash eval/batch_weighted_probe.sh
+python3 eval/analyze_pilot.py            # regenerates Tables 2 & 3
+python3 eval/analyze_weighted_probe.py
+python3 eval/verify_paper_numbers.py     # re-derives every paper number from results/*.json — currently 80/80 PASS
+python3 eval/verify_citations.py         # re-checks every arXiv citation against the live arXiv API — currently 5/5 PASS
 ```
 
-Supported backends: `claude` (Anthropic CLI), `codex` (OpenAI CLI), `bedrock` (AWS Converse API), `ollama` (local), `gemini` (optional).
+Both verifiers run in CI on every push (see badge above). If the raw JSON in `results/` ever drifts from the paper's claims, CI fails.
 
 ---
 
@@ -132,6 +184,7 @@ Supported backends: `claude` (Anthropic CLI), `codex` (OpenAI CLI), `bedrock` (A
 | P1 vs P2 McNemar's exact *p* | 2.4×10⁻⁴ |
 | GPT-5.4 CF-Cabral family n | 22 |
 | GPT-5.4 wrong-outcome rate | 7/22, 95% Wilson CI [16%, 53%] |
+| Full 8-model × 3-counterfactual sweep cost | ~$35 |
 
 ---
 
